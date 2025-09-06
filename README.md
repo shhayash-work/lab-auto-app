@@ -16,6 +16,8 @@
 4. **AI結果判定**: LLMによる検証結果の自動分析・判定
 5. **星取表表示**: 直感的な検証結果の可視化
 6. **知見管理**: 失敗パターンの蓄積と学習
+7. **MCP対応AIエージェント**: Claude/OpenAI/AWS Bedrockで自律的な検証実行
+8. **ハイブリッド実行**: プロバイダーに応じた最適な実行方式の自動選択
 
 ### システムアーキテクチャ
 
@@ -25,29 +27,43 @@ graph TD
     A --> C[Excelアップロード]
     A --> D[手動作成]
     
-    B --> E[検証実行エンジン]
+    B --> E[統合検証エンジン]
     C --> E
     D --> E
     
-    E --> F[モック設備システム]
-    F --> G[SNMP MIB応答]
-    F --> H[JSON応答]
+    E --> F{プロバイダー判定}
+    F -->|Claude/OpenAI/Bedrock| G[MCPエージェント]
+    F -->|Ollama| H[従来エンジン]
     
-    E --> I[LLM結果分析]
-    I --> J[結果データベース]
+    G --> I[FastMCPサーバー]
+    I --> J[モック設備システム]
+    H --> J
     
-    J --> K[Streamlitダッシュボード]
-    K --> L[星取表表示]
-    K --> M[進捗可視化]
-    K --> N[知見管理]
+    J --> K[SNMP MIB応答]
+    J --> L[JSON応答]
+    
+    G --> M[AI自律判定]
+    H --> N[LLM結果分析]
+    
+    M --> O[結果データベース]
+    N --> O
+    
+    O --> P[Streamlitダッシュボード]
+    P --> Q[星取表表示]
+    P --> R[進捗可視化]
+    P --> S[知見管理]
 ```
 
 ## クイックスタート
 
 ### 前提条件
 
-- **Python 3.12以上**
-- **Ollama** (llama3.3:latest, mxbai-embed-large:latest)
+- **Python 3.12以上** (MCP対応のため必須)
+- **Ollama** (llama3.3:latest, mxbai-embed-large:latest) - 従来実装用
+- **API Keys** (オプション) - MCP実装用
+  - Anthropic API Key (Claude)
+  - OpenAI API Key (GPT-4o)
+  - AWS認証情報 (Bedrock)
 - **Git**
 
 ### 1. セットアップ
@@ -118,9 +134,24 @@ http://localhost:8503
 
 1. **検証実行**ページに移動
 2. バッチ名とLLMプロバイダーを設定
+   - **Claude/OpenAI/Bedrock**: MCPエージェントによる自律実行
+   - **Ollama**: 従来のPythonスクリプト実行
 3. 実行する検証項目を選択
 4. **検証開始**をクリック
 5. リアルタイムで進捗と結果を確認
+
+#### 実行方式の違い
+
+**MCP実装 (Claude/OpenAI/Bedrock)**:
+- AIエージェントが検証項目を解釈
+- 自律的にコマンドを選択・実行
+- FastMCPツールを使用した設備連携
+- より柔軟で人間らしい判断
+
+**従来実装 (Ollama)**:
+- 事前定義されたPythonスクリプト実行
+- 確定的なロジックによる処理
+- 安定した動作保証
 
 ### 結果の確認
 

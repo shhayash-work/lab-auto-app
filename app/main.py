@@ -31,6 +31,8 @@ from app.models.validation import (
 from app.models.database import db_manager
 from app.services.llm_service import get_llm_service
 from app.services.validation_engine import get_validation_engine
+from app.services.mcp_validation_engine import get_unified_validation_engine
+from app.services.provider_manager import get_provider_manager, ProviderStatus
 from app.utils.excel_parser import parse_excel_test_items
 from app.utils.star_chart import create_star_chart_dataframe
 
@@ -191,7 +193,7 @@ def render_dashboard():
         fig.update_layout(showlegend=False)
         st.plotly_chart(fig, use_container_width=True)
 
-def render_test_management():
+def render_test_management(selected_provider=None):
     """検証項目管理を描画"""
     st.header("検証項目管理")
     
@@ -203,7 +205,7 @@ def render_test_management():
     )
     
     if method == "AI自動生成":
-        render_ai_generation()
+        render_ai_generation(selected_provider)
     elif method == "Excelアップロード":
         render_excel_upload()
     elif method == "手動作成":
@@ -214,7 +216,7 @@ def render_test_management():
         st.subheader("現在の検証項目")
         render_test_items_table()
 
-def render_ai_generation():
+def render_ai_generation(selected_provider=None):
     """AI生成UI"""
     st.subheader("AI自動生成")
     
@@ -230,11 +232,21 @@ def render_ai_generation():
             default=[EquipmentType.ERICSSON_MMU.value, EquipmentType.SAMSUNG_AUV1.value]
         )
     
-    llm_provider = st.selectbox(
-        "LLMプロバイダー",
-        options=["ollama", "openai", "anthropic", "bedrock"],
-        index=0
-    )
+    # サイドバーで選択されたプロバイダーを使用
+    if selected_provider:
+        provider_manager = get_provider_manager()
+        provider_info = provider_manager.get_provider_info(selected_provider)
+        
+        st.info(f"使用プロバイダー: {provider_info.display_name}")
+        if provider_info.is_mcp_supported:
+            st.success("🤖 AIエージェントが検証項目を自律的に生成します")
+        else:
+            st.info("⚙️ 従来ロジックで検証項目を生成します")
+        
+        llm_provider = selected_provider
+    else:
+        st.warning("サイドバーでプロバイダーを選択してください")
+        return
     
     if st.button("AI生成実行", type="primary"):
         if feature_name and equipment_types:
@@ -377,7 +389,7 @@ def render_test_items_table():
                 st.session_state.show_execution = True
                 st.rerun()
 
-def render_validation_execution():
+def render_validation_execution(selected_provider=None):
     """検証実行UI"""
     st.header("検証実行")
     
@@ -395,11 +407,32 @@ def render_validation_execution():
         )
     
     with col2:
-        llm_provider = st.selectbox(
-            "LLMプロバイダー",
-            options=["ollama", "openai", "anthropic", "bedrock"],
-            index=0
-        )
+        # サイドバーで選択されたプロバイダーを表示
+        if selected_provider:
+            provider_manager = get_provider_manager()
+            provider_info = provider_manager.get_provider_info(selected_provider)
+            
+            st.info(f"使用プロバイダー: {provider_info.display_name}")
+            llm_provider = selected_provider
+        else:
+            st.warning("サイドバーでプロバイダーを選択してください")
+            return
+    
+    # 実行方式の説明を表示
+    temp_engine = get_unified_validation_engine(llm_provider)
+    capabilities = temp_engine.get_capabilities()
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        if capabilities["mcp_supported"]:
+            st.success("🤖 AIエージェント実行")
+            st.caption("AIが自律的にコマンドを判断・実行")
+        else:
+            st.info("⚙️ スクリプト実行")
+            st.caption("Pythonスクリプトベースで実行")
+    
+    with col2:
+        st.metric("自律実行", "対応" if capabilities["autonomous_execution"] else "非対応")
     
     # 実行対象の選択
     st.subheader("実行対象")
@@ -416,11 +449,21 @@ def render_validation_execution():
 
 def execute_validation_batch(test_items: List[TestItem], batch_name: str, llm_provider: str):
     """検証バッチを実行"""
-    # 検証エンジン初期化
-    validation_engine = get_validation_engine(llm_provider)
+    # 統合検証エンジン初期化（MCP対応）
+    validation_engine = get_unified_validation_engine(llm_provider)
     
     # バッチ作成
     batch = validation_engine.create_batch_from_test_items(test_items, batch_name)
+    
+    # 実行方式の表示
+    execution_method = validation_engine.get_execution_method()
+    capabilities = validation_engine.get_capabilities()
+    
+    st.info(f"実行方式: {execution_method}")
+    if capabilities["mcp_supported"]:
+        st.success("AIエージェントが自律的に検証を実行します")
+    else:
+        st.info("従来のPythonスクリプトベースで検証を実行します")
     
     # 進捗表示
     progress_bar = st.progress(0)
@@ -675,6 +718,72 @@ def main():
         
         st.divider()
         
+        # LLMプロバイダー選択
+        st.subheader("LLMプロバイダー")
+        provider_manager = get_provider_manager()
+        available_providers = provider_manager.get_available_providers()
+        all_providers = provider_manager.get_all_providers()
+        
+        if available_providers:
+            # 利用可能なプロバイダーのみ表示
+            provider_options = []
+            provider_labels = []
+            
+            for provider in available_providers:
+                provider_options.append(provider.name)
+                mcp_indicator = "🤖" if provider.is_mcp_supported else "⚙️"
+                provider_labels.append(f"{mcp_indicator} {provider.display_name}")
+            
+            # デフォルトプロバイダーを選択
+            default_provider = provider_manager.get_default_provider()
+            default_index = 0
+            if default_provider in provider_options:
+                default_index = provider_options.index(default_provider)
+            
+            selected_provider = st.selectbox(
+                "プロバイダーを選択",
+                options=provider_options,
+                format_func=lambda x: next(label for opt, label in zip(provider_options, provider_labels) if opt == x),
+                index=default_index,
+                key="selected_provider"
+            )
+            
+            # 選択されたプロバイダーの詳細表示
+            selected_info = provider_manager.get_provider_info(selected_provider)
+            if selected_info:
+                if selected_info.is_mcp_supported:
+                    st.success("🤖 AIエージェント実行")
+                    st.caption("自律的にコマンドを判断・実行")
+                else:
+                    st.info("⚙️ スクリプト実行")
+                    st.caption("事前定義されたロジックで実行")
+                
+                st.caption(f"モデル: {selected_info.model_name}")
+        else:
+            st.error("利用可能なプロバイダーがありません")
+            selected_provider = None
+        
+        # 利用不可プロバイダーの表示
+        unavailable_providers = [p for p in all_providers.values() if p.status != ProviderStatus.AVAILABLE]
+        if unavailable_providers:
+            with st.expander("利用不可プロバイダー", expanded=False):
+                for provider in unavailable_providers:
+                    status_icon = "❌" if provider.status == ProviderStatus.UNAVAILABLE else "⚠️"
+                    st.text(f"{status_icon} {provider.display_name}")
+                    if provider.error_message:
+                        st.caption(f"理由: {provider.error_message}")
+        
+        st.divider()
+        
+        # Embedding情報
+        st.subheader("Embedding設定")
+        embedding_provider, embedding_model = provider_manager.get_embedding_provider()
+        st.info(f"プロバイダー: {embedding_provider}")
+        st.caption(f"モデル: {embedding_model}")
+        st.caption("※RAG・ベクターDB用")
+        
+        st.divider()
+        
         # システム情報
         st.subheader("システム情報")
         st.info(f"バージョン: {APP_VERSION}")
@@ -692,9 +801,9 @@ def main():
     if page == "ダッシュボード":
         render_dashboard()
     elif page == "検証項目管理":
-        render_test_management()
+        render_test_management(selected_provider)
     elif page == "検証実行":
-        render_validation_execution()
+        render_validation_execution(selected_provider)
     elif page == "結果表示":
         render_results_viewer()
 

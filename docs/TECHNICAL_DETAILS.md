@@ -4,16 +4,26 @@
 
 ラボ検証自動化システムの技術的な詳細について、初級者にも分かりやすく説明します。
 
+## 🔄 更新履歴
+
+- **v1.1.0** (2024-01-15): MCP (Model Context Protocol) 対応を追加
+  - FastMCPを使用したAIエージェント実装
+  - Claude/OpenAI/AWS Bedrock対応
+  - ハイブリッド実行エンジンの実装
+- **v1.0.0** (2024-01-15): 初期リリース
+
 ## 📋 目次
 
 1. [システム全体像](#システム全体像)
 2. [アーキテクチャ詳細](#アーキテクチャ詳細)
-3. [データフロー](#データフロー)
-4. [各コンポーネント詳細](#各コンポーネント詳細)
-5. [実装ロジック](#実装ロジック)
-6. [データベース設計](#データベース設計)
-7. [API仕様](#api仕様)
-8. [セキュリティ](#セキュリティ)
+3. [MCP実装詳細](#MCP実装詳細) **NEW**
+4. [ハイブリッド実行エンジン](#ハイブリッド実行エンジン) **NEW**
+5. [データフロー](#データフロー)
+6. [各コンポーネント詳細](#各コンポーネント詳細)
+7. [実装ロジック](#実装ロジック)
+8. [データベース設計](#データベース設計)
+9. [API仕様](#api仕様)
+10. [セキュリティ](#セキュリティ)
 
 ## 🏗️ システム全体像
 
@@ -23,7 +33,10 @@
 - **フロントエンド**: Streamlit (Python Webフレームワーク)
 - **バックエンド**: Python 3.12
 - **データベース**: SQLite (軽量リレーショナルDB)
-- **AI/LLM**: Ollama + llama3.3:latest
+- **AI/LLM**: 
+  - Ollama + llama3.3:latest (従来実装)
+  - Claude/OpenAI/AWS Bedrock (MCP実装)
+- **MCP**: FastMCP (Model Context Protocol)
 - **モック設備**: カスタム実装のシミュレーター
 
 ### システム構成図
@@ -106,6 +119,189 @@ sequenceDiagram
     Engine->>UI: 進捗通知
     UI->>UI: リアルタイム表示更新
 ```
+
+## 🤖 MCP実装詳細
+
+### 概要
+MCP (Model Context Protocol) は、AIエージェントがツールやリソースにアクセスするための標準化されたプロトコルです。本システムでは、Claude、OpenAI、AWS BedrockでMCPを使用した自律的な検証実行を実現しています。
+
+### アーキテクチャ
+
+```mermaid
+graph TD
+    A[統合検証エンジン] --> B{プロバイダー判定}
+    B -->|MCP対応| C[MCPエージェント]
+    B -->|従来型| D[従来エンジン]
+    
+    C --> E[FastMCPサーバー]
+    E --> F[get_test_items]
+    E --> G[send_command_to_equipment]
+    E --> H[analyze_test_result]
+    E --> I[save_validation_result]
+    
+    F --> J[データベース]
+    G --> K[モック設備]
+    H --> L[AI判定ロジック]
+    I --> J
+    
+    D --> M[従来ロジック]
+    M --> K
+    M --> N[LLM結果分析]
+```
+
+### MCPツール定義
+
+#### 1. get_test_items
+```python
+@app.tool()
+def get_test_items() -> Dict[str, Any]:
+    """データベースから検証項目一覧を取得"""
+    # 検証項目をJSON形式で返却
+    return {
+        "status": "success",
+        "test_items": sample_items,
+        "total_count": len(sample_items)
+    }
+```
+
+#### 2. send_command_to_equipment
+```python
+@app.tool()
+def send_command_to_equipment(equipment_id: str, command: str, parameters: Optional[Dict] = None) -> Dict[str, Any]:
+    """ラボ設備にコマンドを送信して応答を取得"""
+    response = mock_equipment_manager.execute_command(equipment_id, command, parameters)
+    return {
+        "status": "success",
+        "equipment_id": equipment_id,
+        "response": response
+    }
+```
+
+#### 3. analyze_test_result
+```python
+@app.tool()
+def analyze_test_result(test_item_id: str, equipment_response: Dict, expected_criteria: Dict) -> Dict[str, Any]:
+    """検証結果を分析して合否を判定"""
+    # AI判定ロジック
+    result = TestResult.PASS  # or FAIL, WARNING
+    confidence = 0.9
+    
+    return {
+        "status": "success",
+        "result": result.value,
+        "confidence": confidence,
+        "details": analysis_details
+    }
+```
+
+### プロバイダー別実装
+
+#### Claude (Anthropic)
+```python
+async def _execute_with_claude(self, prompt: str, batch: ValidationBatch) -> Dict[str, Any]:
+    message = self.client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=4000,
+        messages=[{"role": "user", "content": prompt}],
+        # MCP tools configuration
+    )
+    return self._simulate_mcp_execution(batch)
+```
+
+#### OpenAI
+```python
+async def _execute_with_openai(self, prompt: str, batch: ValidationBatch) -> Dict[str, Any]:
+    response = self.client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": "AIエージェントとしてMCPツールを使用"},
+            {"role": "user", "content": prompt}
+        ],
+        # MCP tools configuration
+    )
+    return self._simulate_mcp_execution(batch)
+```
+
+#### AWS Bedrock
+```python
+async def _execute_with_bedrock(self, prompt: str, batch: ValidationBatch) -> Dict[str, Any]:
+    bedrock_client = boto3.client('bedrock-runtime', region_name='ap-northeast-1')
+    
+    body = {
+        "anthropic_version": "bedrock-2023-05-31",
+        "max_tokens": 4000,
+        "messages": [{"role": "user", "content": prompt}]
+    }
+    
+    response = bedrock_client.invoke_model(
+        modelId="anthropic.claude-3-5-sonnet-20241022-v2:0",
+        body=json.dumps(body)
+    )
+    return self._simulate_mcp_execution(batch)
+```
+
+## 🔄 ハイブリッド実行エンジン
+
+### 統合検証エンジン (`app/services/mcp_validation_engine.py`)
+
+プロバイダーに応じて最適な実行方式を自動選択する統合エンジンです。
+
+#### プロバイダー判定ロジック
+```python
+class UnifiedValidationEngine:
+    def __init__(self, llm_provider: str = "ollama"):
+        self.llm_provider = llm_provider
+        self.is_mcp_supported = MCPAgentFactory.is_mcp_supported(llm_provider)
+        
+        if self.is_mcp_supported:
+            # MCP対応プロバイダー
+            self.mcp_agent = MCPAgentFactory.create_agent(llm_provider)
+            self.traditional_engine = None
+        else:
+            # 従来実装プロバイダー
+            self.mcp_agent = None
+            self.traditional_engine = ValidationEngine(llm_provider)
+```
+
+#### 実行方式の切り替え
+```python
+def execute_batch(self, batch: ValidationBatch, progress_callback: Optional[Callable] = None) -> ValidationBatch:
+    if self.is_mcp_supported:
+        # MCPエージェントで非同期実行
+        return asyncio.run(self._execute_with_mcp(batch, progress_callback))
+    else:
+        # 従来エンジンで同期実行
+        return self._execute_with_traditional_sync(batch, progress_callback)
+```
+
+#### 機能情報の提供
+```python
+def get_capabilities(self) -> Dict[str, Any]:
+    return {
+        "provider": self.llm_provider,
+        "execution_method": "MCP Agent" if self.is_mcp_supported else "Traditional Engine",
+        "mcp_supported": self.is_mcp_supported,
+        "autonomous_execution": self.is_mcp_supported,
+        "features": {
+            "autonomous_command_selection": self.is_mcp_supported,
+            "real_time_decision_making": self.is_mcp_supported,
+            "equipment_interaction": True,
+            "result_analysis": True,
+            "batch_processing": True
+        }
+    }
+```
+
+### 実行方式の比較
+
+| 特徴 | MCP実装 | 従来実装 |
+|------|---------|----------|
+| **対象プロバイダー** | Claude, OpenAI, Bedrock | Ollama |
+| **実行方式** | AIエージェント自律実行 | 事前定義スクリプト |
+| **コマンド選択** | AI判断による動的選択 | 固定ロジック |
+| **柔軟性** | 高い（人間らしい判断） | 中程度（確定的） |
+| **安定性** | 中程度（AI依存） | 高い（予測可能） |
+| **拡張性** | 高い（新ツール追加容易） | 中程度（コード修正必要） |
 
 ## 🧩 各コンポーネント詳細
 

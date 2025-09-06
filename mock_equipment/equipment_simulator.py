@@ -466,6 +466,28 @@ class MockEquipmentManager:
                 "error_message": f"Command execution failed: {str(e)}"
             }
     
+    def execute_command(self, equipment_id: str, command: str, parameters: Dict = None) -> Dict[str, Any]:
+        """設備にコマンドを実行（MCP用）"""
+        if parameters is None:
+            parameters = {}
+            
+        # 設備IDから設備タイプを特定
+        equipment_type = None
+        for eq_type, simulator in self.simulators.items():
+            if simulator.equipment_id == equipment_id:
+                equipment_type = eq_type
+                break
+        
+        if equipment_type is None:
+            return {
+                "status": "error",
+                "error_code": "EQUIPMENT_NOT_FOUND",
+                "error_message": f"Equipment not found: {equipment_id}"
+            }
+        
+        # コマンド実行
+        return self.send_command(equipment_type, command)
+    
     def get_equipment_status(self) -> Dict[str, Any]:
         """全設備のステータスを取得"""
         status = {}
