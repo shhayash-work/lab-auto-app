@@ -12,6 +12,9 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 from app.models.validation import ValidationBatch, ValidationResult, TestItem
 from app.services.vector_store import get_vector_store
+import logging
+
+logger = logging.getLogger(__name__)
 
 # データ保存ディレクトリ
 STORAGE_DIR = Path(__file__).parent.parent.parent / "data" / "batches"
@@ -172,6 +175,18 @@ class BatchStorageManager:
             'fail_batches': fail_batches,
             'running_batches': running_batches
         }
+
+def load_realistic_batches():
+    """リアルな検証バッチデータを読み込み"""
+    try:
+        import os
+        realistic_file = 'data/realistic/realistic_batches.json'
+        if os.path.exists(realistic_file):
+            with open(realistic_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+    except Exception as e:
+        logger.warning(f"Failed to load realistic data: {e}")
+    return []
 
 # グローバルインスタンス
 _batch_storage = None

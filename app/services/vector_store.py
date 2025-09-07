@@ -99,6 +99,10 @@ class VectorStore:
             logger.error(f"Failed to add document: {e}")
             return False
     
+    def search(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+        """検索メソッド（エイリアス）"""
+        return self.search_similar_documents(query, top_k)
+    
     def search_similar_documents(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
         """類似ドキュメントを検索（テキスト類似度ベース）"""
         try:

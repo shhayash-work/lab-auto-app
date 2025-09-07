@@ -35,6 +35,7 @@ from app.services.mcp_validation_engine import get_unified_validation_engine
 from app.services.provider_manager import get_provider_manager, ProviderStatus
 from app.utils.excel_parser import parse_excel_test_items
 from app.utils.star_chart import create_star_chart_dataframe
+from app.ui.qa_panel import render_qa_panel
 
 # ログ設定
 logging.basicConfig(level=logging.INFO)
@@ -562,13 +563,27 @@ def render_ai_generation(selected_provider=None):
                 # LLMサービスを初期化
                 llm_service = get_llm_service(llm_provider)
                 
-                # AWS Bedrockの場合は進捗バーと途中思考を表示
+                # AWS Bedrockの場合は進捗バーとAI思考を表示
                 if llm_provider == "bedrock":
                     progress_bar = st.progress(0)
-                    status_text = st.empty()
-                    spinner_container = st.empty()
+                    spinner_placeholder = st.empty()
+                    thinking_container = st.empty()
+                    
+                    # AWS Bedrockの思考段階（偽装でも可）
+                    thinking_stages = [
+                        "検証項目の要件を分析中...",
+                        "過去の類似検証項目をRAGで検索中...",
+                        "対象設備の特性を考慮中...",
+                        "正常系・異常系のシナリオを検討中...",
+                        "検証条件の詳細を策定中...",
+                        "検証項目の妥当性を確認中...",
+                        "最終的な検証項目リストを作成中..."
+                    ]
+                    current_stage = 0
                     
                     def bedrock_progress_callback(progress: float, message: str):
+                        nonlocal current_stage
+                        
                         # プログレス値の範囲チェック
                         if progress > 1.0:
                             progress = 1.0
@@ -578,11 +593,18 @@ def render_ai_generation(selected_provider=None):
                         # プログレスバー更新
                         progress_bar.progress(progress)
                         
-                        # 進捗テキスト表示
-                        status_text.text(f"実行中... {progress*100:.1f}%済み")
+                        # スピナー表示（実行中... xx%済み）
+                        with spinner_placeholder:
+                            with st.spinner(f"実行中... {progress*100:.1f}%済み"):
+                                pass
                         
-                        # 途中思考を継続表示
-                        spinner_container.info(f"💭 AIエージェント思考: {message}")
+                        # 進捗に応じて思考段階を更新
+                        stage_index = min(int(progress * len(thinking_stages)), len(thinking_stages) - 1)
+                        if stage_index != current_stage:
+                            current_stage = stage_index
+                        
+                        current_thinking = thinking_stages[current_stage]
+                        thinking_container.info(f"💭 {current_thinking}")
                     
                     generated_items = llm_service.generate_test_items(
                         feature_name, 
@@ -592,16 +614,30 @@ def render_ai_generation(selected_provider=None):
                     
                     # 完了表示
                     progress_bar.progress(1.0)
-                    status_text.text("実行中... 100.0%済み")
-                    spinner_container.empty()
+                    spinner_placeholder.empty()
+                    thinking_container.success("💭 検証項目生成完了")
+                    st.success("✅ 検証項目生成完了")
                     
                 else:
                     # Ollama等の場合は進捗表示とステップ表示
                     progress_bar = st.progress(0)
-                    status_text = st.empty()
-                    spinner_container = st.empty()
+                    spinner_placeholder = st.empty()
+                    step_container = st.empty()
+                    
+                    # Ollamaのステップ表示
+                    step_messages = [
+                        "Ollamaモデルを初期化中...",
+                        "検証項目の要件を分析中...",
+                        "ベクトル検索で類似資料取得中...",
+                        "対象設備の特性を考慮中...",
+                        "検証条件の詳細を策定中...",
+                        "検証項目リストを生成中..."
+                    ]
+                    current_step = 0
                     
                     def ollama_progress_callback(progress: float, message: str):
+                        nonlocal current_step
+                        
                         if progress > 1.0:
                             progress = 1.0
                         elif progress < 0.0:
@@ -610,23 +646,18 @@ def render_ai_generation(selected_provider=None):
                         # プログレスバー更新
                         progress_bar.progress(progress)
                         
-                        # 進捗テキスト表示
-                        status_text.text(f"実行中... {progress*100:.1f}%済み")
+                        # スピナー表示（実行中... xx%済み）
+                        with spinner_placeholder:
+                            with st.spinner(f"実行中... {progress*100:.1f}%済み"):
+                                pass
                         
-                        # ステップ表示
-                        step_messages = {
-                            0.0: "Ollamaモデル初期化中...",
-                            0.3: "ベクトル検索で類似資料取得中...",
-                            0.7: "検証項目生成中..."
-                        }
+                        # 進捗に応じてステップを更新
+                        step_index = min(int(progress * len(step_messages)), len(step_messages) - 1)
+                        if step_index != current_step:
+                            current_step = step_index
                         
-                        current_step = "検証項目生成中..."
-                        for threshold, step_msg in step_messages.items():
-                            if progress >= threshold:
-                                current_step = step_msg
-                        
-                        # ステップを継続表示
-                        spinner_container.info(f"🔄 {current_step}")
+                        current_step_msg = step_messages[current_step]
+                        step_container.info(f"🔄 {current_step_msg}")
                     
                     generated_items = llm_service.generate_test_items(
                         feature_name, 
@@ -636,8 +667,9 @@ def render_ai_generation(selected_provider=None):
                     
                     # 完了表示
                     progress_bar.progress(1.0)
-                    status_text.text("実行中... 100.0%済み")
-                    spinner_container.empty()
+                    spinner_placeholder.empty()
+                    step_container.success("🔄 検証項目生成完了")
+                    st.success("✅ 検証項目生成完了")
                 
                 # TestItemオブジェクトに変換
                 test_items = []
@@ -1155,12 +1187,37 @@ def execute_validation_batch(test_items: List[TestItem], batch_name: str, llm_pr
     
     # 進捗表示用コンテナ
     progress_bar = st.progress(0)
-    status_text = st.empty()
-    spinner_container = st.empty()
+    spinner_placeholder = st.empty()
+    thinking_container = st.empty()
     results_container = st.empty()
+    
+    # 検証実行の思考段階を定義
+    if capabilities["mcp_supported"]:
+        # MCPエージェントの思考段階
+        thinking_stages = [
+            "検証バッチの構成を分析中...",
+            "MCPツールを準備中...",
+            "設備との通信を確立中...",
+            "検証項目を順次実行中...",
+            "検証結果を分析中...",
+            "最終レポートを作成中..."
+        ]
+    else:
+        # 従来エンジンのステップ表示
+        thinking_stages = [
+            "検証バッチの構成を分析中...",
+            "モック設備との接続を確立中...",
+            "検証項目を順次実行中...",
+            "LLMで結果を分析中...",
+            "検証レポートを作成中..."
+        ]
+    
+    current_stage = 0
     
     def progress_callback(progress: float, result_or_message):
         """進捗コールバック"""
+        nonlocal current_stage
+        
         # プログレス値の範囲チェック
         if progress > 1.0:
             progress = 1.0
@@ -1170,16 +1227,24 @@ def execute_validation_batch(test_items: List[TestItem], batch_name: str, llm_pr
         # プログレスバー更新
         progress_bar.progress(progress)
         
-        # 進捗テキスト表示
-        status_text.text(f"実行中... {progress*100:.1f}%済み")
+        # スピナー表示（実行中... xx%済み）
+        with spinner_placeholder:
+            with st.spinner(f"実行中... {progress*100:.1f}%済み"):
+                pass
         
-        # メッセージまたは結果に応じて表示を更新
-        if isinstance(result_or_message, str):
-            # AWS Bedrockの思考メッセージ
-            if "AIエージェント" in result_or_message or "思考" in result_or_message:
-                spinner_container.info(f"💭 {result_or_message}")
-        elif hasattr(result_or_message, 'result'):
-            # 検証結果をリアルタイム表示
+        # 進捗に応じて思考段階を更新
+        stage_index = min(int(progress * len(thinking_stages)), len(thinking_stages) - 1)
+        if stage_index != current_stage:
+            current_stage = stage_index
+        
+        current_thinking = thinking_stages[current_stage]
+        if capabilities["mcp_supported"]:
+            thinking_container.info(f"💭 {current_thinking}")
+        else:
+            thinking_container.info(f"🔄 {current_thinking}")
+        
+        # 検証結果をリアルタイム表示
+        if hasattr(result_or_message, 'result'):
             if batch.results:
                 with results_container.container():
                     render_realtime_results(batch.results)
@@ -1196,8 +1261,12 @@ def execute_validation_batch(test_items: List[TestItem], batch_name: str, llm_pr
         
         # 完了表示
         progress_bar.progress(1.0)
-        status_text.text(f"✅ 完了! 実行時間: {execution_time:.1f}秒")
-        spinner_container.empty()
+        spinner_placeholder.empty()
+        if capabilities["mcp_supported"]:
+            thinking_container.success("💭 検証実行完了")
+        else:
+            thinking_container.success("🔄 検証実行完了")
+        st.success(f"✅ 完了! 実行時間: {execution_time:.1f}秒")
         
         # セッション状態に保存
         st.session_state.current_batch = completed_batch
@@ -1235,7 +1304,7 @@ def render_realtime_results(results: List[ValidationResult]):
         details = ""
         if hasattr(result, 'details') and result.details:
             details = result.details
-        elif result.error_message:
+        elif hasattr(result, 'error_message') and result.error_message:
             details = f"エラー: {result.error_message}"
         else:
             details = "詳細情報なし"
@@ -1250,14 +1319,25 @@ def render_realtime_results(results: List[ValidationResult]):
                     condition_text = item.condition.condition_text
                     break
         
+        # 辞書とオブジェクトの両方に対応
+        if isinstance(result, dict):
+            equipment_type = result.get('equipment_type', 'Unknown')
+            result_value = result.get('result', 'Unknown')
+            confidence = result.get('confidence', 0.0)
+            execution_time = result.get('execution_time', 0.0)
+        else:
+            equipment_type = result.equipment_type.value if hasattr(result.equipment_type, 'value') else str(result.equipment_type)
+            result_value = result.result.value if hasattr(result.result, 'value') else str(result.result)
+            confidence = result.confidence
+            execution_time = result.execution_time
+        
         data.append({
-            "#": i + 1,
             "検証条件": condition_text,
-            "対象設備": result.equipment_type.value,
-            "結果": result.result.value,
+            "対象設備": equipment_type,
+            "結果": result_value,
             "判定根拠": details,
-            "信頼度": f"{result.confidence:.2f}",
-            "実行時間": f"{result.execution_time:.2f}s"
+            "信頼度": f"{confidence:.2f}",
+            "実行時間": f"{execution_time:.2f}s"
         })
     
     if data:
@@ -1554,12 +1634,12 @@ def render_results_viewer():
             continue
         filtered_results.append(result)
     
-    # 星取表表示
-    col1, col2 = st.columns([3, 1])
+    # 表示オプション（左寄せ横並び）
+    col1, col2, col3 = st.columns([2, 2, 6])
     with col1:
-        show_star_chart = st.checkbox("星取表表示", value=True)
+        show_star_chart = st.checkbox("星取表を表示", value=True)
     with col2:
-        show_details = st.checkbox("詳細表示", value=False)
+        show_details = st.checkbox("詳細を表示", value=False)
     
     if show_star_chart:
         render_star_chart(filtered_results)
@@ -1612,20 +1692,43 @@ def render_detailed_results_table(results: List[ValidationResult]):
         details = ""
         if hasattr(result, 'details') and result.details:
             details = result.details
-        elif result.error_message:
+        elif hasattr(result, 'error_message') and result.error_message:
             details = f"エラー: {result.error_message}"
         else:
             details = "詳細情報なし"
         
+        # 辞書とオブジェクトの両方に対応
+        if isinstance(result, dict):
+            equipment_type = result.get('equipment_type', 'Unknown')
+            result_value = result.get('result', 'Unknown')
+            confidence = result.get('confidence', 0.0)
+            execution_time = result.get('execution_time', 0.0)
+            created_at = result.get('created_at', 'Unknown')
+            if created_at != 'Unknown':
+                try:
+                    from datetime import datetime
+                    if isinstance(created_at, str):
+                        created_at = datetime.fromisoformat(created_at.replace('Z', '+00:00'))
+                    created_at_str = created_at.strftime("%H:%M:%S")
+                except:
+                    created_at_str = str(created_at)
+            else:
+                created_at_str = "Unknown"
+        else:
+            equipment_type = result.equipment_type.value if hasattr(result.equipment_type, 'value') else str(result.equipment_type)
+            result_value = result.result.value if hasattr(result.result, 'value') else str(result.result)
+            confidence = result.confidence
+            execution_time = result.execution_time
+            created_at_str = result.created_at.strftime("%H:%M:%S")
+        
         data.append({
-            "#": i + 1,
             "検証条件": condition_text,
-            "対象設備": result.equipment_type.value,
-            "結果": result.result.value,
+            "対象設備": equipment_type,
+            "結果": result_value,
             "判定根拠": details,
-            "信頼度": f"{result.confidence:.2f}",
-            "実行時間": f"{result.execution_time:.2f}s",
-            "実行時刻": result.created_at.strftime("%H:%M:%S")
+            "信頼度": f"{confidence:.2f}",
+            "実行時間": f"{execution_time:.2f}s",
+            "実行時刻": created_at_str
         })
     
     df = pd.DataFrame(data)
@@ -1778,7 +1881,7 @@ def render_batch_list():
     for i, row in edited_df.iterrows():
         if row["選択"]:
             batch_id = df.iloc[i]["ID"]
-            selected_batch = next((b for b in executed_batches if b['id'] == batch_id), None)
+            selected_batch = next((b for b in all_batches if b.get('id') == batch_id or b.get('name') == batch_id), None)
             if selected_batch:
                 selected_batches.append(selected_batch)
     
@@ -1786,15 +1889,28 @@ def render_batch_list():
         st.subheader("選択されたバッチの詳細")
         
         for batch in selected_batches:
-            with st.expander(f"📊 {batch['name']}", expanded=True):
+            with st.expander(f"{batch['name']}", expanded=True):
                 if batch['results']:
                     # バッチサマリー
                     col1, col2, col3, col4 = st.columns(4)
                     
                     total_tests = len(batch['results'])
-                    pass_count = sum(1 for r in batch['results'] if r.result.value == 'PASS')
-                    fail_count = sum(1 for r in batch['results'] if r.result.value == 'FAIL')
-                    warning_count = sum(1 for r in batch['results'] if r.result.value == 'WARNING')
+                    pass_count = 0
+                    fail_count = 0
+                    
+                    for r in batch['results']:
+                        # 辞書とオブジェクトの両方に対応
+                        if isinstance(r, dict):
+                            result_value = r.get('result')
+                        else:
+                            result_value = getattr(r, 'result', None)
+                            if hasattr(result_value, 'value'):
+                                result_value = result_value.value
+                        
+                        if result_value == 'PASS':
+                            pass_count += 1
+                        elif result_value == 'FAIL':
+                            fail_count += 1
                     
                     with col1:
                         st.metric("総テスト数", total_tests)
@@ -1803,7 +1919,8 @@ def render_batch_list():
                     with col3:
                         st.metric("失敗", fail_count)
                     with col4:
-                        st.metric("警告", warning_count)
+                        success_rate = f"{(pass_count / total_tests * 100):.1f}%" if total_tests > 0 else "0%"
+                        st.metric("成功率", success_rate)
                     
                     # 詳細結果テーブル
                     render_detailed_results_table(batch['results'])
@@ -1832,7 +1949,7 @@ def main():
         if main_menu == "ダッシュボード":
             sub_page = st.radio(
                 "ダッシュボード",
-                ["検証サマリ", "検証バッチ一覧"],
+                ["検証サマリ", "検証バッチ一覧", "AI質疑応答"],
                 index=0
             )
         else:  # 検証手動実行
@@ -1928,6 +2045,8 @@ def main():
             render_dashboard()
         elif sub_page == "検証バッチ一覧":
             render_batch_list()
+        elif sub_page == "AI質疑応答":
+            render_qa_panel()
     else:  # 検証手動実行
         if sub_page == "検証項目入力":
             render_test_management(selected_provider)

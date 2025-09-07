@@ -41,28 +41,45 @@ def create_star_chart_dataframe(results: List[ValidationResult]) -> pd.DataFrame
         # データフレームの初期化
         df_data = {}
         
-        # 検証項目IDを行として設定（検証条件のみ）
+        # 検証項目IDを行として設定（試験ブロック、カテゴリ、検証条件）
+        test_blocks = []
+        categories = []
         condition_texts = []
         
         for i, test_item_id in enumerate(test_item_ids):
-            # 検証条件を取得
+            # 検証項目の詳細を取得
+            test_block = "試験ブロック不明"
+            category = "カテゴリ不明"
             condition_text = "検証条件不明"
             
-            # セッション状態から検証条件を取得（Streamlitのグローバル状態を使用）
+            # セッション状態から検証項目詳細を取得（Streamlitのグローバル状態を使用）
             try:
                 import streamlit as st
                 test_items = st.session_state.get('test_items', [])
                 for item in test_items:
                     if item.id == test_item_id:
+                        # 現在のバッチから試験ブロックを取得
+                        current_batch = st.session_state.get('current_batch')
+                        if current_batch and hasattr(current_batch, 'name'):
+                            # バッチ名から試験ブロックを抽出（検証バッチ_{試験ブロック}_形式）
+                            batch_parts = current_batch.name.split('_')
+                            if len(batch_parts) >= 2:
+                                test_block = batch_parts[1]
+                        
+                        category = item.category.value if hasattr(item.category, 'value') else str(item.category)
                         condition_text = item.condition.condition_text
                         break
             except:
                 # セッション状態が利用できない場合はデフォルト
                 pass
             
+            test_blocks.append(test_block)
+            categories.append(category)
             condition_texts.append(condition_text)
         
-        # 検証条件を設定
+        # 列を設定
+        df_data['試験ブロック'] = test_blocks
+        df_data['カテゴリ'] = categories
         df_data['検証条件'] = condition_texts
         
         # 各設備タイプを列として追加

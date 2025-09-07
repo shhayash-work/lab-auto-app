@@ -260,6 +260,63 @@ class LLMService:
             logger.error(f"Bedrock generation error: {e}")
             raise
     
+    def _generate_bedrock_streaming(self, prompt: str, system_prompt: Optional[str] = None, progress_callback=None) -> str:
+        """AWS Bedrock応答を生成（ストリーミング対応）"""
+        try:
+            full_prompt = prompt
+            if system_prompt:
+                full_prompt = f"{system_prompt}\n\n{prompt}"
+            
+            body = json.dumps({
+                "anthropic_version": "bedrock-2023-05-31",
+                "max_tokens": 2048,
+                "temperature": 0.7,
+                "messages": [{"role": "user", "content": full_prompt}]
+            })
+            
+            logger.info(f"Bedrock streaming request body: {body[:200]}...")
+            
+            # ストリーミングレスポンスを使用
+            response = self.client.invoke_model_with_response_stream(
+                modelId=BEDROCK_MODEL,
+                body=body
+            )
+            
+            # ストリーミングレスポンスを処理
+            full_response = ""
+            chunk_count = 0
+            total_chunks_estimate = 20  # 推定チャンク数
+            
+            for event in response['body']:
+                if 'chunk' in event:
+                    chunk = json.loads(event['chunk']['bytes'].decode())
+                    
+                    if chunk['type'] == 'content_block_delta':
+                        if 'delta' in chunk and 'text' in chunk['delta']:
+                            text_chunk = chunk['delta']['text']
+                            full_response += text_chunk
+                            chunk_count += 1
+                            
+                            # 進捗とストリーミングテキストを報告
+                            progress = min(chunk_count / total_chunks_estimate, 0.95)
+                            if progress_callback:
+                                progress_callback(progress, text_chunk)
+                    
+                    elif chunk['type'] == 'message_stop':
+                        # 完了
+                        if progress_callback:
+                            progress_callback(1.0, "応答完了")
+                        break
+            
+            logger.info(f"Bedrock streaming response completed: {len(full_response)} chars")
+            return full_response
+            
+        except Exception as e:
+            logger.error(f"Bedrock streaming generation error: {e}")
+            # フォールバック: 通常のAPI呼び出し
+            logger.info("Falling back to non-streaming Bedrock API")
+            return self._generate_bedrock(prompt, system_prompt)
+    
     def analyze_validation_result(self, test_item: Dict[str, Any], equipment_response: Dict[str, Any]) -> Dict[str, Any]:
         """検証結果を分析"""
         system_prompt = """あなたは通信設備の検証エキスパートです。
@@ -398,10 +455,13 @@ class LLMService:
             if progress_callback:
                 progress_callback(0.7, f"{self.provider.upper()} AIエージェントが検証項目を生成中...")
             
-            response = self.generate_response(prompt, system_prompt)
-            
-            if progress_callback:
-                progress_callback(0.9, "生成された検証項目を解析中...")
+            # Bedrockの場合はストリーミング対応
+            if self.provider == "bedrock":
+                response = self._generate_bedrock_streaming(prompt, system_prompt, progress_callback)
+            else:
+                response = self.generate_response(prompt, system_prompt)
+                if progress_callback:
+                    progress_callback(0.9, "生成された検証項目を解析中...")
             
             try:
                 test_items = json.loads(response)
