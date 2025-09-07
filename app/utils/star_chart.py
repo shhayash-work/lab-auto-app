@@ -34,25 +34,46 @@ def create_star_chart_dataframe(results: List[ValidationResult]) -> pd.DataFrame
         # データを整理
         chart_data = {}
         
-        # 行: シナリオ、列: 設備タイプ
-        scenarios = sorted(list(set(result.scenario for result in results)))
+        # 行: 検証項目ID、列: 設備タイプ
+        test_item_ids = sorted(list(set(result.test_item_id for result in results)))
         equipment_types = sorted(list(set(result.equipment_type.value for result in results)))
         
         # データフレームの初期化
         df_data = {}
         
-        # シナリオを行として設定
-        df_data['シナリオ'] = scenarios
+        # 検証項目IDを行として設定（検証条件のみ）
+        condition_texts = []
+        
+        for i, test_item_id in enumerate(test_item_ids):
+            # 検証条件を取得
+            condition_text = "検証条件不明"
+            
+            # セッション状態から検証条件を取得（Streamlitのグローバル状態を使用）
+            try:
+                import streamlit as st
+                test_items = st.session_state.get('test_items', [])
+                for item in test_items:
+                    if item.id == test_item_id:
+                        condition_text = item.condition.condition_text
+                        break
+            except:
+                # セッション状態が利用できない場合はデフォルト
+                pass
+            
+            condition_texts.append(condition_text)
+        
+        # 検証条件を設定
+        df_data['検証条件'] = condition_texts
         
         # 各設備タイプを列として追加
         for equipment_type in equipment_types:
             column_data = []
             
-            for scenario in scenarios:
+            for test_item_id in test_item_ids:
                 # 該当する結果を検索
                 matching_result = None
                 for result in results:
-                    if result.scenario == scenario and result.equipment_type.value == equipment_type:
+                    if result.test_item_id == test_item_id and result.equipment_type.value == equipment_type:
                         matching_result = result
                         break
                 
@@ -68,9 +89,6 @@ def create_star_chart_dataframe(results: List[ValidationResult]) -> pd.DataFrame
         
         # DataFrameを作成
         df = pd.DataFrame(df_data)
-        
-        # シナリオを行インデックスに設定
-        df.set_index('シナリオ', inplace=True)
         
         logger.info(f"Star chart created: {df.shape}")
         return df

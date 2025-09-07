@@ -438,6 +438,21 @@ class MockEquipmentManager:
         """シミュレータを取得"""
         return self.simulators.get(equipment_type)
     
+    def get_equipment(self, equipment_id: str) -> Optional[BaseEquipmentSimulator]:
+        """設備IDから設備を取得（テスト用）"""
+        # 設備IDから設備タイプを推定
+        if "MMU" in equipment_id:
+            return self.simulators.get("Ericsson-MMU")
+        elif "RRU" in equipment_id:
+            return self.simulators.get("Ericsson-RRU")
+        elif "AUv1" in equipment_id:
+            return self.simulators.get("Samsung-AUv1")
+        elif "AUv2" in equipment_id:
+            return self.simulators.get("Samsung-AUv2")
+        else:
+            # デフォルトはEricsson MMU
+            return self.simulators.get("Ericsson-MMU")
+    
     def execute_command(self, equipment_type: str, command: str) -> Dict[str, Any]:
         """コマンドを実行"""
         simulator = self.get_simulator(equipment_type)
@@ -471,12 +486,29 @@ class MockEquipmentManager:
         if parameters is None:
             parameters = {}
             
-        # 設備IDから設備タイプを特定
+        # 設備IDから設備タイプを特定（柔軟なマッチング）
         equipment_type = None
+        
+        # 直接的なマッチング
         for eq_type, simulator in self.simulators.items():
             if simulator.equipment_id == equipment_id:
                 equipment_type = eq_type
                 break
+        
+        # 設備タイプ名での直接マッチング
+        if equipment_type is None and equipment_id in self.simulators:
+            equipment_type = equipment_id
+        
+        # パターンマッチング
+        if equipment_type is None:
+            if "Samsung-AUv1" in equipment_id or "SAMSUNG_AUV1" in equipment_id:
+                equipment_type = "Samsung-AUv1"
+            elif "Samsung-AUv2" in equipment_id or "SAMSUNG_AUV2" in equipment_id:
+                equipment_type = "Samsung-AUv2"
+            elif "Ericsson-MMU" in equipment_id or "ERICSSON_MMU" in equipment_id:
+                equipment_type = "Ericsson-MMU"
+            elif "Ericsson-RRU" in equipment_id or "ERICSSON_RRU" in equipment_id:
+                equipment_type = "Ericsson-RRU"
         
         if equipment_type is None:
             return {
@@ -487,6 +519,36 @@ class MockEquipmentManager:
         
         # コマンド実行
         return self.send_command(equipment_type, command)
+    
+    def send_command(self, equipment_type: str, command: str) -> Dict[str, Any]:
+        """設備にコマンドを送信"""
+        simulator = self.get_simulator(equipment_type)
+        if not simulator:
+            return {
+                "status": "error",
+                "error_code": "UNKNOWN_EQUIPMENT",
+                "error_message": f"Unknown equipment type: {equipment_type}"
+            }
+        
+        # 基本的なコマンド実行
+        if command == "get_status":
+            return simulator.get_snmp_data()
+        elif command == "get_cm_data":
+            return {"cm_data": simulator.get_cm_data()}
+        elif "test_command" in command:
+            return {
+                "status": "success",
+                "equipment_type": equipment_type,
+                "command": command,
+                "timestamp": datetime.now().isoformat(),
+                "response": "Command executed successfully"
+            }
+        else:
+            return {
+                "status": "error",
+                "error_code": "UNKNOWN_COMMAND",
+                "error_message": f"Unknown command: {command}"
+            }
     
     def get_equipment_status(self) -> Dict[str, Any]:
         """全設備のステータスを取得"""

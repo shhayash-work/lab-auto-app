@@ -1,0 +1,3386 @@
+[
+  {
+    "id": "53347c55-cebf-4730-a00a-c0ecbe2da783",
+    "name": "検証バッチ_5G NR接続性能_20250906_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "e5009f62-7164-4d46-ad46-d42ca2e4000e",
+        "test_block": "初期接続",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "5G NRセルへの初期接続が正常に完了すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.424558",
+        "updated_at": "2025-09-07T09:22:40.424558"
+      },
+      {
+        "id": "e9234424-a2af-46b4-93b4-3287e1448ecd",
+        "test_block": "スループット",
+        "category": "対策バンドによるフィルタ",
+        "condition": {
+          "condition_text": "下り/上りスループットが仕様値を満たすこと",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.424582",
+        "updated_at": "2025-09-07T09:22:40.424583"
+      },
+      {
+        "id": "a656d96e-654f-4eb4-bc88-7b225fd3a6a1",
+        "test_block": "レイテンシ",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "エンドツーエンドレイテンシが要求値以下であること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.424606",
+        "updated_at": "2025-09-07T09:22:40.424606"
+      }
+    ],
+    "results": [
+      {
+        "id": "dd254e0b-fc5e-4fe2-a586-3ca88980ebb0",
+        "test_item_id": "e5009f62-7164-4d46-ad46-d42ca2e4000e",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "初期接続が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.07,
+        "error_message": null,
+        "confidence": 0.87,
+        "created_at": "2025-09-07T09:22:40.424630"
+      },
+      {
+        "id": "c2658480-1b5c-4c3e-87a2-4b4f31c290b3",
+        "test_item_id": "e9234424-a2af-46b4-93b4-3287e1448ecd",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "スループットが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.46,
+        "error_message": null,
+        "confidence": 0.96,
+        "created_at": "2025-09-07T09:22:40.424639"
+      },
+      {
+        "id": "43fb2deb-676a-4e16-8fe8-3bc06dced5b9",
+        "test_item_id": "a656d96e-654f-4eb4-bc88-7b225fd3a6a1",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "レイテンシが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.39,
+        "error_message": null,
+        "confidence": 0.94,
+        "created_at": "2025-09-07T09:22:40.424649"
+      }
+    ],
+    "created_at": "2025-09-06T09:22:40.424520",
+    "started_at": "2025-09-06T09:22:40.424520",
+    "completed_at": "2025-09-06T09:25:40.424520"
+  },
+  {
+    "id": "3efe6354-b6be-4702-a2af-df9e383f5f1c",
+    "name": "検証バッチ_LTE-5G連携機能_20250905_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "e18e07a8-1e73-45bd-baa5-e66dc2073b49",
+        "test_block": "デュアル接続",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "LTE-5G同時接続が正常に確立されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.424685",
+        "updated_at": "2025-09-07T09:22:40.424686"
+      },
+      {
+        "id": "7306936b-44de-4669-9865-1d8db351cd4c",
+        "test_block": "ベアラ分離",
+        "category": "対策バンドによるフィルタ",
+        "condition": {
+          "condition_text": "LTE/5Gベアラの適切な分離制御が動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.424708",
+        "updated_at": "2025-09-07T09:22:40.424708"
+      },
+      {
+        "id": "3bc239f7-6031-4acc-887c-5fe652567820",
+        "test_block": "負荷分散",
+        "category": "作業データのフィルタ",
+        "condition": {
+          "condition_text": "トラフィック負荷が適切に分散されること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.424730",
+        "updated_at": "2025-09-07T09:22:40.424730"
+      },
+      {
+        "id": "f95b677f-20c0-4737-867a-ce076e123a5e",
+        "test_block": "切替制御",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "LTE-5G間の切替が正常に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.424752",
+        "updated_at": "2025-09-07T09:22:40.424752"
+      }
+    ],
+    "results": [
+      {
+        "id": "0fe44a3e-7bb6-49b2-b70e-264f66728b81",
+        "test_item_id": "e18e07a8-1e73-45bd-baa5-e66dc2073b49",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "デュアル接続が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.76,
+        "error_message": null,
+        "confidence": 0.9099999999999999,
+        "created_at": "2025-09-07T09:22:40.424780"
+      },
+      {
+        "id": "f2151988-30e9-483f-8fbd-502d3679d64d",
+        "test_item_id": "7306936b-44de-4669-9865-1d8db351cd4c",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "ベアラ分離が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.53,
+        "error_message": null,
+        "confidence": 0.88,
+        "created_at": "2025-09-07T09:22:40.424788"
+      },
+      {
+        "id": "daca53d8-c414-4f47-a935-44b8cbd00833",
+        "test_item_id": "3bc239f7-6031-4acc-887c-5fe652567820",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "負荷分散が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.4,
+        "error_message": null,
+        "confidence": 0.9,
+        "created_at": "2025-09-07T09:22:40.424797"
+      },
+      {
+        "id": "f8a1bfee-353d-4b17-9e8f-2d39244ffe4a",
+        "test_item_id": "f95b677f-20c0-4737-867a-ce076e123a5e",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "切替制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.82,
+        "error_message": null,
+        "confidence": 0.9199999999999999,
+        "created_at": "2025-09-07T09:22:40.424805"
+      }
+    ],
+    "created_at": "2025-09-05T09:22:40.424654",
+    "started_at": "2025-09-05T09:22:40.424654",
+    "completed_at": "2025-09-05T09:26:40.424654"
+  },
+  {
+    "id": "90f4a649-9b8e-4db4-9ac8-3a162ebd260b",
+    "name": "検証バッチ_ビームフォーミング制御_20250904_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "3c647b70-e61f-4487-9d01-6014a4537398",
+        "test_block": "ビーム生成",
+        "category": "ESG作成",
+        "condition": {
+          "condition_text": "適切なビームパターンが生成されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.424853",
+        "updated_at": "2025-09-07T09:22:40.424854"
+      },
+      {
+        "id": "e7c4d5fa-182e-4be4-a9f9-4bbdaafbe59e",
+        "test_block": "追従制御",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "端末移動に対するビーム追従が正常動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.424877",
+        "updated_at": "2025-09-07T09:22:40.424877"
+      }
+    ],
+    "results": [
+      {
+        "id": "189bdf01-659b-4d2c-993d-a40aa5ed8b5d",
+        "test_item_id": "3c647b70-e61f-4487-9d01-6014a4537398",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "ビーム生成が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.58,
+        "error_message": null,
+        "confidence": 0.9299999999999999,
+        "created_at": "2025-09-07T09:22:40.424897"
+      },
+      {
+        "id": "e0da315d-cbc9-4050-9540-8af5eba72e5a",
+        "test_item_id": "e7c4d5fa-182e-4be4-a9f9-4bbdaafbe59e",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "追従制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.58,
+        "error_message": null,
+        "confidence": 0.9299999999999999,
+        "created_at": "2025-09-07T09:22:40.424906"
+      }
+    ],
+    "created_at": "2025-09-04T09:22:40.424809",
+    "started_at": "2025-09-04T09:22:40.424809",
+    "completed_at": "2025-09-04T09:27:40.424809"
+  },
+  {
+    "id": "36875473-cb28-4e4f-ae4f-2cd2b6b327df",
+    "name": "検証バッチ_キャリアアグリゲーション_20250903_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "ba5e58eb-bc0d-490b-9ba0-3f671fcc0663",
+        "test_block": "CA設定",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "複数キャリアの集約設定が正常に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.424942",
+        "updated_at": "2025-09-07T09:22:40.424942"
+      },
+      {
+        "id": "0cf6709a-44ab-43be-841c-7a1ef33e92f8",
+        "test_block": "スケジューリング",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "CA環境でのスケジューリングが適切に動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.424964",
+        "updated_at": "2025-09-07T09:22:40.424965"
+      },
+      {
+        "id": "5d3ed4d2-472c-4953-8034-820a7d4ea05d",
+        "test_block": "品質制御",
+        "category": "対策バンドによるフィルタ",
+        "condition": {
+          "condition_text": "各キャリアの品質が適切に制御されること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.424986",
+        "updated_at": "2025-09-07T09:22:40.424986"
+      }
+    ],
+    "results": [
+      {
+        "id": "3ecd0f30-43a2-4430-8f45-7fa0da98283f",
+        "test_item_id": "ba5e58eb-bc0d-490b-9ba0-3f671fcc0663",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "CA設定が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.9699999999999998,
+        "error_message": null,
+        "confidence": 0.87,
+        "created_at": "2025-09-07T09:22:40.425006"
+      },
+      {
+        "id": "fc8c3bcf-346e-43c1-8b1d-cdf388496503",
+        "test_item_id": "ba5e58eb-bc0d-490b-9ba0-3f671fcc0663",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "CA設定が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.9699999999999998,
+        "error_message": null,
+        "confidence": 0.87,
+        "created_at": "2025-09-07T09:22:40.425015"
+      },
+      {
+        "id": "c029034a-111d-4fdd-a3b9-89c39d2ec1e9",
+        "test_item_id": "0cf6709a-44ab-43be-841c-7a1ef33e92f8",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "スケジューリングが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.15,
+        "error_message": null,
+        "confidence": 0.85,
+        "created_at": "2025-09-07T09:22:40.425023"
+      },
+      {
+        "id": "b26b2e75-fbfc-4122-887d-2d5be28b72b6",
+        "test_item_id": "0cf6709a-44ab-43be-841c-7a1ef33e92f8",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "スケジューリングが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.15,
+        "error_message": null,
+        "confidence": 0.85,
+        "created_at": "2025-09-07T09:22:40.425031"
+      },
+      {
+        "id": "cc63a51c-eeeb-40ec-965c-07c81914379a",
+        "test_item_id": "5d3ed4d2-472c-4953-8034-820a7d4ea05d",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "品質制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.35,
+        "error_message": null,
+        "confidence": 0.95,
+        "created_at": "2025-09-07T09:22:40.425039"
+      },
+      {
+        "id": "4fd99043-602f-47cc-889d-f319aaa423b9",
+        "test_item_id": "5d3ed4d2-472c-4953-8034-820a7d4ea05d",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "品質制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.35,
+        "error_message": null,
+        "confidence": 0.95,
+        "created_at": "2025-09-07T09:22:40.425047"
+      }
+    ],
+    "created_at": "2025-09-03T09:22:40.424910",
+    "started_at": "2025-09-03T09:22:40.424910",
+    "completed_at": "2025-09-03T09:28:40.424910"
+  },
+  {
+    "id": "da997935-429e-4f5a-b008-faa6ae371ee1",
+    "name": "検証バッチ_VoLTE音声品質_20250902_092240",
+    "status": "failed",
+    "test_items": [
+      {
+        "id": "df67139f-8e70-445d-9b4d-2dc75eaef3f7",
+        "test_block": "音声接続",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "VoLTE音声接続が正常に確立されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425080",
+        "updated_at": "2025-09-07T09:22:40.425080"
+      },
+      {
+        "id": "020ef579-eea7-4e0b-86cd-dd6bacdc4f48",
+        "test_block": "音質評価",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "音声品質が基準値を満たすこと",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425105",
+        "updated_at": "2025-09-07T09:22:40.425105"
+      },
+      {
+        "id": "e7d22efd-83b8-4b12-bd6f-e7a34beaaaeb",
+        "test_block": "ハンドオーバー",
+        "category": "ESG作成",
+        "condition": {
+          "condition_text": "通話中ハンドオーバーが正常動作すること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425127",
+        "updated_at": "2025-09-07T09:22:40.425127"
+      },
+      {
+        "id": "d3c0e882-f916-47b1-9cad-8d0f9c778b94",
+        "test_block": "緊急通話",
+        "category": "作業データのフィルタ",
+        "condition": {
+          "condition_text": "緊急通話機能が正常に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425149",
+        "updated_at": "2025-09-07T09:22:40.425149"
+      }
+    ],
+    "results": [
+      {
+        "id": "c6b4832a-fde1-46a0-bbab-de409e6a2bf8",
+        "test_item_id": "df67139f-8e70-445d-9b4d-2dc75eaef3f7",
+        "equipment_type": "Samsung-AUv1",
+        "result": "FAIL",
+        "details": "音声接続で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.58,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.9299999999999999,
+        "created_at": "2025-09-07T09:22:40.425172"
+      },
+      {
+        "id": "2c04a781-03d6-4bcf-8073-a07efbae7d92",
+        "test_item_id": "df67139f-8e70-445d-9b4d-2dc75eaef3f7",
+        "equipment_type": "Samsung-AUv2",
+        "result": "FAIL",
+        "details": "音声接続で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.58,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.9299999999999999,
+        "created_at": "2025-09-07T09:22:40.425183"
+      },
+      {
+        "id": "199e7973-2725-44c5-945f-cd0603731354",
+        "test_item_id": "020ef579-eea7-4e0b-86cd-dd6bacdc4f48",
+        "equipment_type": "Samsung-AUv1",
+        "result": "FAIL",
+        "details": "音質評価で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.38,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.9299999999999999,
+        "created_at": "2025-09-07T09:22:40.425192"
+      },
+      {
+        "id": "6a9eab04-878a-4eef-94b5-0eb2a62658b2",
+        "test_item_id": "020ef579-eea7-4e0b-86cd-dd6bacdc4f48",
+        "equipment_type": "Samsung-AUv2",
+        "result": "FAIL",
+        "details": "音質評価で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.38,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.9299999999999999,
+        "created_at": "2025-09-07T09:22:40.425200"
+      },
+      {
+        "id": "827007b2-2029-41d2-80fd-cf6c76131867",
+        "test_item_id": "e7d22efd-83b8-4b12-bd6f-e7a34beaaaeb",
+        "equipment_type": "Samsung-AUv1",
+        "result": "FAIL",
+        "details": "ハンドオーバーで異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.54,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.89,
+        "created_at": "2025-09-07T09:22:40.425208"
+      },
+      {
+        "id": "a5ea2bd0-dde1-4154-9dff-c92796c418d4",
+        "test_item_id": "e7d22efd-83b8-4b12-bd6f-e7a34beaaaeb",
+        "equipment_type": "Samsung-AUv2",
+        "result": "FAIL",
+        "details": "ハンドオーバーで異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.54,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.89,
+        "created_at": "2025-09-07T09:22:40.425217"
+      },
+      {
+        "id": "bfba465b-6481-4f66-8179-ba1ce50103f1",
+        "test_item_id": "d3c0e882-f916-47b1-9cad-8d0f9c778b94",
+        "equipment_type": "Samsung-AUv1",
+        "result": "FAIL",
+        "details": "緊急通話で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.15,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.9,
+        "created_at": "2025-09-07T09:22:40.425226"
+      },
+      {
+        "id": "270f3913-fc3f-41c2-8681-c805342c30da",
+        "test_item_id": "d3c0e882-f916-47b1-9cad-8d0f9c778b94",
+        "equipment_type": "Samsung-AUv2",
+        "result": "FAIL",
+        "details": "緊急通話で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.15,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.9,
+        "created_at": "2025-09-07T09:22:40.425234"
+      }
+    ],
+    "created_at": "2025-09-02T09:22:40.425050",
+    "started_at": "2025-09-02T09:22:40.425050",
+    "completed_at": "2025-09-02T09:29:40.425050"
+  },
+  {
+    "id": "3bcace9f-cfd2-49b5-8668-bf275d993693",
+    "name": "検証バッチ_ハンドオーバー性能_20250901_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "a56ac910-fffc-4bf6-8ca8-73b5d7708905",
+        "test_block": "セル間HO",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "セル間ハンドオーバーが正常に完了すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425271",
+        "updated_at": "2025-09-07T09:22:40.425272"
+      },
+      {
+        "id": "ac079371-ad5a-4a53-ad50-88c304912452",
+        "test_block": "周波数間HO",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "周波数間ハンドオーバーが正常動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425294",
+        "updated_at": "2025-09-07T09:22:40.425294"
+      }
+    ],
+    "results": [
+      {
+        "id": "c473051c-4700-4075-967f-ad161e99fbb4",
+        "test_item_id": "a56ac910-fffc-4bf6-8ca8-73b5d7708905",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "セル間HOが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.69,
+        "error_message": null,
+        "confidence": 0.99,
+        "created_at": "2025-09-07T09:22:40.425315"
+      },
+      {
+        "id": "d82bdb09-569b-46ec-9088-1f77ff6d1e6e",
+        "test_item_id": "ac079371-ad5a-4a53-ad50-88c304912452",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "周波数間HOが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.43,
+        "error_message": null,
+        "confidence": 0.98,
+        "created_at": "2025-09-07T09:22:40.425325"
+      }
+    ],
+    "created_at": "2025-09-01T09:22:40.425238",
+    "started_at": "2025-09-01T09:22:40.425238",
+    "completed_at": "2025-09-01T09:30:40.425238"
+  },
+  {
+    "id": "bf941d85-461c-4383-91fc-4cd7898c699f",
+    "name": "検証バッチ_電力制御機能_20250831_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "5ecc501f-c065-4eac-aab1-8dd3314d09e3",
+        "test_block": "上り電力制御",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "端末上り送信電力が適切に制御されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425360",
+        "updated_at": "2025-09-07T09:22:40.425361"
+      },
+      {
+        "id": "93fb8eed-d544-4013-810d-75738ed23738",
+        "test_block": "下り電力制御",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "基地局下り送信電力が適切に制御されること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425382",
+        "updated_at": "2025-09-07T09:22:40.425383"
+      },
+      {
+        "id": "c3167186-100a-4ac6-bee5-6ec595ddf99f",
+        "test_block": "省電力制御",
+        "category": "ESG作成",
+        "condition": {
+          "condition_text": "低トラフィック時の省電力制御が動作すること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425404",
+        "updated_at": "2025-09-07T09:22:40.425404"
+      }
+    ],
+    "results": [
+      {
+        "id": "9bde8b1f-a95c-41d0-9f6d-9a1818b36d52",
+        "test_item_id": "5ecc501f-c065-4eac-aab1-8dd3314d09e3",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "上り電力制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.59,
+        "error_message": null,
+        "confidence": 0.94,
+        "created_at": "2025-09-07T09:22:40.425424"
+      },
+      {
+        "id": "bcb09f8e-34b8-423d-ac78-5f5fbc5bfb7e",
+        "test_item_id": "93fb8eed-d544-4013-810d-75738ed23738",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "下り電力制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.87,
+        "error_message": null,
+        "confidence": 0.87,
+        "created_at": "2025-09-07T09:22:40.425432"
+      },
+      {
+        "id": "1c5cc51e-e7bf-442d-b540-9c5dc0107f0d",
+        "test_item_id": "c3167186-100a-4ac6-bee5-6ec595ddf99f",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "省電力制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.4,
+        "error_message": null,
+        "confidence": 0.85,
+        "created_at": "2025-09-07T09:22:40.425440"
+      }
+    ],
+    "created_at": "2025-08-31T09:22:40.425328",
+    "started_at": "2025-08-31T09:22:40.425328",
+    "completed_at": "2025-08-31T09:31:40.425328"
+  },
+  {
+    "id": "a5b18d16-be28-4979-bd19-3a50212a4a8c",
+    "name": "検証バッチ_干渉制御機能_20250830_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "feb96137-c1f0-4395-819b-28ad18e93b6b",
+        "test_block": "セル間干渉制御",
+        "category": "対策バンドによるフィルタ",
+        "condition": {
+          "condition_text": "隣接セル間の干渉が適切に制御されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425474",
+        "updated_at": "2025-09-07T09:22:40.425475"
+      },
+      {
+        "id": "4fd6a99d-15ea-4c1a-a8bf-ad795a989095",
+        "test_block": "上り干渉制御",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "上り干渉が適切に抑制されること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425497",
+        "updated_at": "2025-09-07T09:22:40.425497"
+      },
+      {
+        "id": "6280e1f4-aeb0-4830-84ad-83f8711a5f05",
+        "test_block": "下り干渉制御",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "下り干渉が適切に抑制されること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425518",
+        "updated_at": "2025-09-07T09:22:40.425519"
+      },
+      {
+        "id": "8aeeeeef-fc0f-448a-9d1b-44fde9e72692",
+        "test_block": "SINR維持",
+        "category": "作業データのフィルタ",
+        "condition": {
+          "condition_text": "干渉制御によりSINRが維持されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425541",
+        "updated_at": "2025-09-07T09:22:40.425541"
+      }
+    ],
+    "results": [
+      {
+        "id": "17736e4e-7960-497f-981e-200bda0b6aa9",
+        "test_item_id": "feb96137-c1f0-4395-819b-28ad18e93b6b",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "セル間干渉制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.25,
+        "error_message": null,
+        "confidence": 0.95,
+        "created_at": "2025-09-07T09:22:40.425560"
+      },
+      {
+        "id": "a73d6dfe-7247-4f13-8ca5-90f2b217926a",
+        "test_item_id": "4fd6a99d-15ea-4c1a-a8bf-ad795a989095",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "上り干渉制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.16,
+        "error_message": null,
+        "confidence": 0.96,
+        "created_at": "2025-09-07T09:22:40.425568"
+      },
+      {
+        "id": "bd3fada1-14a6-4b2f-889c-f53df72d6121",
+        "test_item_id": "6280e1f4-aeb0-4830-84ad-83f8711a5f05",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "下り干渉制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.38,
+        "error_message": null,
+        "confidence": 0.98,
+        "created_at": "2025-09-07T09:22:40.425576"
+      },
+      {
+        "id": "a63b9a6f-719d-4821-a2af-8d2965b4b342",
+        "test_item_id": "8aeeeeef-fc0f-448a-9d1b-44fde9e72692",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "SINR維持が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.0300000000000002,
+        "error_message": null,
+        "confidence": 0.9299999999999999,
+        "created_at": "2025-09-07T09:22:40.425584"
+      }
+    ],
+    "created_at": "2025-08-30T09:22:40.425444",
+    "started_at": "2025-08-30T09:22:40.425444",
+    "completed_at": "2025-08-30T09:24:40.425444"
+  },
+  {
+    "id": "ffb1d233-28ef-4f0f-857d-c03b2669abf8",
+    "name": "検証バッチ_セル選択・再選択_20250829_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "5d09fff8-3ccc-429d-a1d4-6031a73412d8",
+        "test_block": "初期セル選択",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "電源投入時の初期セル選択が正常動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425617",
+        "updated_at": "2025-09-07T09:22:40.425618"
+      },
+      {
+        "id": "b443a2e5-a9d7-477c-9799-17014345dbb3",
+        "test_block": "セル再選択",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "移動時のセル再選択が適切に動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425639",
+        "updated_at": "2025-09-07T09:22:40.425640"
+      }
+    ],
+    "results": [
+      {
+        "id": "cc52258b-3416-47f8-a82a-ea3c7bd93655",
+        "test_item_id": "5d09fff8-3ccc-429d-a1d4-6031a73412d8",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "初期セル選択が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.07,
+        "error_message": null,
+        "confidence": 0.87,
+        "created_at": "2025-09-07T09:22:40.425659"
+      },
+      {
+        "id": "99ffd356-208b-4333-8cc9-e594019a3dae",
+        "test_item_id": "b443a2e5-a9d7-477c-9799-17014345dbb3",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "セル再選択が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.24,
+        "error_message": null,
+        "confidence": 0.99,
+        "created_at": "2025-09-07T09:22:40.425667"
+      }
+    ],
+    "created_at": "2025-08-29T09:22:40.425588",
+    "started_at": "2025-08-29T09:22:40.425588",
+    "completed_at": "2025-08-29T09:25:40.425588"
+  },
+  {
+    "id": "93bef929-fd4e-4582-8a4e-5fb8d3573950",
+    "name": "検証バッチ_RRC接続管理_20250828_092240",
+    "status": "failed",
+    "test_items": [
+      {
+        "id": "eb36f43f-fc2a-47df-8d3a-5562d1500066",
+        "test_block": "RRC接続確立",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "RRC接続確立が正常に完了すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425700",
+        "updated_at": "2025-09-07T09:22:40.425702"
+      },
+      {
+        "id": "266af86d-d71f-4bf0-8004-60cad6aaf8f3",
+        "test_block": "RRC再設定",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "RRC接続再設定が正常に動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425726",
+        "updated_at": "2025-09-07T09:22:40.425727"
+      },
+      {
+        "id": "6721f383-b119-4f40-99d6-7f2b5dbe56dd",
+        "test_block": "RRC解放",
+        "category": "ESG作成",
+        "condition": {
+          "condition_text": "RRC接続解放が適切に実行されること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425748",
+        "updated_at": "2025-09-07T09:22:40.425748"
+      }
+    ],
+    "results": [
+      {
+        "id": "5ec38c8d-cab8-49a0-85d7-d831159fc432",
+        "test_item_id": "eb36f43f-fc2a-47df-8d3a-5562d1500066",
+        "equipment_type": "Ericsson-MMU",
+        "result": "FAIL",
+        "details": "RRC接続確立で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.27,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.8200000000000001,
+        "created_at": "2025-09-07T09:22:40.425768"
+      },
+      {
+        "id": "69b20766-6243-4f9d-a35f-eee11fde317d",
+        "test_item_id": "eb36f43f-fc2a-47df-8d3a-5562d1500066",
+        "equipment_type": "Ericsson-RRU",
+        "result": "FAIL",
+        "details": "RRC接続確立で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.27,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.8200000000000001,
+        "created_at": "2025-09-07T09:22:40.425777"
+      },
+      {
+        "id": "e7848717-2d1f-428f-93ef-ab3ed2b8d203",
+        "test_item_id": "266af86d-d71f-4bf0-8004-60cad6aaf8f3",
+        "equipment_type": "Ericsson-MMU",
+        "result": "FAIL",
+        "details": "RRC再設定で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.43,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.78,
+        "created_at": "2025-09-07T09:22:40.425875"
+      },
+      {
+        "id": "19ec8293-8739-491c-a2a2-5237c4d6e86b",
+        "test_item_id": "266af86d-d71f-4bf0-8004-60cad6aaf8f3",
+        "equipment_type": "Ericsson-RRU",
+        "result": "FAIL",
+        "details": "RRC再設定で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.43,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.78,
+        "created_at": "2025-09-07T09:22:40.425885"
+      },
+      {
+        "id": "e11de8ed-2ced-4bea-b0a4-defd88a500fa",
+        "test_item_id": "6721f383-b119-4f40-99d6-7f2b5dbe56dd",
+        "equipment_type": "Ericsson-MMU",
+        "result": "FAIL",
+        "details": "RRC解放で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.0700000000000003,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.8200000000000001,
+        "created_at": "2025-09-07T09:22:40.425893"
+      },
+      {
+        "id": "42423169-da3e-4380-83f6-4da1267668f6",
+        "test_item_id": "6721f383-b119-4f40-99d6-7f2b5dbe56dd",
+        "equipment_type": "Ericsson-RRU",
+        "result": "FAIL",
+        "details": "RRC解放で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.0700000000000003,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.8200000000000001,
+        "created_at": "2025-09-07T09:22:40.425901"
+      }
+    ],
+    "created_at": "2025-08-28T09:22:40.425670",
+    "started_at": "2025-08-28T09:22:40.425670",
+    "completed_at": "2025-08-28T09:26:40.425670"
+  },
+  {
+    "id": "b1bbeefb-6dae-4479-b66e-4433525dca80",
+    "name": "検証バッチ_QoS制御機能_20250827_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "ec2d742f-10f9-42a6-bcd5-dd3733a6b1ff",
+        "test_block": "QoSフロー制御",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "QoSフローの制御が正常に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425937",
+        "updated_at": "2025-09-07T09:22:40.425938"
+      },
+      {
+        "id": "fa2bc861-95ce-4afc-bca1-766b95cb91ed",
+        "test_block": "優先度制御",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "トラフィック優先度制御が適切に動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425960",
+        "updated_at": "2025-09-07T09:22:40.425960"
+      },
+      {
+        "id": "05b8ead4-1cd4-44c0-a0f6-56b57149e1a6",
+        "test_block": "帯域制御",
+        "category": "対策バンドによるフィルタ",
+        "condition": {
+          "condition_text": "帯域制御が仕様通りに動作すること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.425982",
+        "updated_at": "2025-09-07T09:22:40.425983"
+      },
+      {
+        "id": "6ea78878-79dc-4554-821d-4bbc885a80e6",
+        "test_block": "遅延制御",
+        "category": "作業データのフィルタ",
+        "condition": {
+          "condition_text": "遅延制御が要求仕様を満たすこと",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426004",
+        "updated_at": "2025-09-07T09:22:40.426004"
+      }
+    ],
+    "results": [
+      {
+        "id": "e3fba36c-4d05-4440-ac66-5286b0c963eb",
+        "test_item_id": "ec2d742f-10f9-42a6-bcd5-dd3733a6b1ff",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "QoSフロー制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.36,
+        "error_message": null,
+        "confidence": 0.86,
+        "created_at": "2025-09-07T09:22:40.426025"
+      },
+      {
+        "id": "cea1e645-b06c-41ca-986c-1b644b9f1785",
+        "test_item_id": "ec2d742f-10f9-42a6-bcd5-dd3733a6b1ff",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "QoSフロー制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.36,
+        "error_message": null,
+        "confidence": 0.86,
+        "created_at": "2025-09-07T09:22:40.426033"
+      },
+      {
+        "id": "4ab487f4-f195-4bd5-8a5d-ea2d331abb60",
+        "test_item_id": "fa2bc861-95ce-4afc-bca1-766b95cb91ed",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "優先度制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.62,
+        "error_message": null,
+        "confidence": 0.97,
+        "created_at": "2025-09-07T09:22:40.426041"
+      },
+      {
+        "id": "3d86c03e-ff55-4beb-bd4c-d005b23f47fe",
+        "test_item_id": "fa2bc861-95ce-4afc-bca1-766b95cb91ed",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "優先度制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.62,
+        "error_message": null,
+        "confidence": 0.97,
+        "created_at": "2025-09-07T09:22:40.426049"
+      },
+      {
+        "id": "1a475e69-bc01-4a60-903c-c83e95a3af04",
+        "test_item_id": "05b8ead4-1cd4-44c0-a0f6-56b57149e1a6",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "帯域制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.87,
+        "error_message": null,
+        "confidence": 0.87,
+        "created_at": "2025-09-07T09:22:40.426057"
+      },
+      {
+        "id": "a9807ad2-5c34-46b6-8d16-69e3c88bc2d5",
+        "test_item_id": "05b8ead4-1cd4-44c0-a0f6-56b57149e1a6",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "帯域制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.87,
+        "error_message": null,
+        "confidence": 0.87,
+        "created_at": "2025-09-07T09:22:40.426065"
+      },
+      {
+        "id": "c8a8dbb9-0b78-42ed-b0cd-7d4953407031",
+        "test_item_id": "6ea78878-79dc-4554-821d-4bbc885a80e6",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "遅延制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.99,
+        "error_message": null,
+        "confidence": 0.89,
+        "created_at": "2025-09-07T09:22:40.426073"
+      },
+      {
+        "id": "69b3f8c1-cbb0-479b-90e7-6a7b0a15c9f4",
+        "test_item_id": "6ea78878-79dc-4554-821d-4bbc885a80e6",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "遅延制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.99,
+        "error_message": null,
+        "confidence": 0.89,
+        "created_at": "2025-09-07T09:22:40.426081"
+      }
+    ],
+    "created_at": "2025-08-27T09:22:40.425905",
+    "started_at": "2025-08-27T09:22:40.425905",
+    "completed_at": "2025-08-27T09:27:40.425905"
+  },
+  {
+    "id": "a3fd2901-299a-46a2-aa33-a595eba390c6",
+    "name": "検証バッチ_セキュリティ機能_20250826_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "d0b0f61e-3082-49e2-8e4a-9f2352851caa",
+        "test_block": "認証機能",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "端末認証が正常に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426114",
+        "updated_at": "2025-09-07T09:22:40.426115"
+      },
+      {
+        "id": "bc94ce1a-0acd-4961-b4fa-5546e69d198d",
+        "test_block": "暗号化機能",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "通信データの暗号化が正常に動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426136",
+        "updated_at": "2025-09-07T09:22:40.426136"
+      }
+    ],
+    "results": [
+      {
+        "id": "88e5bee1-f7b8-42a3-a93b-b2414d95a0ab",
+        "test_item_id": "d0b0f61e-3082-49e2-8e4a-9f2352851caa",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "認証機能が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.2800000000000002,
+        "error_message": null,
+        "confidence": 0.9299999999999999,
+        "created_at": "2025-09-07T09:22:40.426156"
+      },
+      {
+        "id": "77bef7bb-c80e-4de2-b86e-700cc4e62915",
+        "test_item_id": "bc94ce1a-0acd-4961-b4fa-5546e69d198d",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "暗号化機能が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.26,
+        "error_message": null,
+        "confidence": 0.86,
+        "created_at": "2025-09-07T09:22:40.426164"
+      }
+    ],
+    "created_at": "2025-08-26T09:22:40.426085",
+    "started_at": "2025-08-26T09:22:40.426085",
+    "completed_at": "2025-08-26T09:28:40.426085"
+  },
+  {
+    "id": "e13889f0-c0b9-448f-ab2c-12bc62fcd182",
+    "name": "検証バッチ_O&M機能_20250825_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "3b8da7d5-a125-43b8-a0f6-0e14b02ef58b",
+        "test_block": "設定管理",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "基地局設定管理が正常に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426203",
+        "updated_at": "2025-09-07T09:22:40.426203"
+      },
+      {
+        "id": "d9afb8b7-e48e-4e72-8218-565751011b66",
+        "test_block": "性能監視",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "性能データ収集・監視が正常動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426225",
+        "updated_at": "2025-09-07T09:22:40.426226"
+      },
+      {
+        "id": "12aaba50-e147-4172-a485-fbc195313b17",
+        "test_block": "ログ管理",
+        "category": "作業データのフィルタ",
+        "condition": {
+          "condition_text": "ログ収集・管理機能が正常動作すること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426247",
+        "updated_at": "2025-09-07T09:22:40.426247"
+      }
+    ],
+    "results": [
+      {
+        "id": "482b9db2-371a-4da9-982a-10c6c0a0da94",
+        "test_item_id": "3b8da7d5-a125-43b8-a0f6-0e14b02ef58b",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "設定管理が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.4699999999999998,
+        "error_message": null,
+        "confidence": 0.9199999999999999,
+        "created_at": "2025-09-07T09:22:40.426267"
+      },
+      {
+        "id": "6943ee22-0bbf-46c4-8592-39089839dce9",
+        "test_item_id": "d9afb8b7-e48e-4e72-8218-565751011b66",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "性能監視が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.21,
+        "error_message": null,
+        "confidence": 0.9099999999999999,
+        "created_at": "2025-09-07T09:22:40.426275"
+      },
+      {
+        "id": "3459cf72-4240-4e13-9da1-766b55a1b419",
+        "test_item_id": "12aaba50-e147-4172-a485-fbc195313b17",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "ログ管理が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.09,
+        "error_message": null,
+        "confidence": 0.94,
+        "created_at": "2025-09-07T09:22:40.426283"
+      }
+    ],
+    "created_at": "2025-08-25T09:22:40.426168",
+    "started_at": "2025-08-25T09:22:40.426168",
+    "completed_at": "2025-08-25T09:29:40.426168"
+  },
+  {
+    "id": "2a1b81a9-1871-48ea-b58b-13f299487829",
+    "name": "検証バッチ_アラーム監視機能_20250824_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "beab6c85-657e-4a00-99d7-55f96f29348d",
+        "test_block": "アラーム検出",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "異常状態のアラーム検出が正常動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426317",
+        "updated_at": "2025-09-07T09:22:40.426317"
+      },
+      {
+        "id": "e90db80c-1cc7-43df-b6fb-58d583664e92",
+        "test_block": "アラーム通知",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "アラーム通知機能が正常に動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426339",
+        "updated_at": "2025-09-07T09:22:40.426339"
+      },
+      {
+        "id": "3a10e35f-beba-49c5-bcbb-7be8016a7bdd",
+        "test_block": "アラーム分析",
+        "category": "ESG作成",
+        "condition": {
+          "condition_text": "アラーム原因分析機能が正常動作すること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426361",
+        "updated_at": "2025-09-07T09:22:40.426361"
+      },
+      {
+        "id": "b9af2eea-3889-4170-807a-f48e7e23ad49",
+        "test_block": "復旧制御",
+        "category": "作業データのフィルタ",
+        "condition": {
+          "condition_text": "自動復旧制御が適切に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426384",
+        "updated_at": "2025-09-07T09:22:40.426384"
+      }
+    ],
+    "results": [
+      {
+        "id": "ab27df6e-7af7-40e3-8731-2b52c9b276a6",
+        "test_item_id": "beab6c85-657e-4a00-99d7-55f96f29348d",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "アラーム検出が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.62,
+        "error_message": null,
+        "confidence": 0.97,
+        "created_at": "2025-09-07T09:22:40.426404"
+      },
+      {
+        "id": "0e01818a-e0e2-4003-9c59-c1df3ffdb170",
+        "test_item_id": "e90db80c-1cc7-43df-b6fb-58d583664e92",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "アラーム通知が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.54,
+        "error_message": null,
+        "confidence": 0.99,
+        "created_at": "2025-09-07T09:22:40.426413"
+      },
+      {
+        "id": "2a2f51b2-f557-4a36-9542-24bba19a3ee8",
+        "test_item_id": "3a10e35f-beba-49c5-bcbb-7be8016a7bdd",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "アラーム分析が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.2199999999999998,
+        "error_message": null,
+        "confidence": 0.97,
+        "created_at": "2025-09-07T09:22:40.426422"
+      },
+      {
+        "id": "a78aa767-4635-423f-8e16-f7579c33100d",
+        "test_item_id": "b9af2eea-3889-4170-807a-f48e7e23ad49",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "復旧制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.85,
+        "error_message": null,
+        "confidence": 0.9,
+        "created_at": "2025-09-07T09:22:40.426430"
+      }
+    ],
+    "created_at": "2025-08-24T09:22:40.426286",
+    "started_at": "2025-08-24T09:22:40.426286",
+    "completed_at": "2025-08-24T09:30:40.426286"
+  },
+  {
+    "id": "e5b1a7ce-0ab3-4906-b3b3-d51e11a27e8b",
+    "name": "検証バッチ_基地局スリープ機能_20250823_092240",
+    "status": "failed",
+    "test_items": [
+      {
+        "id": "14a56d4c-46b4-4aa3-8e52-c71cbec59fc3",
+        "test_block": "ESG選定",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "スリープ対象基地局のESGが正しく選定されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426461",
+        "updated_at": "2025-09-07T09:22:40.426462"
+      },
+      {
+        "id": "07eefb19-83d6-4073-9435-118f0b42c5ad",
+        "test_block": "CMデータ取得",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "基地局のCMデータが正常に取得できること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426484",
+        "updated_at": "2025-09-07T09:22:40.426484"
+      }
+    ],
+    "results": [
+      {
+        "id": "0cc60d85-00c2-4c1f-b6ed-4543f124652e",
+        "test_item_id": "14a56d4c-46b4-4aa3-8e52-c71cbec59fc3",
+        "equipment_type": "Samsung-AUv2",
+        "result": "FAIL",
+        "details": "ESG選定で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 1.97,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.92,
+        "created_at": "2025-09-07T09:22:40.426504"
+      },
+      {
+        "id": "ebd2bec6-a325-475c-b7df-9feaa504eed2",
+        "test_item_id": "07eefb19-83d6-4073-9435-118f0b42c5ad",
+        "equipment_type": "Samsung-AUv2",
+        "result": "FAIL",
+        "details": "CMデータ取得で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.52,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.87,
+        "created_at": "2025-09-07T09:22:40.426513"
+      }
+    ],
+    "created_at": "2025-08-23T09:22:40.426433",
+    "started_at": "2025-08-23T09:22:40.426433",
+    "completed_at": "2025-08-23T09:31:40.426433"
+  },
+  {
+    "id": "7824d0de-9d5c-4757-a91e-0a513602987c",
+    "name": "検証バッチ_5G NR接続性能_20250822_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "3621f68b-6ea7-4522-910e-5016a38ae4e9",
+        "test_block": "初期接続",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "5G NRセルへの初期接続が正常に完了すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426544",
+        "updated_at": "2025-09-07T09:22:40.426544"
+      },
+      {
+        "id": "f74d45f5-2004-48c8-9a22-404c42b028d1",
+        "test_block": "スループット",
+        "category": "対策バンドによるフィルタ",
+        "condition": {
+          "condition_text": "下り/上りスループットが仕様値を満たすこと",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426566",
+        "updated_at": "2025-09-07T09:22:40.426566"
+      },
+      {
+        "id": "5b430c36-a6da-47c6-b8ee-74309c852a0a",
+        "test_block": "レイテンシ",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "エンドツーエンドレイテンシが要求値以下であること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426587",
+        "updated_at": "2025-09-07T09:22:40.426588"
+      }
+    ],
+    "results": [
+      {
+        "id": "ae418935-d3ed-4f9f-96d0-fa5a5112ba1a",
+        "test_item_id": "3621f68b-6ea7-4522-910e-5016a38ae4e9",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "初期接続が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.5,
+        "error_message": null,
+        "confidence": 0.95,
+        "created_at": "2025-09-07T09:22:40.426609"
+      },
+      {
+        "id": "d3296781-43e7-4155-b718-5b0f1918c83e",
+        "test_item_id": "3621f68b-6ea7-4522-910e-5016a38ae4e9",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "初期接続が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.5,
+        "error_message": null,
+        "confidence": 0.95,
+        "created_at": "2025-09-07T09:22:40.426621"
+      },
+      {
+        "id": "eb499650-c625-4742-b3bc-8e3d85c3dd75",
+        "test_item_id": "f74d45f5-2004-48c8-9a22-404c42b028d1",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "スループットが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.99,
+        "error_message": null,
+        "confidence": 0.94,
+        "created_at": "2025-09-07T09:22:40.426629"
+      },
+      {
+        "id": "51a8bd69-ec08-427e-831d-024c6a2efbed",
+        "test_item_id": "f74d45f5-2004-48c8-9a22-404c42b028d1",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "スループットが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.99,
+        "error_message": null,
+        "confidence": 0.94,
+        "created_at": "2025-09-07T09:22:40.426637"
+      },
+      {
+        "id": "68eed807-44fb-45b5-ab84-4eb71317a2dc",
+        "test_item_id": "5b430c36-a6da-47c6-b8ee-74309c852a0a",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "レイテンシが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.89,
+        "error_message": null,
+        "confidence": 0.94,
+        "created_at": "2025-09-07T09:22:40.426645"
+      },
+      {
+        "id": "602d2524-4653-4fe0-96be-b5b1fcb6586f",
+        "test_item_id": "5b430c36-a6da-47c6-b8ee-74309c852a0a",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "レイテンシが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.89,
+        "error_message": null,
+        "confidence": 0.94,
+        "created_at": "2025-09-07T09:22:40.426653"
+      }
+    ],
+    "created_at": "2025-08-22T09:22:40.426516",
+    "started_at": "2025-08-22T09:22:40.426516",
+    "completed_at": "2025-08-22T09:24:40.426516"
+  },
+  {
+    "id": "e6a2bcfd-b836-4c40-9610-4a9262ccf7ce",
+    "name": "検証バッチ_LTE-5G連携機能_20250821_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "2eb6262f-c338-463a-97f1-2655e8756474",
+        "test_block": "デュアル接続",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "LTE-5G同時接続が正常に確立されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426685",
+        "updated_at": "2025-09-07T09:22:40.426685"
+      },
+      {
+        "id": "0d75023a-0d60-4f89-80a3-d290bce367c7",
+        "test_block": "ベアラ分離",
+        "category": "対策バンドによるフィルタ",
+        "condition": {
+          "condition_text": "LTE/5Gベアラの適切な分離制御が動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426707",
+        "updated_at": "2025-09-07T09:22:40.426708"
+      },
+      {
+        "id": "b4716edb-84b2-4658-8b1c-bc70eb523790",
+        "test_block": "負荷分散",
+        "category": "作業データのフィルタ",
+        "condition": {
+          "condition_text": "トラフィック負荷が適切に分散されること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426729",
+        "updated_at": "2025-09-07T09:22:40.426729"
+      },
+      {
+        "id": "6113aafd-725c-487b-b2ba-b22cd450e645",
+        "test_block": "切替制御",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "LTE-5G間の切替が正常に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426751",
+        "updated_at": "2025-09-07T09:22:40.426751"
+      }
+    ],
+    "results": [
+      {
+        "id": "dea116b4-bfd2-42e8-91d1-88b48aa318d3",
+        "test_item_id": "2eb6262f-c338-463a-97f1-2655e8756474",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "デュアル接続が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.05,
+        "error_message": null,
+        "confidence": 0.85,
+        "created_at": "2025-09-07T09:22:40.426771"
+      },
+      {
+        "id": "ef76e633-1e8a-484a-b08e-1c34789b423f",
+        "test_item_id": "2eb6262f-c338-463a-97f1-2655e8756474",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "デュアル接続が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.05,
+        "error_message": null,
+        "confidence": 0.85,
+        "created_at": "2025-09-07T09:22:40.426779"
+      },
+      {
+        "id": "4791e997-522d-41a4-8acd-842eeaa8f416",
+        "test_item_id": "0d75023a-0d60-4f89-80a3-d290bce367c7",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "ベアラ分離が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.32,
+        "error_message": null,
+        "confidence": 0.9199999999999999,
+        "created_at": "2025-09-07T09:22:40.426787"
+      },
+      {
+        "id": "bb1302bf-dfff-4c93-b74c-29a6fa96d89b",
+        "test_item_id": "0d75023a-0d60-4f89-80a3-d290bce367c7",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "ベアラ分離が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.32,
+        "error_message": null,
+        "confidence": 0.9199999999999999,
+        "created_at": "2025-09-07T09:22:40.426794"
+      },
+      {
+        "id": "31b4ce43-7fc3-4822-86c3-8cce98063d75",
+        "test_item_id": "b4716edb-84b2-4658-8b1c-bc70eb523790",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "負荷分散が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.01,
+        "error_message": null,
+        "confidence": 0.9099999999999999,
+        "created_at": "2025-09-07T09:22:40.426802"
+      },
+      {
+        "id": "5518d41d-dd5b-454e-a823-1172a56f41b1",
+        "test_item_id": "b4716edb-84b2-4658-8b1c-bc70eb523790",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "負荷分散が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.01,
+        "error_message": null,
+        "confidence": 0.9099999999999999,
+        "created_at": "2025-09-07T09:22:40.426812"
+      },
+      {
+        "id": "56efe811-57e2-48a9-850d-4f7e7932491f",
+        "test_item_id": "6113aafd-725c-487b-b2ba-b22cd450e645",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "切替制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.36,
+        "error_message": null,
+        "confidence": 0.9099999999999999,
+        "created_at": "2025-09-07T09:22:40.426821"
+      },
+      {
+        "id": "23b54923-adb5-4f34-b104-ea40af3f3bf0",
+        "test_item_id": "6113aafd-725c-487b-b2ba-b22cd450e645",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "切替制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.36,
+        "error_message": null,
+        "confidence": 0.9099999999999999,
+        "created_at": "2025-09-07T09:22:40.426829"
+      }
+    ],
+    "created_at": "2025-08-21T09:22:40.426656",
+    "started_at": "2025-08-21T09:22:40.426656",
+    "completed_at": "2025-08-21T09:25:40.426656"
+  },
+  {
+    "id": "eb9f433a-a799-411e-9417-577d9197a96a",
+    "name": "検証バッチ_ビームフォーミング制御_20250820_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "3b8720db-bbd5-4565-ab4c-14c7cf42326c",
+        "test_block": "ビーム生成",
+        "category": "ESG作成",
+        "condition": {
+          "condition_text": "適切なビームパターンが生成されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426860",
+        "updated_at": "2025-09-07T09:22:40.426861"
+      },
+      {
+        "id": "636d90a2-b280-4905-9643-1b0bd249db9f",
+        "test_block": "追従制御",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "端末移動に対するビーム追従が正常動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426882",
+        "updated_at": "2025-09-07T09:22:40.426883"
+      }
+    ],
+    "results": [
+      {
+        "id": "151cdf43-3db8-44cb-9bf0-d6cd5fe7049c",
+        "test_item_id": "3b8720db-bbd5-4565-ab4c-14c7cf42326c",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "ビーム生成が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.39,
+        "error_message": null,
+        "confidence": 0.99,
+        "created_at": "2025-09-07T09:22:40.426902"
+      },
+      {
+        "id": "4f27f42f-0670-41db-8e15-5c36734e505f",
+        "test_item_id": "636d90a2-b280-4905-9643-1b0bd249db9f",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "追従制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.41,
+        "error_message": null,
+        "confidence": 0.9099999999999999,
+        "created_at": "2025-09-07T09:22:40.426910"
+      }
+    ],
+    "created_at": "2025-08-20T09:22:40.426832",
+    "started_at": "2025-08-20T09:22:40.426832",
+    "completed_at": "2025-08-20T09:26:40.426832"
+  },
+  {
+    "id": "ae68f5b4-e9d7-4ab4-bfe6-ae29b5aba63e",
+    "name": "検証バッチ_キャリアアグリゲーション_20250819_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "ca02d5b7-977f-4a86-8777-6ed890c8fc38",
+        "test_block": "CA設定",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "複数キャリアの集約設定が正常に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426943",
+        "updated_at": "2025-09-07T09:22:40.426943"
+      },
+      {
+        "id": "c04c78fb-8c74-47c2-81a3-c333a06dae0f",
+        "test_block": "スケジューリング",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "CA環境でのスケジューリングが適切に動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426966",
+        "updated_at": "2025-09-07T09:22:40.426966"
+      },
+      {
+        "id": "d14ca751-8972-43de-b32c-ef83a298ac26",
+        "test_block": "品質制御",
+        "category": "対策バンドによるフィルタ",
+        "condition": {
+          "condition_text": "各キャリアの品質が適切に制御されること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.426987",
+        "updated_at": "2025-09-07T09:22:40.426988"
+      }
+    ],
+    "results": [
+      {
+        "id": "16d4d23f-6b80-4ef2-ab12-1542e314e7e9",
+        "test_item_id": "ca02d5b7-977f-4a86-8777-6ed890c8fc38",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "CA設定が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.77,
+        "error_message": null,
+        "confidence": 0.97,
+        "created_at": "2025-09-07T09:22:40.427010"
+      },
+      {
+        "id": "6ab23df6-b4f1-4fa6-b25a-7ee536a53eba",
+        "test_item_id": "c04c78fb-8c74-47c2-81a3-c333a06dae0f",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "スケジューリングが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.18,
+        "error_message": null,
+        "confidence": 0.9299999999999999,
+        "created_at": "2025-09-07T09:22:40.427018"
+      },
+      {
+        "id": "1dc85609-a92e-49fc-9012-bb7c7cd259f4",
+        "test_item_id": "d14ca751-8972-43de-b32c-ef83a298ac26",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "品質制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.38,
+        "error_message": null,
+        "confidence": 0.98,
+        "created_at": "2025-09-07T09:22:40.427027"
+      }
+    ],
+    "created_at": "2025-08-19T09:22:40.426913",
+    "started_at": "2025-08-19T09:22:40.426913",
+    "completed_at": "2025-08-19T09:27:40.426913"
+  },
+  {
+    "id": "69f921d8-04c3-4a9e-a9fb-f87d57469ca1",
+    "name": "検証バッチ_VoLTE音声品質_20250818_092240",
+    "status": "failed",
+    "test_items": [
+      {
+        "id": "41a43aa8-f60d-4560-b2f0-e70eb6de5765",
+        "test_block": "音声接続",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "VoLTE音声接続が正常に確立されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427059",
+        "updated_at": "2025-09-07T09:22:40.427060"
+      },
+      {
+        "id": "6d723356-502d-484e-a09d-afb24b20b680",
+        "test_block": "音質評価",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "音声品質が基準値を満たすこと",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427081",
+        "updated_at": "2025-09-07T09:22:40.427082"
+      },
+      {
+        "id": "780591f8-9200-4d15-adc1-2cdd6ab51913",
+        "test_block": "ハンドオーバー",
+        "category": "ESG作成",
+        "condition": {
+          "condition_text": "通話中ハンドオーバーが正常動作すること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427103",
+        "updated_at": "2025-09-07T09:22:40.427103"
+      },
+      {
+        "id": "2e06df07-f75d-4220-b900-0e664e932f5d",
+        "test_block": "緊急通話",
+        "category": "作業データのフィルタ",
+        "condition": {
+          "condition_text": "緊急通話機能が正常に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427125",
+        "updated_at": "2025-09-07T09:22:40.427125"
+      }
+    ],
+    "results": [
+      {
+        "id": "c7d00d84-5b60-4743-832f-d26ff7920b1c",
+        "test_item_id": "41a43aa8-f60d-4560-b2f0-e70eb6de5765",
+        "equipment_type": "Ericsson-RRU",
+        "result": "FAIL",
+        "details": "音声接続で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.41,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.76,
+        "created_at": "2025-09-07T09:22:40.427144"
+      },
+      {
+        "id": "9bcfa115-9542-4188-8d25-df462b9614e5",
+        "test_item_id": "6d723356-502d-484e-a09d-afb24b20b680",
+        "equipment_type": "Ericsson-RRU",
+        "result": "FAIL",
+        "details": "音質評価で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 1.86,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.81,
+        "created_at": "2025-09-07T09:22:40.427153"
+      },
+      {
+        "id": "9f2bdfbc-7d92-4363-b414-fb30dfe95f14",
+        "test_item_id": "780591f8-9200-4d15-adc1-2cdd6ab51913",
+        "equipment_type": "Ericsson-RRU",
+        "result": "FAIL",
+        "details": "ハンドオーバーで異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 1.94,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.89,
+        "created_at": "2025-09-07T09:22:40.427161"
+      },
+      {
+        "id": "055bffb5-b0e1-45ac-bded-348e63f44b85",
+        "test_item_id": "2e06df07-f75d-4220-b900-0e664e932f5d",
+        "equipment_type": "Ericsson-RRU",
+        "result": "FAIL",
+        "details": "緊急通話で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.2600000000000002,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.81,
+        "created_at": "2025-09-07T09:22:40.427169"
+      }
+    ],
+    "created_at": "2025-08-18T09:22:40.427030",
+    "started_at": "2025-08-18T09:22:40.427030",
+    "completed_at": "2025-08-18T09:28:40.427030"
+  },
+  {
+    "id": "4570ba1e-dbf4-4146-a77e-9e2b84bcb0f2",
+    "name": "検証バッチ_ハンドオーバー性能_20250817_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "d0dada0a-126d-4d46-80f9-381d5f018fa5",
+        "test_block": "セル間HO",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "セル間ハンドオーバーが正常に完了すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427201",
+        "updated_at": "2025-09-07T09:22:40.427201"
+      },
+      {
+        "id": "c1c8b097-a89f-4d0c-8496-65801fb34d0b",
+        "test_block": "周波数間HO",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "周波数間ハンドオーバーが正常動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427223",
+        "updated_at": "2025-09-07T09:22:40.427224"
+      }
+    ],
+    "results": [
+      {
+        "id": "300f9037-11d9-411e-815c-0dba187779d7",
+        "test_item_id": "d0dada0a-126d-4d46-80f9-381d5f018fa5",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "セル間HOが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.29,
+        "error_message": null,
+        "confidence": 0.99,
+        "created_at": "2025-09-07T09:22:40.427243"
+      },
+      {
+        "id": "c2830abd-e1b0-4a84-9875-a444273e1115",
+        "test_item_id": "c1c8b097-a89f-4d0c-8496-65801fb34d0b",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "周波数間HOが正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.6,
+        "error_message": null,
+        "confidence": 0.9,
+        "created_at": "2025-09-07T09:22:40.427251"
+      }
+    ],
+    "created_at": "2025-08-17T09:22:40.427172",
+    "started_at": "2025-08-17T09:22:40.427172",
+    "completed_at": "2025-08-17T09:29:40.427172"
+  },
+  {
+    "id": "15855b90-591a-40bb-a45b-2ba8d28b40bd",
+    "name": "検証バッチ_電力制御機能_20250816_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "36a14dbd-8c07-4d6d-9b9c-164f1081c04b",
+        "test_block": "上り電力制御",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "端末上り送信電力が適切に制御されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427327",
+        "updated_at": "2025-09-07T09:22:40.427328"
+      },
+      {
+        "id": "d6f1485c-6cbd-40cc-9ea6-7aad0d746be4",
+        "test_block": "下り電力制御",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "基地局下り送信電力が適切に制御されること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427351",
+        "updated_at": "2025-09-07T09:22:40.427351"
+      },
+      {
+        "id": "2ea7ae0f-ab86-4cb2-863c-db98f7f49224",
+        "test_block": "省電力制御",
+        "category": "ESG作成",
+        "condition": {
+          "condition_text": "低トラフィック時の省電力制御が動作すること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427373",
+        "updated_at": "2025-09-07T09:22:40.427373"
+      }
+    ],
+    "results": [
+      {
+        "id": "ba69e17f-cea7-48c4-98ce-c33df8ac0581",
+        "test_item_id": "36a14dbd-8c07-4d6d-9b9c-164f1081c04b",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "上り電力制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.17,
+        "error_message": null,
+        "confidence": 0.97,
+        "created_at": "2025-09-07T09:22:40.427393"
+      },
+      {
+        "id": "85964d89-5fef-432b-9df4-de84504eddbc",
+        "test_item_id": "36a14dbd-8c07-4d6d-9b9c-164f1081c04b",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "上り電力制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.17,
+        "error_message": null,
+        "confidence": 0.97,
+        "created_at": "2025-09-07T09:22:40.427404"
+      },
+      {
+        "id": "aa1e58ab-0aee-4e42-99db-85fdc1cfb499",
+        "test_item_id": "d6f1485c-6cbd-40cc-9ea6-7aad0d746be4",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "下り電力制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.06,
+        "error_message": null,
+        "confidence": 0.96,
+        "created_at": "2025-09-07T09:22:40.427415"
+      },
+      {
+        "id": "47a7a5a3-7d1c-4239-ba22-869acfae9ad4",
+        "test_item_id": "d6f1485c-6cbd-40cc-9ea6-7aad0d746be4",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "下り電力制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.06,
+        "error_message": null,
+        "confidence": 0.96,
+        "created_at": "2025-09-07T09:22:40.427423"
+      },
+      {
+        "id": "492f1aa2-cf29-4836-9a22-2f6107ee602d",
+        "test_item_id": "2ea7ae0f-ab86-4cb2-863c-db98f7f49224",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "省電力制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.76,
+        "error_message": null,
+        "confidence": 0.86,
+        "created_at": "2025-09-07T09:22:40.427433"
+      },
+      {
+        "id": "a943c9a0-7907-4d43-9152-2a418f7bfe3d",
+        "test_item_id": "2ea7ae0f-ab86-4cb2-863c-db98f7f49224",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "省電力制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.76,
+        "error_message": null,
+        "confidence": 0.86,
+        "created_at": "2025-09-07T09:22:40.427444"
+      }
+    ],
+    "created_at": "2025-08-16T09:22:40.427254",
+    "started_at": "2025-08-16T09:22:40.427254",
+    "completed_at": "2025-08-16T09:30:40.427254"
+  },
+  {
+    "id": "f749f89d-97f7-4468-8caa-4c6af807cc70",
+    "name": "検証バッチ_干渉制御機能_20250815_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "33da2f9b-2285-448d-8518-cffb7960b69a",
+        "test_block": "セル間干渉制御",
+        "category": "対策バンドによるフィルタ",
+        "condition": {
+          "condition_text": "隣接セル間の干渉が適切に制御されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427479",
+        "updated_at": "2025-09-07T09:22:40.427480"
+      },
+      {
+        "id": "c4196dd0-b341-4c08-884b-058e426165ea",
+        "test_block": "上り干渉制御",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "上り干渉が適切に抑制されること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427501",
+        "updated_at": "2025-09-07T09:22:40.427502"
+      },
+      {
+        "id": "c4e6d4e3-2ba2-4d63-849d-1fe4ea1370ae",
+        "test_block": "下り干渉制御",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "下り干渉が適切に抑制されること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427523",
+        "updated_at": "2025-09-07T09:22:40.427523"
+      },
+      {
+        "id": "bd2cfa2e-d435-41e7-9b6a-e6376ff24f05",
+        "test_block": "SINR維持",
+        "category": "作業データのフィルタ",
+        "condition": {
+          "condition_text": "干渉制御によりSINRが維持されること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427545",
+        "updated_at": "2025-09-07T09:22:40.427545"
+      }
+    ],
+    "results": [
+      {
+        "id": "aa673d0a-afb1-4fbf-9dc8-c1af09943b63",
+        "test_item_id": "33da2f9b-2285-448d-8518-cffb7960b69a",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "セル間干渉制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.19,
+        "error_message": null,
+        "confidence": 0.94,
+        "created_at": "2025-09-07T09:22:40.427567"
+      },
+      {
+        "id": "49f600f3-bb94-4108-96b1-d2d7958f11c6",
+        "test_item_id": "33da2f9b-2285-448d-8518-cffb7960b69a",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "セル間干渉制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.19,
+        "error_message": null,
+        "confidence": 0.94,
+        "created_at": "2025-09-07T09:22:40.427576"
+      },
+      {
+        "id": "8bf1061b-d552-4547-aad6-475fa8eae833",
+        "test_item_id": "c4196dd0-b341-4c08-884b-058e426165ea",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "上り干渉制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.73,
+        "error_message": null,
+        "confidence": 0.98,
+        "created_at": "2025-09-07T09:22:40.427584"
+      },
+      {
+        "id": "ed62a5a4-6b8d-459e-84ba-dd30461166eb",
+        "test_item_id": "c4196dd0-b341-4c08-884b-058e426165ea",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "上り干渉制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.73,
+        "error_message": null,
+        "confidence": 0.98,
+        "created_at": "2025-09-07T09:22:40.427592"
+      },
+      {
+        "id": "2b6913b2-e993-4d3b-a8bf-9e29916af5e3",
+        "test_item_id": "c4e6d4e3-2ba2-4d63-849d-1fe4ea1370ae",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "下り干渉制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.31,
+        "error_message": null,
+        "confidence": 0.86,
+        "created_at": "2025-09-07T09:22:40.427600"
+      },
+      {
+        "id": "6ed06777-152c-4c53-a8b3-ff98caf1ffe6",
+        "test_item_id": "c4e6d4e3-2ba2-4d63-849d-1fe4ea1370ae",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "下り干渉制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.31,
+        "error_message": null,
+        "confidence": 0.86,
+        "created_at": "2025-09-07T09:22:40.427608"
+      },
+      {
+        "id": "6e508c90-b306-4db1-b271-33c251666ae5",
+        "test_item_id": "bd2cfa2e-d435-41e7-9b6a-e6376ff24f05",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "SINR維持が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.15,
+        "error_message": null,
+        "confidence": 0.95,
+        "created_at": "2025-09-07T09:22:40.427616"
+      },
+      {
+        "id": "c580e65d-ef9e-4a51-9c63-9c01cc37a572",
+        "test_item_id": "bd2cfa2e-d435-41e7-9b6a-e6376ff24f05",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "SINR維持が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.15,
+        "error_message": null,
+        "confidence": 0.95,
+        "created_at": "2025-09-07T09:22:40.427624"
+      }
+    ],
+    "created_at": "2025-08-15T09:22:40.427448",
+    "started_at": "2025-08-15T09:22:40.427448",
+    "completed_at": "2025-08-15T09:31:40.427448"
+  },
+  {
+    "id": "d46ad877-513a-43e1-a65e-56c65ba32cd7",
+    "name": "検証バッチ_セル選択・再選択_20250814_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "b7e211af-93dc-48a2-bd99-f4965128c6c3",
+        "test_block": "初期セル選択",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "電源投入時の初期セル選択が正常動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427657",
+        "updated_at": "2025-09-07T09:22:40.427657"
+      },
+      {
+        "id": "ec9291b3-c7d8-4b63-84ae-3779eed05923",
+        "test_block": "セル再選択",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "移動時のセル再選択が適切に動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427679",
+        "updated_at": "2025-09-07T09:22:40.427679"
+      }
+    ],
+    "results": [
+      {
+        "id": "ceb1def7-92bd-4baa-9d0f-755cc25dd090",
+        "test_item_id": "b7e211af-93dc-48a2-bd99-f4965128c6c3",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "初期セル選択が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.11,
+        "error_message": null,
+        "confidence": 0.9099999999999999,
+        "created_at": "2025-09-07T09:22:40.427698"
+      },
+      {
+        "id": "2debe4c0-d785-4ccc-8d4d-a7eee7a0497f",
+        "test_item_id": "ec9291b3-c7d8-4b63-84ae-3779eed05923",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "セル再選択が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.52,
+        "error_message": null,
+        "confidence": 0.9199999999999999,
+        "created_at": "2025-09-07T09:22:40.427706"
+      }
+    ],
+    "created_at": "2025-08-14T09:22:40.427628",
+    "started_at": "2025-08-14T09:22:40.427628",
+    "completed_at": "2025-08-14T09:24:40.427628"
+  },
+  {
+    "id": "bfa51dd5-aaa5-4237-a47f-264bafe1eed0",
+    "name": "検証バッチ_RRC接続管理_20250813_092240",
+    "status": "failed",
+    "test_items": [
+      {
+        "id": "f39fc241-afe4-4666-844a-c402499c73f4",
+        "test_block": "RRC接続確立",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "RRC接続確立が正常に完了すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427738",
+        "updated_at": "2025-09-07T09:22:40.427738"
+      },
+      {
+        "id": "94538b13-aeb3-464f-8dda-63f145aeb3e8",
+        "test_block": "RRC再設定",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "RRC接続再設定が正常に動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427760",
+        "updated_at": "2025-09-07T09:22:40.427761"
+      },
+      {
+        "id": "c13a6535-30e8-42e4-8e21-22566a9e7c8e",
+        "test_block": "RRC解放",
+        "category": "ESG作成",
+        "condition": {
+          "condition_text": "RRC接続解放が適切に実行されること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427782",
+        "updated_at": "2025-09-07T09:22:40.427782"
+      }
+    ],
+    "results": [
+      {
+        "id": "311d981e-8e7a-4e51-bb72-81845946217d",
+        "test_item_id": "f39fc241-afe4-4666-844a-c402499c73f4",
+        "equipment_type": "Samsung-AUv1",
+        "result": "FAIL",
+        "details": "RRC接続確立で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.49,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.84,
+        "created_at": "2025-09-07T09:22:40.427803"
+      },
+      {
+        "id": "1c6acf7b-8568-4cd3-8c61-f54dfd529327",
+        "test_item_id": "94538b13-aeb3-464f-8dda-63f145aeb3e8",
+        "equipment_type": "Samsung-AUv1",
+        "result": "FAIL",
+        "details": "RRC再設定で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 2.39,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.94,
+        "created_at": "2025-09-07T09:22:40.427812"
+      },
+      {
+        "id": "1ae2595e-507e-4590-8ddd-3c18a32ce1fd",
+        "test_item_id": "c13a6535-30e8-42e4-8e21-22566a9e7c8e",
+        "equipment_type": "Samsung-AUv1",
+        "result": "FAIL",
+        "details": "RRC解放で異常が検出されました。設定値が期待値と異なります。",
+        "response_data": {},
+        "execution_time": 1.87,
+        "error_message": "設定値不整合エラー",
+        "confidence": 0.8200000000000001,
+        "created_at": "2025-09-07T09:22:40.427820"
+      }
+    ],
+    "created_at": "2025-08-13T09:22:40.427709",
+    "started_at": "2025-08-13T09:22:40.427709",
+    "completed_at": "2025-08-13T09:25:40.427709"
+  },
+  {
+    "id": "280a9672-2958-4d97-9624-7820fb74b92f",
+    "name": "検証バッチ_QoS制御機能_20250812_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "b344d54e-d133-4578-855f-6e0baa4939bf",
+        "test_block": "QoSフロー制御",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "QoSフローの制御が正常に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427857",
+        "updated_at": "2025-09-07T09:22:40.427858"
+      },
+      {
+        "id": "9010f8f6-a7ef-4211-9ef9-eb6a7b9a382d",
+        "test_block": "優先度制御",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "トラフィック優先度制御が適切に動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427880",
+        "updated_at": "2025-09-07T09:22:40.427880"
+      },
+      {
+        "id": "10218ff5-8c95-4576-93cc-0722f72a478d",
+        "test_block": "帯域制御",
+        "category": "対策バンドによるフィルタ",
+        "condition": {
+          "condition_text": "帯域制御が仕様通りに動作すること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427902",
+        "updated_at": "2025-09-07T09:22:40.427902"
+      },
+      {
+        "id": "e996a477-e346-4cd8-8390-84c28a08399b",
+        "test_block": "遅延制御",
+        "category": "作業データのフィルタ",
+        "condition": {
+          "condition_text": "遅延制御が要求仕様を満たすこと",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.427923",
+        "updated_at": "2025-09-07T09:22:40.427923"
+      }
+    ],
+    "results": [
+      {
+        "id": "170bcdd0-8ad1-458e-a412-2674cd931c61",
+        "test_item_id": "b344d54e-d133-4578-855f-6e0baa4939bf",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "QoSフロー制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.84,
+        "error_message": null,
+        "confidence": 0.99,
+        "created_at": "2025-09-07T09:22:40.427943"
+      },
+      {
+        "id": "040bca05-c5ee-48ce-ac08-6f1fc2fc513d",
+        "test_item_id": "9010f8f6-a7ef-4211-9ef9-eb6a7b9a382d",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "優先度制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.67,
+        "error_message": null,
+        "confidence": 0.87,
+        "created_at": "2025-09-07T09:22:40.427952"
+      },
+      {
+        "id": "e100d002-37c3-46d0-b3d4-8ae0f7606a99",
+        "test_item_id": "10218ff5-8c95-4576-93cc-0722f72a478d",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "帯域制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.26,
+        "error_message": null,
+        "confidence": 0.96,
+        "created_at": "2025-09-07T09:22:40.427960"
+      },
+      {
+        "id": "c0171bc0-b0be-43c4-9455-fc9268d21102",
+        "test_item_id": "e996a477-e346-4cd8-8390-84c28a08399b",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "遅延制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.37,
+        "error_message": null,
+        "confidence": 0.97,
+        "created_at": "2025-09-07T09:22:40.427968"
+      }
+    ],
+    "created_at": "2025-08-12T09:22:40.427824",
+    "started_at": "2025-08-12T09:22:40.427824",
+    "completed_at": "2025-08-12T09:26:40.427824"
+  },
+  {
+    "id": "2ea41cbb-2515-442b-bcda-ce873df3f73c",
+    "name": "検証バッチ_セキュリティ機能_20250811_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "b61dc476-cb1e-4e0d-a548-09e1ea491b5b",
+        "test_block": "認証機能",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "端末認証が正常に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.428000",
+        "updated_at": "2025-09-07T09:22:40.428000"
+      },
+      {
+        "id": "9ef16017-94d4-42c7-94ed-4a2dd501ca99",
+        "test_block": "暗号化機能",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "通信データの暗号化が正常に動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.428022",
+        "updated_at": "2025-09-07T09:22:40.428022"
+      }
+    ],
+    "results": [
+      {
+        "id": "05578567-d805-4dad-9841-776a9b8562d3",
+        "test_item_id": "b61dc476-cb1e-4e0d-a548-09e1ea491b5b",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "認証機能が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.09,
+        "error_message": null,
+        "confidence": 0.94,
+        "created_at": "2025-09-07T09:22:40.428041"
+      },
+      {
+        "id": "029d6815-f085-469a-8975-0fef0ce4980a",
+        "test_item_id": "9ef16017-94d4-42c7-94ed-4a2dd501ca99",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "暗号化機能が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.86,
+        "error_message": null,
+        "confidence": 0.9099999999999999,
+        "created_at": "2025-09-07T09:22:40.428050"
+      }
+    ],
+    "created_at": "2025-08-11T09:22:40.427971",
+    "started_at": "2025-08-11T09:22:40.427971",
+    "completed_at": "2025-08-11T09:27:40.427971"
+  },
+  {
+    "id": "c27a0415-9ca5-4094-9607-c81092dab31a",
+    "name": "検証バッチ_O&M機能_20250810_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "9b19363c-810e-4e7b-8a1e-739c646cfe60",
+        "test_block": "設定管理",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "基地局設定管理が正常に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.428081",
+        "updated_at": "2025-09-07T09:22:40.428082"
+      },
+      {
+        "id": "b72ab32a-6d50-4b38-868e-5979675bea87",
+        "test_block": "性能監視",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "性能データ収集・監視が正常動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.428103",
+        "updated_at": "2025-09-07T09:22:40.428104"
+      },
+      {
+        "id": "deddf3e9-fa55-4d8d-a2ed-9efb0fd75232",
+        "test_block": "ログ管理",
+        "category": "作業データのフィルタ",
+        "condition": {
+          "condition_text": "ログ収集・管理機能が正常動作すること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Ericsson-MMU",
+            "Ericsson-RRU"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.428125",
+        "updated_at": "2025-09-07T09:22:40.428125"
+      }
+    ],
+    "results": [
+      {
+        "id": "4fe58a6a-b938-4e8e-af91-4342009abe92",
+        "test_item_id": "9b19363c-810e-4e7b-8a1e-739c646cfe60",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "設定管理が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.34,
+        "error_message": null,
+        "confidence": 0.89,
+        "created_at": "2025-09-07T09:22:40.428150"
+      },
+      {
+        "id": "baa87908-970f-44de-95a0-c437228d7537",
+        "test_item_id": "9b19363c-810e-4e7b-8a1e-739c646cfe60",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "設定管理が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.34,
+        "error_message": null,
+        "confidence": 0.89,
+        "created_at": "2025-09-07T09:22:40.428158"
+      },
+      {
+        "id": "c11a4d09-0748-4830-bfdc-7e01a46b8308",
+        "test_item_id": "b72ab32a-6d50-4b38-868e-5979675bea87",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "性能監視が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.19,
+        "error_message": null,
+        "confidence": 0.89,
+        "created_at": "2025-09-07T09:22:40.428165"
+      },
+      {
+        "id": "e24e520a-ca69-427a-b246-2a38051daea2",
+        "test_item_id": "b72ab32a-6d50-4b38-868e-5979675bea87",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "性能監視が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.19,
+        "error_message": null,
+        "confidence": 0.89,
+        "created_at": "2025-09-07T09:22:40.428173"
+      },
+      {
+        "id": "5a494b30-fbdf-48ef-903a-b19bbe4543cf",
+        "test_item_id": "deddf3e9-fa55-4d8d-a2ed-9efb0fd75232",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "ログ管理が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.42,
+        "error_message": null,
+        "confidence": 0.9199999999999999,
+        "created_at": "2025-09-07T09:22:40.428184"
+      },
+      {
+        "id": "a1e83f8c-64d3-4335-9dc0-141c7f84ade6",
+        "test_item_id": "deddf3e9-fa55-4d8d-a2ed-9efb0fd75232",
+        "equipment_type": "Ericsson-RRU",
+        "result": "PASS",
+        "details": "ログ管理が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.42,
+        "error_message": null,
+        "confidence": 0.9199999999999999,
+        "created_at": "2025-09-07T09:22:40.428192"
+      }
+    ],
+    "created_at": "2025-08-10T09:22:40.428054",
+    "started_at": "2025-08-10T09:22:40.428054",
+    "completed_at": "2025-08-10T09:28:40.428054"
+  },
+  {
+    "id": "08d199e9-d0d8-4f3a-9eb7-51dd776bdd9a",
+    "name": "検証バッチ_アラーム監視機能_20250809_092240",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "aba0e6c7-07a2-4a30-8a88-2745f4271b70",
+        "test_block": "アラーム検出",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "異常状態のアラーム検出が正常動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.428223",
+        "updated_at": "2025-09-07T09:22:40.428224"
+      },
+      {
+        "id": "a99a8d23-7654-426a-b498-bf7a6e9a7198",
+        "test_block": "アラーム通知",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "アラーム通知機能が正常に動作すること",
+          "expected_count": 2,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.428245",
+        "updated_at": "2025-09-07T09:22:40.428246"
+      },
+      {
+        "id": "21f6ce7d-c876-4720-aaa3-69648b953861",
+        "test_block": "アラーム分析",
+        "category": "ESG作成",
+        "condition": {
+          "condition_text": "アラーム原因分析機能が正常動作すること",
+          "expected_count": 3,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.428271",
+        "updated_at": "2025-09-07T09:22:40.428271"
+      },
+      {
+        "id": "8d7c3fd2-b399-4777-a858-b64531f96ac8",
+        "test_block": "復旧制御",
+        "category": "作業データのフィルタ",
+        "condition": {
+          "condition_text": "自動復旧制御が適切に動作すること",
+          "expected_count": 1,
+          "threshold_values": {},
+          "equipment_types": [
+            "Samsung-AUv1",
+            "Samsung-AUv2"
+          ]
+        },
+        "created_at": "2025-09-07T09:22:40.428292",
+        "updated_at": "2025-09-07T09:22:40.428293"
+      }
+    ],
+    "results": [
+      {
+        "id": "0d79d7e8-d5af-40c3-9e2a-57a397f6af1f",
+        "test_item_id": "aba0e6c7-07a2-4a30-8a88-2745f4271b70",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "アラーム検出が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.05,
+        "error_message": null,
+        "confidence": 0.95,
+        "created_at": "2025-09-07T09:22:40.428312"
+      },
+      {
+        "id": "dae0e278-7292-481f-b2b7-9432b9c715b8",
+        "test_item_id": "aba0e6c7-07a2-4a30-8a88-2745f4271b70",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "アラーム検出が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.05,
+        "error_message": null,
+        "confidence": 0.95,
+        "created_at": "2025-09-07T09:22:40.428320"
+      },
+      {
+        "id": "f7931d5d-9195-4db1-9c5a-ed7e875ac5c1",
+        "test_item_id": "a99a8d23-7654-426a-b498-bf7a6e9a7198",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "アラーム通知が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.98,
+        "error_message": null,
+        "confidence": 0.98,
+        "created_at": "2025-09-07T09:22:40.428328"
+      },
+      {
+        "id": "396d7fbd-4abb-4e0d-b85f-ce2b29243dd4",
+        "test_item_id": "a99a8d23-7654-426a-b498-bf7a6e9a7198",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "アラーム通知が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 2.98,
+        "error_message": null,
+        "confidence": 0.98,
+        "created_at": "2025-09-07T09:22:40.428336"
+      },
+      {
+        "id": "e2181fe0-f274-4380-9f16-a8d627e30f4b",
+        "test_item_id": "21f6ce7d-c876-4720-aaa3-69648b953861",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "アラーム分析が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.3,
+        "error_message": null,
+        "confidence": 0.95,
+        "created_at": "2025-09-07T09:22:40.428346"
+      },
+      {
+        "id": "f2beccce-d2d6-4977-a571-ad2859115e4c",
+        "test_item_id": "21f6ce7d-c876-4720-aaa3-69648b953861",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "アラーム分析が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.3,
+        "error_message": null,
+        "confidence": 0.95,
+        "created_at": "2025-09-07T09:22:40.428354"
+      },
+      {
+        "id": "4bb901ff-2f21-412a-8d97-a82b9cb5b428",
+        "test_item_id": "8d7c3fd2-b399-4777-a858-b64531f96ac8",
+        "equipment_type": "Samsung-AUv1",
+        "result": "PASS",
+        "details": "復旧制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.09,
+        "error_message": null,
+        "confidence": 0.99,
+        "created_at": "2025-09-07T09:22:40.428363"
+      },
+      {
+        "id": "5f57eae6-4c4b-4926-b701-3fbe0509361f",
+        "test_item_id": "8d7c3fd2-b399-4777-a858-b64531f96ac8",
+        "equipment_type": "Samsung-AUv2",
+        "result": "PASS",
+        "details": "復旧制御が正常に動作し、すべての条件を満たしています。",
+        "response_data": {},
+        "execution_time": 3.09,
+        "error_message": null,
+        "confidence": 0.99,
+        "created_at": "2025-09-07T09:22:40.428371"
+      }
+    ],
+    "created_at": "2025-08-09T09:22:40.428195",
+    "started_at": "2025-08-09T09:22:40.428195",
+    "completed_at": "2025-08-09T09:29:40.428195"
+  },
+  {
+    "id": "dfc071b5-8e7a-4d67-a4f0-239995598491",
+    "name": "検証バッチ_基地局スリープ機能_20250907_184134",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "02d79c39-489f-420f-8283-f49c15529e47",
+        "test_block": "CMデータの取得",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "基地局からCMデータを正常に取得できること（テスト1）",
+          "expected_count": 1,
+          "equipment_types": [
+            {
+              "value": "Ericsson-MMU"
+            }
+          ]
+        }
+      }
+    ],
+    "results": [
+      {
+        "id": "5356c8be-cf77-463e-b3f3-abb04d980b04",
+        "test_item_id": "02d79c39-489f-420f-8283-f49c15529e47",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "CMデータ取得成功 - テスト1",
+        "response_data": {},
+        "execution_time": 2.5,
+        "confidence": 0.9
+      }
+    ],
+    "started_at": "2025-09-07T18:41:34.071935",
+    "completed_at": "2025-09-07T18:46:34.071935",
+    "created_at": "2025-09-07T18:41:34.071935"
+  },
+  {
+    "id": "595d7e66-2184-4b32-b1b6-f0a8df4288d8",
+    "name": "検証バッチ_基地局スリープ機能_20250907_172634",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "1dfb1496-cdcf-44b7-b3ca-7244255868f3",
+        "test_block": "CMデータの取得",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "基地局からCMデータを正常に取得できること（テスト2）",
+          "expected_count": 1,
+          "equipment_types": [
+            {
+              "value": "Ericsson-MMU"
+            }
+          ]
+        }
+      }
+    ],
+    "results": [
+      {
+        "id": "e91014c8-8d1a-46cf-9b93-c32ec73d007d",
+        "test_item_id": "1dfb1496-cdcf-44b7-b3ca-7244255868f3",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "CMデータ取得成功 - テスト2",
+        "response_data": {},
+        "execution_time": 3.0,
+        "confidence": 0.9
+      }
+    ],
+    "started_at": "2025-09-07T17:26:34.071935",
+    "completed_at": "2025-09-07T17:31:34.071935",
+    "created_at": "2025-09-07T17:26:34.071935"
+  },
+  {
+    "id": "3004024c-bb25-467f-8b58-7b79662e3146",
+    "name": "検証バッチ_基地局スリープ機能_20250907_161134",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "91b91e87-6d72-4fb0-98f8-ce90a6fdfb41",
+        "test_block": "CMデータの取得",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "基地局からCMデータを正常に取得できること（テスト3）",
+          "expected_count": 1,
+          "equipment_types": [
+            {
+              "value": "Ericsson-MMU"
+            }
+          ]
+        }
+      }
+    ],
+    "results": [
+      {
+        "id": "2f8e1375-bda3-4b3c-9bc2-8e61693eb5aa",
+        "test_item_id": "91b91e87-6d72-4fb0-98f8-ce90a6fdfb41",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "CMデータ取得成功 - テスト3",
+        "response_data": {},
+        "execution_time": 3.5,
+        "confidence": 0.9
+      }
+    ],
+    "started_at": "2025-09-07T16:11:34.071935",
+    "completed_at": "2025-09-07T16:16:34.071935",
+    "created_at": "2025-09-07T16:11:34.071935"
+  },
+  {
+    "id": "0822a3bb-40e7-46da-8c50-23eb90240184",
+    "name": "検証バッチ_基地局スリープ機能_20250907_145634",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "b71a60d9-216f-46aa-9f13-5c69dc4f5d25",
+        "test_block": "CMデータの取得",
+        "category": "CMデータの取得",
+        "condition": {
+          "condition_text": "基地局からCMデータを正常に取得できること（テスト4）",
+          "expected_count": 1,
+          "equipment_types": [
+            {
+              "value": "Ericsson-MMU"
+            }
+          ]
+        }
+      }
+    ],
+    "results": [
+      {
+        "id": "2316f099-292a-4089-9261-9bf467e92191",
+        "test_item_id": "b71a60d9-216f-46aa-9f13-5c69dc4f5d25",
+        "equipment_type": "Ericsson-MMU",
+        "result": "PASS",
+        "details": "CMデータ取得成功 - テスト4",
+        "response_data": {},
+        "execution_time": 4.0,
+        "confidence": 0.9
+      }
+    ],
+    "started_at": "2025-09-07T14:56:34.071935",
+    "completed_at": "2025-09-07T15:01:34.071935",
+    "created_at": "2025-09-07T14:56:34.071935"
+  },
+  {
+    "id": "96c65148-86da-41be-8ce9-2e1042d9d4a3",
+    "name": "検証バッチ_基地局スリープ機能_20250907_141134",
+    "status": "completed",
+    "test_items": [
+      {
+        "id": "dfde704d-e8be-405e-be36-2a39c0d8deef",
+        "test_block": "ESG選定",
+        "category": "ESG選定",
+        "condition": {
+          "condition_text": "ESG選定処理が正常に動作すること",
+          "expected_count": 1,
+          "equipment_types": [
+            {
+              "value": "Samsung-AUv1"
+            }
+          ]
+        }
+      }
+    ],
+    "results": [
+      {
+        "id": "801d3107-3c43-48cf-8909-3a6744a1ebf7",
+        "test_item_id": "dfde704d-e8be-405e-be36-2a39c0d8deef",
+        "equipment_type": "Samsung-AUv1",
+        "result": "FAIL",
+        "details": "ESG選定失敗: 設定エラーが発生しました",
+        "response_data": {},
+        "execution_time": 8.2,
+        "confidence": 0.4
+      }
+    ],
+    "started_at": "2025-09-07T14:11:34.071935",
+    "completed_at": "2025-09-07T14:21:34.071935",
+    "created_at": "2025-09-07T14:11:34.071935"
+  },
+  {
+    "id": "163c5f53-c68a-491e-8704-ffd86a2d2482",
+    "name": "検証バッチ_基地局スリープ機能_20250907_191134",
+    "status": "running",
+    "test_items": [
+      {
+        "id": "9d7a06cd-7b3e-45ca-8101-f20483d899f9",
+        "test_block": "トラフィック制御",
+        "category": "バンドフィルタ",
+        "condition": {
+          "condition_text": "トラフィック制御機能が正常に動作すること",
+          "expected_count": 1,
+          "equipment_types": [
+            {
+              "value": "Ericsson-RRU"
+            }
+          ]
+        }
+      }
+    ],
+    "results": [],
+    "started_at": "2025-09-07T19:11:34.071935",
+    "completed_at": null,
+    "created_at": "2025-09-07T19:11:34.071935"
+  }
+]

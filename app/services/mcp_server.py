@@ -18,23 +18,33 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 try:
-    from fastmcp import FastMCP
+    from fastapi import FastAPI
+    from fastapi.middleware.cors import CORSMiddleware
 except ImportError:
-    print("FastMCPがインストールされていません。pip install fastmcp を実行してください。")
+    print("FastAPIがインストールされていません。pip install fastapi を実行してください。")
     sys.exit(1)
 
 from app.models.validation import TestItem, TestCondition, ValidationResult, TestResult, EquipmentType
 from app.models.database import db_manager
-from mock_equipment.equipment_simulator import mock_equipment_manager
+from mock_equipment.simplified_equipment_simulator import get_simplified_mock_equipment_manager
 
 # ログ設定
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# MCPサーバー初期化
-app = FastMCP("Lab Validation Engine")
+# FastAPIアプリケーション（MCP API用）
+app = FastAPI(title="Lab Validation MCP Server", version="1.0.0")
 
-@app.tool()
+# CORS設定
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/mcp/get_test_items")
 def get_test_items() -> Dict[str, Any]:
     """
     データベースから検証項目一覧を取得
@@ -84,7 +94,7 @@ def get_test_items() -> Dict[str, Any]:
             "timestamp": datetime.now().isoformat()
         }
 
-@app.tool()
+@app.post("/mcp/send_command_to_equipment")
 def send_command_to_equipment(equipment_id: str, command: str, parameters: Optional[Dict] = None) -> Dict[str, Any]:
     """
     ラボ設備にコマンドを送信して応答を取得
@@ -104,7 +114,8 @@ def send_command_to_equipment(equipment_id: str, command: str, parameters: Optio
         if parameters is None:
             parameters = {}
             
-        # モック設備システムを使用してコマンド実行
+        # 簡易化されたモック設備システムを使用してコマンド実行
+        mock_equipment_manager = get_simplified_mock_equipment_manager()
         response = mock_equipment_manager.execute_command(equipment_id, command, parameters)
         
         return {
@@ -126,7 +137,7 @@ def send_command_to_equipment(equipment_id: str, command: str, parameters: Optio
             "timestamp": datetime.now().isoformat()
         }
 
-@app.tool()
+@app.post("/mcp/analyze_test_result")
 def analyze_test_result(test_item_id: str, equipment_response: Dict, expected_criteria: Dict) -> Dict[str, Any]:
     """
     検証結果を分析して合否を判定
@@ -207,7 +218,7 @@ def analyze_test_result(test_item_id: str, equipment_response: Dict, expected_cr
             "timestamp": datetime.now().isoformat()
         }
 
-@app.tool()
+@app.post("/mcp/save_validation_result")
 def save_validation_result(test_item_id: str, result_data: Dict) -> Dict[str, Any]:
     """
     検証結果をデータベースに保存
@@ -242,7 +253,7 @@ def save_validation_result(test_item_id: str, result_data: Dict) -> Dict[str, An
             "timestamp": datetime.now().isoformat()
         }
 
-@app.tool()
+@app.get("/mcp/get_equipment_status")
 def get_equipment_status() -> Dict[str, Any]:
     """
     利用可能な設備の状態を取得
@@ -267,7 +278,7 @@ def get_equipment_status() -> Dict[str, Any]:
             "timestamp": datetime.now().isoformat()
         }
 
-@app.tool()
+@app.post("/mcp/create_validation_batch")
 def create_validation_batch(batch_name: str, test_item_ids: List[str]) -> Dict[str, Any]:
     """
     検証バッチを作成
@@ -299,6 +310,66 @@ def create_validation_batch(batch_name: str, test_item_ids: List[str]) -> Dict[s
             "timestamp": datetime.now().isoformat()
         }
 
+# HTTP APIエンドポイント
+@app.post("/mcp/call")
+async def call_mcp_tool(request: Dict[str, Any]):
+    """MCPツールを呼び出すHTTPエンドポイント"""
+    try:
+        tool_name = request.get("tool")
+        parameters = request.get("parameters", {})
+        
+        logger.info(f"MCP tool call: {tool_name} with params: {parameters}")
+        
+        # ツール名に基づいて適切な関数を呼び出し
+        if tool_name == "get_test_items":
+            result = get_test_items()
+        elif tool_name == "send_command_to_equipment":
+            result = send_command_to_equipment(
+                equipment_id=parameters.get("equipment_id"),
+                command=parameters.get("command"),
+                parameters=parameters.get("parameters")
+            )
+        elif tool_name == "analyze_test_result":
+            result = analyze_test_result(
+                test_item_id=parameters.get("test_item_id", ""),
+                equipment_response=parameters.get("test_data", {}),
+                expected_criteria={"expected_result": parameters.get("expected_result", "")}
+            )
+        elif tool_name == "save_validation_result":
+            result = save_validation_result(
+                test_item_id=parameters.get("test_item_id"),
+                result_data=parameters
+            )
+        else:
+            return {
+                "status": "error",
+                "message": f"Unknown tool: {tool_name}",
+                "timestamp": datetime.now().isoformat()
+            }
+        
+        return {
+            "status": "success",
+            "result": result,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        logger.error(f"MCP tool call error: {e}")
+        return {
+            "status": "error", 
+            "message": str(e),
+            "timestamp": datetime.now().isoformat()
+        }
+
+@app.get("/health")
+async def health_check():
+    """ヘルスチェックエンドポイント"""
+    return {
+        "status": "healthy",
+        "service": "Lab Validation MCP Server",
+        "timestamp": datetime.now().isoformat()
+    }
+
 def main():
     """MCPサーバーを起動"""
     logger.info("Lab Validation MCP Server を起動中...")
@@ -310,8 +381,9 @@ def main():
     except Exception as e:
         logger.error(f"データベース初期化エラー: {e}")
     
-    # MCPサーバー起動
-    app.run()
+    # FastAPIサーバーを起動
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
 
 if __name__ == "__main__":
     main()

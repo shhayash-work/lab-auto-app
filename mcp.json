@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "lab-validation": {
+      "command": "python",
+      "args": [
+        "/home/share/lab-auto-app/workspace/app/services/mcp_server.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/share/lab-auto-app/workspace"
+      }
+    }
+  }
+}

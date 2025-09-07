@@ -17,9 +17,10 @@ from datetime import datetime
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from app.models.validation import ValidationBatch, ValidationResult, TestItem
+from app.models.validation import ValidationBatch, ValidationResult, TestItem, EquipmentType
+import uuid
 from app.services.validation_engine import ValidationEngine
-from app.services.mcp_agent import MCPValidationAgent, MCPAgentFactory
+from app.services.real_mcp_agent import get_real_mcp_agent
 
 # ログ設定
 logging.basicConfig(level=logging.INFO)
@@ -30,11 +31,11 @@ class UnifiedValidationEngine:
     
     def __init__(self, llm_provider: str = "ollama"):
         self.llm_provider = llm_provider
-        self.is_mcp_supported = MCPAgentFactory.is_mcp_supported(llm_provider)
+        self.is_mcp_supported = llm_provider in ["anthropic", "openai", "bedrock"]
         
         if self.is_mcp_supported:
-            logger.info(f"MCP対応プロバイダー '{llm_provider}' を使用")
-            self.mcp_agent = MCPAgentFactory.create_agent(llm_provider)
+            logger.info(f"真のMCP対応プロバイダー '{llm_provider}' を使用")
+            self.mcp_agent = get_real_mcp_agent(llm_provider)
             self.traditional_engine = None
         else:
             logger.info(f"従来実装プロバイダー '{llm_provider}' を使用")
@@ -46,8 +47,8 @@ class UnifiedValidationEngine:
         batch_id = f"batch_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         
         return ValidationBatch(
-            batch_id=batch_id,
-            batch_name=batch_name,
+            id=batch_id,
+            name=batch_name,
             test_items=test_items,
             created_at=datetime.now()
         )
@@ -70,7 +71,7 @@ class UnifiedValidationEngine:
     
     async def _execute_with_mcp(self, batch: ValidationBatch, progress_callback: Optional[Callable] = None) -> ValidationBatch:
         """MCP エージェントで実行"""
-        logger.info(f"MCP実行開始: {batch.batch_name}")
+        logger.info(f"MCP実行開始: {batch.name}")
         
         try:
             # 進捗コールバック（開始）
@@ -78,7 +79,7 @@ class UnifiedValidationEngine:
                 progress_callback(0.0, None)
             
             # MCPエージェントで実行
-            result_batch = await self.mcp_agent.execute_validation_batch(batch)
+            result_batch = await self.mcp_agent.execute_validation_batch(batch, progress_callback)
             
             # 進捗コールバック（各結果）
             if progress_callback:
@@ -110,7 +111,7 @@ class UnifiedValidationEngine:
     
     def _execute_with_traditional_sync(self, batch: ValidationBatch, progress_callback: Optional[Callable] = None) -> ValidationBatch:
         """従来エンジンで同期実行"""
-        logger.info(f"従来実行開始: {batch.batch_name}")
+        logger.info(f"従来実行開始: {batch.name}")
         
         try:
             # 進捗コールバック（開始）
@@ -137,13 +138,15 @@ class UnifiedValidationEngine:
         error_results = []
         for item in test_items:
             result = ValidationResult(
+                id=str(uuid.uuid4()),
                 test_item_id=item.id,
+                equipment_type=EquipmentType.ERICSSON_MMU,  # デフォルト設備
+                scenario="エラー発生",
                 result=TestResult.FAIL,
+                error_message=f"実行エラー: {error_message}",
                 confidence=0.0,
-                details=[f"実行エラー: {error_message}"],
-                equipment_type="UNKNOWN",
                 execution_time=0.0,
-                timestamp=datetime.now()
+                created_at=datetime.now()
             )
             error_results.append(result)
         
@@ -246,7 +249,7 @@ async def main():
                 
                 batch = engine.create_batch_from_test_items([test_item], f"テストバッチ_{provider}")
                 
-                print(f"バッチ作成完了: {batch.batch_name}")
+                print(f"バッチ作成完了: {batch.name}")
                 
             except Exception as e:
                 print(f"エラー: {e}")

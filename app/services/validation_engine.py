@@ -24,7 +24,7 @@ from app.models.validation import (
     TestResult, EquipmentType
 )
 from app.services.llm_service import get_llm_service
-from mock_equipment.equipment_simulator import mock_equipment_manager
+from mock_equipment.simplified_equipment_simulator import get_simplified_mock_equipment_manager
 
 logger = logging.getLogger(__name__)
 
@@ -33,15 +33,15 @@ class ValidationEngine:
     
     def __init__(self, llm_provider: str = "ollama"):
         self.llm_service = get_llm_service(llm_provider)
-        self.mock_equipment = mock_equipment_manager
+        self.mock_equipment = get_simplified_mock_equipment_manager()
         self.max_workers = 3  # 並列実行数
     
-    def execute_test_item(self, test_item: TestItem, scenario: str, equipment_type: EquipmentType) -> ValidationResult:
+    def execute_test_item(self, test_item: TestItem, equipment_type: EquipmentType) -> ValidationResult:
         """単一の検証項目を実行"""
         result_id = str(uuid.uuid4())
         start_time = time.time()
         
-        logger.info(f"Executing test: {test_item.id} - {scenario} - {equipment_type.value}")
+        logger.info(f"Executing test: {test_item.id} - {equipment_type.value}")
         
         try:
             # モック設備にコマンド送信
@@ -51,24 +51,37 @@ class ValidationEngine:
                 command
             )
             
-            execution_time = time.time() - start_time
-            
-            # LLMで結果分析
+            # LLMで結果分析（実行時間計測はここまで含める）
             analysis = self.llm_service.analyze_validation_result(
                 test_item.to_dict(),
                 equipment_response
             )
             
+            execution_time = time.time() - start_time
+            
             # 結果判定
             test_result = TestResult(analysis.get('result', 'FAIL'))
             confidence = analysis.get('confidence', 0.5)
+            
+            # LLM分析の詳細を取得
+            analysis_details = analysis.get('analysis', 'LLMによる分析結果')
+            recommendations = analysis.get('recommendations', [])
+            issues = analysis.get('issues', [])
+            
+            # 判定根拠を作成
+            details_parts = [analysis_details]
+            if issues:
+                details_parts.append(f"問題点: {'; '.join(issues)}")
+            if recommendations:
+                details_parts.append(f"推奨事項: {'; '.join(recommendations)}")
+            
+            details = ' | '.join(details_parts)
             
             # エラーメッセージの処理
             error_message = None
             if equipment_response.get('status') == 'error':
                 error_message = equipment_response.get('error_message', 'Unknown error')
             elif test_result == TestResult.FAIL:
-                issues = analysis.get('issues', [])
                 if issues:
                     error_message = '; '.join(issues)
             
@@ -76,8 +89,8 @@ class ValidationEngine:
                 id=result_id,
                 test_item_id=test_item.id,
                 equipment_type=equipment_type,
-                scenario=scenario,
                 result=test_result,
+                details=details,  # LLM判定根拠を追加
                 response_data=equipment_response,
                 execution_time=execution_time,
                 error_message=error_message,
@@ -92,8 +105,8 @@ class ValidationEngine:
                 id=result_id,
                 test_item_id=test_item.id,
                 equipment_type=equipment_type,
-                scenario=scenario,
                 result=TestResult.FAIL,
+                details=f"検証実行中にエラーが発生しました: {str(e)}",
                 response_data={"status": "error", "error": str(e)},
                 execution_time=execution_time,
                 error_message=f"実行エラー: {str(e)}",
@@ -101,13 +114,9 @@ class ValidationEngine:
             )
     
     def _determine_command(self, category: str) -> str:
-        """カテゴリに基づいてコマンドを決定"""
-        if "CMデータ" in category or "データの取得" in category:
-            return "get_cm_data"
-        elif "スリープ" in category or "ESG" in category:
-            return "execute_sleep_mode"
-        else:
-            return "get_cm_data"  # デフォルト
+        """統一的なコマンドを決定（簡易化）"""
+        # すべての検証項目に対して統一的なコマンドを使用
+        return "execute_validation"
     
     def execute_batch(self, batch: ValidationBatch, progress_callback: Optional[callable] = None) -> ValidationBatch:
         """バッチ検証を実行"""
@@ -117,12 +126,11 @@ class ValidationEngine:
         batch.started_at = datetime.now()
         
         try:
-            # 実行タスクを準備
+            # 実行タスクを準備（検証項目 × 設備のみ）
             tasks = []
             for test_item in batch.test_items:
-                for scenario in test_item.scenarios:
-                    for equipment_type in test_item.condition.equipment_types:
-                        tasks.append((test_item, scenario, equipment_type))
+                for equipment_type in test_item.condition.equipment_types:
+                    tasks.append((test_item, equipment_type))
             
             total_tasks = len(tasks)
             completed_tasks = 0
@@ -131,8 +139,8 @@ class ValidationEngine:
             with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
                 # タスクを投入
                 future_to_task = {
-                    executor.submit(self.execute_test_item, test_item, scenario, equipment_type): (test_item, scenario, equipment_type)
-                    for test_item, scenario, equipment_type in tasks
+                    executor.submit(self.execute_test_item, test_item, equipment_type): (test_item, equipment_type)
+                    for test_item, equipment_type in tasks
                 }
                 
                 # 結果を収集

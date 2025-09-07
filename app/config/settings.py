@@ -65,3 +65,4 @@ STREAMLIT_CONFIG = {
     "initial_sidebar_state": "expanded"
 }
 
+

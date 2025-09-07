@@ -46,7 +46,7 @@ from app.config.settings import (
     OLLAMA_BASE_URL, OLLAMA_MODEL,
     OPENAI_API_KEY, OPENAI_MODEL,
     ANTHROPIC_API_KEY, ANTHROPIC_MODEL,
-    AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, BEDROCK_MODEL
+    AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN, AWS_REGION, BEDROCK_MODEL
 )
 
 logger = logging.getLogger(__name__)
@@ -90,7 +90,21 @@ class LLMService:
         # 接続テスト
         try:
             models = self.client.list()
-            available_models = [model['name'] for model in models.get('models', [])]
+            if hasattr(models, 'models'):
+                # Pydanticモデルの場合
+                available_models = []
+                for model in models.models:
+                    if hasattr(model, 'name'):
+                        available_models.append(model.name)
+                    elif hasattr(model, 'model'):
+                        available_models.append(model.model)
+                    elif isinstance(model, dict):
+                        available_models.append(model.get('name', model.get('model', '')))
+            elif isinstance(models, dict):
+                available_models = [model.get('name', '') for model in models.get('models', [])]
+            else:
+                available_models = []
+            
             if OLLAMA_MODEL not in available_models:
                 logger.warning(f"Model {OLLAMA_MODEL} not found. Available: {available_models}")
             logger.info(f"✅ Ollama connected: {OLLAMA_BASE_URL}")
@@ -128,12 +142,20 @@ class LLMService:
         if boto3 is None:
             raise ImportError("boto3 package not installed")
         
-        self.client = boto3.client(
-            'bedrock-runtime',
-            aws_access_key_id=AWS_ACCESS_KEY_ID,
-            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-            region_name=AWS_REGION
-        )
+        # AWS_SESSION_TOKENが設定されている場合は一時的な認証情報を使用
+        client_kwargs = {
+            'service_name': 'bedrock-runtime',
+            'aws_access_key_id': AWS_ACCESS_KEY_ID,
+            'aws_secret_access_key': AWS_SECRET_ACCESS_KEY,
+            'region_name': AWS_REGION
+        }
+        
+        # AWS_SESSION_TOKENが設定されている場合（AssumeRole使用時）
+        if AWS_SESSION_TOKEN:
+            client_kwargs['aws_session_token'] = AWS_SESSION_TOKEN
+            logger.info("🔐 Using temporary credentials with session token")
+        
+        self.client = boto3.client(**client_kwargs)
         logger.info("✅ AWS Bedrock client initialized")
     
     def generate_response(self, prompt: str, system_prompt: Optional[str] = None) -> str:
@@ -166,7 +188,8 @@ class LLMService:
             options={
                 "temperature": 0.7,
                 "top_p": 0.9,
-                "num_predict": 2048
+                "num_predict": 2048,  # 元に戻す
+                "num_ctx": 10240     # コンテキスト長を拡張
             }
         )
         return response['message']['content']
@@ -202,24 +225,40 @@ class LLMService:
     
     def _generate_bedrock(self, prompt: str, system_prompt: Optional[str] = None) -> str:
         """AWS Bedrock応答を生成"""
-        full_prompt = prompt
-        if system_prompt:
-            full_prompt = f"{system_prompt}\n\n{prompt}"
-        
-        body = json.dumps({
-            "anthropic_version": "bedrock-2023-05-31",
-            "max_tokens": 2048,
-            "temperature": 0.7,
-            "messages": [{"role": "user", "content": full_prompt}]
-        })
-        
-        response = self.client.invoke_model(
-            modelId=BEDROCK_MODEL,
-            body=body
-        )
-        
-        response_body = json.loads(response['body'].read())
-        return response_body['content'][0]['text']
+        try:
+            full_prompt = prompt
+            if system_prompt:
+                full_prompt = f"{system_prompt}\n\n{prompt}"
+            
+            body = json.dumps({
+                "anthropic_version": "bedrock-2023-05-31",
+                "max_tokens": 2048,
+                "temperature": 0.7,
+                "messages": [{"role": "user", "content": full_prompt}]
+            })
+            
+            logger.info(f"Bedrock request body: {body[:200]}...")
+            
+            response = self.client.invoke_model(
+                modelId=BEDROCK_MODEL,
+                body=body
+            )
+            
+            response_body = json.loads(response['body'].read())
+            logger.info(f"Bedrock response: {response_body}")
+            
+            # レスポンス構造を確認
+            if 'content' in response_body and response_body['content']:
+                return response_body['content'][0]['text']
+            elif 'completion' in response_body:
+                return response_body['completion']
+            else:
+                logger.error(f"Unexpected Bedrock response structure: {response_body}")
+                raise ValueError(f"Unexpected response structure: {response_body}")
+                
+        except Exception as e:
+            logger.error(f"Bedrock generation error: {e}")
+            raise
     
     def analyze_validation_result(self, test_item: Dict[str, Any], equipment_response: Dict[str, Any]) -> Dict[str, Any]:
         """検証結果を分析"""
@@ -229,11 +268,10 @@ class LLMService:
 判定基準:
 - PASS: 期待される動作が正常に実行され、すべての条件を満たしている
 - FAIL: 期待される動作が実行されない、または条件を満たしていない
-- WARNING: 動作はするが、パフォーマンスや設定に問題がある可能性
 
 応答は必ずJSON形式で以下の構造にしてください:
 {
-    "result": "PASS|FAIL|WARNING",
+    "result": "PASS|FAIL",
     "confidence": 0.0-1.0,
     "analysis": "詳細な分析内容",
     "issues": ["問題点のリスト"],
@@ -255,33 +293,45 @@ class LLMService:
         try:
             response = self.generate_response(prompt, system_prompt)
             
-            # JSONパースを試行
+            # JSONパースを試行（レスポンスからJSONを抽出）
             try:
+                # まず直接JSONパースを試行
                 result = json.loads(response)
-                
-                # 必要なフィールドの検証
-                required_fields = ['result', 'confidence', 'analysis']
-                for field in required_fields:
-                    if field not in result:
-                        result[field] = self._get_default_value(field)
-                
-                # 値の範囲チェック
-                if not isinstance(result['confidence'], (int, float)) or not 0 <= result['confidence'] <= 1:
-                    result['confidence'] = 0.8
-                
-                if result['result'] not in ['PASS', 'FAIL', 'WARNING']:
-                    result['result'] = 'FAIL'
-                
-                return result
-                
             except json.JSONDecodeError:
-                # JSONパースに失敗した場合のフォールバック
-                logger.warning("Failed to parse LLM response as JSON, using fallback analysis")
-                return self._fallback_analysis(equipment_response)
+                # 失敗した場合、レスポンスからJSONを抽出
+                json_start = response.find('{')
+                json_end = response.rfind('}') + 1
+                
+                if json_start != -1 and json_end > json_start:
+                    json_str = response[json_start:json_end]
+                    try:
+                        result = json.loads(json_str)
+                    except json.JSONDecodeError as e:
+                        logger.error(f"Failed to parse extracted JSON: {e}")
+                        logger.error(f"Extracted JSON: {json_str}")
+                        raise ValueError(f"LLM returned invalid JSON: {str(e)}")
+                else:
+                    logger.error(f"No JSON found in response: {response}")
+                    raise ValueError("No JSON found in LLM response")
+            
+            # 必要なフィールドの検証
+            required_fields = ['result', 'confidence', 'analysis']
+            for field in required_fields:
+                if field not in result:
+                    result[field] = self._get_default_value(field)
+            
+            # 値の範囲チェック
+            if not isinstance(result['confidence'], (int, float)) or not 0 <= result['confidence'] <= 1:
+                result['confidence'] = 0.8
+            
+            if result['result'] not in ['PASS', 'FAIL', 'WARNING']:
+                result['result'] = 'FAIL'
+            
+            return result
                 
         except Exception as e:
             logger.error(f"LLM analysis failed: {e}")
-            return self._fallback_analysis(equipment_response)
+            raise
     
     def _get_default_value(self, field: str) -> Any:
         """デフォルト値を取得"""
@@ -294,42 +344,8 @@ class LLMService:
         }
         return defaults.get(field, None)
     
-    def _fallback_analysis(self, equipment_response: Dict[str, Any]) -> Dict[str, Any]:
-        """フォールバック分析（ルールベース）"""
-        status = equipment_response.get('status', 'error')
-        
-        if status == 'success':
-            # 基本的な成功判定
-            parsed_data = equipment_response.get('parsed_data', {})
-            signal_strength = parsed_data.get('signal_strength_dbm', -999)
-            error_rate = parsed_data.get('error_rate_percent', 100)
-            
-            if signal_strength > -100 and error_rate < 10:
-                return {
-                    'result': 'PASS',
-                    'confidence': 0.8,
-                    'analysis': 'ルールベース分析: 基本的な条件を満たしています',
-                    'issues': [],
-                    'recommendations': []
-                }
-            else:
-                return {
-                    'result': 'WARNING',
-                    'confidence': 0.6,
-                    'analysis': 'ルールベース分析: パフォーマンスに問題がある可能性があります',
-                    'issues': [f'信号強度: {signal_strength}dBm', f'エラー率: {error_rate}%'],
-                    'recommendations': ['設備の設定を確認してください']
-                }
-        else:
-            return {
-                'result': 'FAIL',
-                'confidence': 0.9,
-                'analysis': 'ルールベース分析: 設備からエラー応答を受信しました',
-                'issues': [equipment_response.get('error_message', '不明なエラー')],
-                'recommendations': ['設備の接続状態を確認してください']
-            }
     
-    def generate_test_items(self, feature_name: str, equipment_types: List[str]) -> List[Dict[str, Any]]:
+    def generate_test_items(self, feature_name: str, equipment_types: List[str], progress_callback=None) -> List[Dict[str, Any]]:
         """検証項目を生成"""
         system_prompt = """あなたは通信設備の検証エキスパートです。
 新機能に対する検証項目を生成してください。
@@ -345,17 +361,25 @@ class LLMService:
     {
         "test_block": "試験ブロック名",
         "category": "検証カテゴリ",
-        "condition_text": "検証条件の詳細",
-        "expected_count": 期待件数,
-        "scenarios": ["シナリオ1", "シナリオ2", ...]
+        "condition_text": "検証条件の詳細"
     }
-]"""
+]
+
+検証条件は対象設備での成功・失敗を判定するための具体的な条件を記述してください。"""
+        
+        # RAGベクターDBから関連する過去の検証項目を検索
+        if progress_callback:
+            progress_callback(0.5, "RAGベクターDBから類似検証項目を検索中...")
+        rag_context = self._search_similar_test_items(feature_name, equipment_types)
         
         prompt = f"""
 機能名: {feature_name}
 対象設備: {', '.join(equipment_types)}
 
-この機能に対する包括的な検証項目を生成してください。
+【過去の類似検証項目（RAG検索結果）】
+{rag_context}
+
+上記の過去の検証項目を参考に、新しい機能「{feature_name}」について包括的な検証項目を生成してください。
 基地局スリープ機能の検証を参考に、以下の観点を含めてください:
 
 1. ESG選定
@@ -371,42 +395,62 @@ class LLMService:
 """
         
         try:
+            if progress_callback:
+                progress_callback(0.7, f"{self.provider.upper()} AIエージェントが検証項目を生成中...")
+            
             response = self.generate_response(prompt, system_prompt)
+            
+            if progress_callback:
+                progress_callback(0.9, "生成された検証項目を解析中...")
             
             try:
                 test_items = json.loads(response)
                 if isinstance(test_items, list):
+                    logger.info(f"Generated {len(test_items)} test items using RAG")
+                    
+                    if progress_callback:
+                        progress_callback(1.0, f"検証項目生成完了: {len(test_items)}件")
+                    
                     return test_items
                 else:
-                    logger.warning("LLM response is not a list, using fallback")
-                    return self._generate_fallback_test_items(feature_name, equipment_types)
-            except json.JSONDecodeError:
-                logger.warning("Failed to parse LLM response as JSON, using fallback")
-                return self._generate_fallback_test_items(feature_name, equipment_types)
+                    logger.error("LLM response is not a list")
+                    raise ValueError("LLM returned invalid format (not a list)")
+            except json.JSONDecodeError as e:
+                logger.error(f"Failed to parse LLM response as JSON: {e}")
+                raise ValueError(f"LLM returned invalid JSON: {str(e)}")
                 
         except Exception as e:
             logger.error(f"Test item generation failed: {e}")
-            return self._generate_fallback_test_items(feature_name, equipment_types)
+            if progress_callback:
+                progress_callback(1.0, f"生成エラー: {str(e)}")
+            raise
     
-    def _generate_fallback_test_items(self, feature_name: str, equipment_types: List[str]) -> List[Dict[str, Any]]:
-        """フォールバック検証項目生成"""
-        base_items = [
-            {
-                "test_block": "基本機能検証",
-                "category": "CMデータの取得",
-                "condition_text": f"{feature_name}機能のCMデータ取得成功",
-                "expected_count": len(equipment_types),
-                "scenarios": [f"{eq}正常動作" for eq in equipment_types]
-            },
-            {
-                "test_block": "異常系検証",
-                "category": "CMデータの取得",
-                "condition_text": f"{feature_name}機能の異常時動作確認",
-                "expected_count": 0,
-                "scenarios": [f"{eq}異常データ" for eq in equipment_types]
-            }
-        ]
-        return base_items
+    def _search_similar_test_items(self, feature_name: str, equipment_types: List[str]) -> str:
+        """RAGベクターDBから類似する検証項目を検索"""
+        try:
+            from app.services.vector_store import get_vector_store
+            
+            # 検索クエリを作成
+            query = f"{feature_name} {' '.join(equipment_types)} 検証項目"
+            
+            # ベクターDBから類似項目を検索
+            vector_store = get_vector_store()
+            similar_items = vector_store.search_similar_documents(query, top_k=5)
+            
+            if similar_items:
+                context = "過去の類似検証項目:\n"
+                for i, item in enumerate(similar_items, 1):
+                    context += f"{i}. {item.get('content', '')}\n"
+                logger.info(f"Found {len(similar_items)} similar test items from RAG")
+                return context
+            else:
+                logger.info("No similar test items found in RAG")
+                return "過去の類似検証項目は見つかりませんでした。"
+                
+        except Exception as e:
+            logger.warning(f"RAG search failed: {e}")
+            return "RAG検索でエラーが発生しました。基本的な検証項目を生成します。"
+    
 
 # グローバルLLMサービスインスタンス
 def get_llm_service(provider: str = "ollama") -> LLMService:
