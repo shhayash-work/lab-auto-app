@@ -97,7 +97,7 @@ class EricssonMMUSimulator(BaseEquipmentSimulator):
     - Radio Performance: 1.3.6.1.4.1.193.183.4.1.4
     """
     
-    def __init__(self, equipment_id: str = "ERICSSON_MMU_001"):
+    def __init__(self, equipment_id: str = "高輪ゲートウェイシティ_Ericsson_001"):
         super().__init__(equipment_id, "Ericsson", "MMU")
         
         # Ericsson固有のMIBオブジェクト
@@ -196,7 +196,7 @@ class EricssonMMUSimulator(BaseEquipmentSimulator):
 class EricssonRRUSimulator(BaseEquipmentSimulator):
     """Ericsson RRU シミュレータ"""
     
-    def __init__(self, equipment_id: str = "ERICSSON_RRU_001"):
+    def __init__(self, equipment_id: str = "大岡山ラボ_Ericsson_001"):
         super().__init__(equipment_id, "Ericsson", "RRU")
     
     def get_cm_data(self) -> Dict[str, Any]:
@@ -271,7 +271,7 @@ class EricssonRRUSimulator(BaseEquipmentSimulator):
 class SamsungAUv1Simulator(BaseEquipmentSimulator):
     """Samsung AU v1 シミュレータ"""
     
-    def __init__(self, equipment_id: str = "SAMSUNG_AUV1_001"):
+    def __init__(self, equipment_id: str = "高輪ゲートウェイシティ_Samsung_001"):
         super().__init__(equipment_id, "Samsung", "AU-v1")
     
     def get_cm_data(self) -> Dict[str, Any]:
@@ -346,7 +346,7 @@ class SamsungAUv1Simulator(BaseEquipmentSimulator):
 class SamsungAUv2Simulator(BaseEquipmentSimulator):
     """Samsung AU v2 シミュレータ"""
     
-    def __init__(self, equipment_id: str = "SAMSUNG_AUV2_001"):
+    def __init__(self, equipment_id: str = "大岡山ラボ_Samsung_001"):
         super().__init__(equipment_id, "Samsung", "AU-v2")
     
     def get_cm_data(self) -> Dict[str, Any]:
@@ -501,14 +501,16 @@ class MockEquipmentManager:
         
         # パターンマッチング
         if equipment_type is None:
-            if "Samsung-AUv1" in equipment_id or "SAMSUNG_AUV1" in equipment_id:
-                equipment_type = "Samsung-AUv1"
-            elif "Samsung-AUv2" in equipment_id or "SAMSUNG_AUV2" in equipment_id:
-                equipment_type = "Samsung-AUv2"
-            elif "Ericsson-MMU" in equipment_id or "ERICSSON_MMU" in equipment_id:
-                equipment_type = "Ericsson-MMU"
-            elif "Ericsson-RRU" in equipment_id or "ERICSSON_RRU" in equipment_id:
-                equipment_type = "Ericsson-RRU"
+            if "Samsung" in equipment_id:
+                if "高輪ゲートウェイシティ" in equipment_id:
+                    equipment_type = "高輪ゲートウェイシティ_Samsung"
+                else:
+                    equipment_type = "大岡山ラボ_Samsung"
+            elif "Ericsson" in equipment_id:
+                if "高輪ゲートウェイシティ" in equipment_id:
+                    equipment_type = "高輪ゲートウェイシティ_Ericsson"
+                else:
+                    equipment_type = "大岡山ラボ_Ericsson"
         
         if equipment_type is None:
             return {

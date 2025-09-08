@@ -32,7 +32,6 @@ def create_sample_test_items():
                 "test_block": "ESG選定",
                 "category": TestCategory.CM_DATA_ACQUISITION.value,
                 "condition_text": "取得成功（Ericsson-MMU）",
-                "expected_count": 1,
                 "equipment_types": ["Ericsson-MMU"],
                 "scenarios": ["正常スリープ"]
             },
@@ -41,7 +40,6 @@ def create_sample_test_items():
                 "test_block": "ESG選定",
                 "category": TestCategory.CM_DATA_ACQUISITION.value,
                 "condition_text": "取得成功（Ericsson-RRU）",
-                "expected_count": 1,
                 "equipment_types": ["Ericsson-RRU"],
                 "scenarios": ["正常スリープ"]
             },
@@ -50,7 +48,6 @@ def create_sample_test_items():
                 "test_block": "ESG選定",
                 "category": TestCategory.CM_DATA_ACQUISITION.value,
                 "condition_text": "取得成功（Samsung）",
-                "expected_count": 2,
                 "equipment_types": ["Samsung-AUv1", "Samsung-AUv2"],
                 "scenarios": ["正常スリープ"]
             },
@@ -59,7 +56,6 @@ def create_sample_test_items():
                 "test_block": "ESG選定",
                 "category": TestCategory.CM_DATA_ACQUISITION.value,
                 "condition_text": "不正なデータあり（Ericsson-MMU）",
-                "expected_count": 1,
                 "equipment_types": ["Ericsson-MMU"],
                 "scenarios": ["不正なデータ"]
             },
@@ -68,7 +64,6 @@ def create_sample_test_items():
                 "test_block": "ESG選定",
                 "category": TestCategory.CM_DATA_ACQUISITION.value,
                 "condition_text": "不正なデータあり（Samsung）",
-                "expected_count": 2,
                 "equipment_types": ["Samsung-AUv1", "Samsung-AUv2"],
                 "scenarios": ["不正なデータ"]
             },
@@ -77,7 +72,6 @@ def create_sample_test_items():
                 "test_block": "ESG選定",
                 "category": TestCategory.INDOOR_FILTER.value,
                 "condition_text": "インドア対策局フィルタ取得成功",
-                "expected_count": 8,
                 "equipment_types": ["Ericsson-MMU", "Ericsson-RRU", "Samsung-AUv1", "Samsung-AUv2"],
                 "scenarios": ["正常スリープ"]
             },
@@ -86,7 +80,6 @@ def create_sample_test_items():
                 "test_block": "ESG選定",
                 "category": TestCategory.BAND_FILTER.value,
                 "condition_text": "対策バンドのCMデータあり",
-                "expected_count": 4,
                 "equipment_types": ["Ericsson-MMU", "Ericsson-RRU", "Samsung-AUv1", "Samsung-AUv2"],
                 "scenarios": ["正常スリープ"]
             },
@@ -95,7 +88,6 @@ def create_sample_test_items():
                 "test_block": "ESG選定",
                 "category": TestCategory.ESG_CREATION.value,
                 "condition_text": "Samsung mmW AUv1 ESG作成",
-                "expected_count": 1,
                 "equipment_types": ["Samsung-AUv1"],
                 "scenarios": ["正常スリープ"]
             },
@@ -104,7 +96,6 @@ def create_sample_test_items():
                 "test_block": "ESG選定",
                 "category": TestCategory.ESG_CREATION.value,
                 "condition_text": "Samsung mmW AUv2 ESG作成",
-                "expected_count": 1,
                 "equipment_types": ["Samsung-AUv2"],
                 "scenarios": ["正常スリープ"]
             },
@@ -113,7 +104,6 @@ def create_sample_test_items():
                 "test_block": "ESG選定",
                 "category": TestCategory.ESG_CREATION.value,
                 "condition_text": "Ericsson mmW ESG作成",
-                "expected_count": 2,
                 "equipment_types": ["Ericsson-MMU", "Ericsson-RRU"],
                 "scenarios": ["正常スリープ"]
             }
@@ -125,7 +115,6 @@ def create_sample_test_items():
                 test_block=item_data["test_block"],
                 category=item_data["category"],
                 condition_text=item_data["condition_text"],
-                expected_count=item_data["expected_count"]
             )
             test_item.set_equipment_types(item_data["equipment_types"])
             test_item.set_scenarios(item_data["scenarios"])

@@ -109,7 +109,7 @@ class RealMCPAgent:
                 progress_callback(0.9, "検証結果を処理中...")
             
             # 結果をValidationResultに変換
-            validation_results = self._parse_mcp_results(results)
+            validation_results = self._parse_mcp_results(results, batch)
             
             # バッチに結果を設定
             batch.results = validation_results
@@ -132,14 +132,13 @@ class RealMCPAgent:
         """バッチ情報をプロンプトに変換"""
         test_items_info = []
         for item in batch.test_items:
-            equipment_list = [eq.value for eq in item.condition.equipment_types]
+            equipment_list = [eq.value if hasattr(eq, 'value') else str(eq) for eq in item.condition.equipment_types]
             test_items_info.append({
                 "id": item.id,
                 "test_block": item.test_block,
-                "category": item.category.value,
+                "category": item.category.value if hasattr(item.category, 'value') else str(item.category),
                 "condition": item.condition.condition_text,
-                "equipment_types": equipment_list,
-                "expected_count": item.condition.expected_count
+                "equipment_types": equipment_list
             })
         
         return f"""
@@ -250,9 +249,19 @@ class RealMCPAgent:
             logger.error(f"Bedrock MCP実行エラー: {e}")
             raise
     
-    def _parse_mcp_results(self, mcp_response: Dict[str, Any]) -> List[ValidationResult]:
+    def _parse_mcp_results(self, mcp_response: Dict[str, Any], batch: 'ValidationBatch' = None) -> List[ValidationResult]:
         """MCP応答を解析してValidationResultに変換"""
         validation_results = []
+        
+        # バッチから利用可能な設備タイプを取得
+        available_equipment_types = set()
+        if batch and batch.test_items:
+            for item in batch.test_items:
+                for eq in item.condition.equipment_types:
+                    if hasattr(eq, 'value'):
+                        available_equipment_types.add(eq.value)
+                    else:
+                        available_equipment_types.add(str(eq))
         
         try:
             response_text = mcp_response.get("response_text", "")
@@ -273,8 +282,22 @@ class RealMCPAgent:
                             equipment_type = eq_type
                             break
                     
+                    # 見つからない場合はバッチの最初の設備タイプを使用
                     if equipment_type is None:
-                        equipment_type = EquipmentType.ERICSSON_MMU  # デフォルト
+                        if batch and batch.test_items and batch.test_items[0].condition.equipment_types:
+                            first_equipment = batch.test_items[0].condition.equipment_types[0]
+                            if hasattr(first_equipment, 'value'):
+                                equipment_type = first_equipment
+                            else:
+                                # 文字列の場合、対応するEquipmentTypeを検索
+                                for et in EquipmentType:
+                                    if et.value == str(first_equipment):
+                                        equipment_type = et
+                                        break
+                        
+                        # それでも見つからない場合はデフォルト
+                        if equipment_type is None:
+                            equipment_type = EquipmentType.TAKANAWA_ERICSSON
                     
                     # TestResultを解決
                     result_str = result_data.get("result", "FAIL")
@@ -304,7 +327,7 @@ class RealMCPAgent:
             return [ValidationResult(
                 id=f"error_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
                 test_item_id="unknown",
-                equipment_type=EquipmentType.ERICSSON_MMU,
+                equipment_type=EquipmentType.TAKANAWA_ERICSSON,
                 result=TestResult.WARNING,
                 details=f"MCP結果解析エラー: {str(e)}",
                 response_data={},

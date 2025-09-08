@@ -184,7 +184,7 @@ class VectorStore:
                 "metadata": {
                     "category": "ESG選定",
                     "feature": "基地局スリープ機能",
-                    "equipment_type": "ERICSSON_MMU"
+                    "equipment_type": "TAKANAWA_ERICSSON"
                 }
             },
             {
@@ -193,7 +193,7 @@ class VectorStore:
                 "metadata": {
                     "category": "CMデータの取得",
                     "feature": "基地局スリープ機能",
-                    "equipment_type": "ERICSSON_MMU"
+                    "equipment_type": "TAKANAWA_ERICSSON"
                 }
             },
             {
@@ -202,7 +202,7 @@ class VectorStore:
                 "metadata": {
                     "category": "インドア対策局のフィルタ",
                     "feature": "基地局スリープ機能",
-                    "equipment_type": "ERICSSON_MMU"
+                    "equipment_type": "TAKANAWA_ERICSSON"
                 }
             },
             {
@@ -211,7 +211,7 @@ class VectorStore:
                 "metadata": {
                     "category": "対策バンドによるフィルタ",
                     "feature": "基地局スリープ機能",
-                    "equipment_type": "ERICSSON_MMU"
+                    "equipment_type": "TAKANAWA_ERICSSON"
                 }
             },
             {
@@ -220,7 +220,7 @@ class VectorStore:
                 "metadata": {
                     "category": "ESG作成",
                     "feature": "基地局スリープ機能",
-                    "equipment_type": "ERICSSON_MMU"
+                    "equipment_type": "TAKANAWA_ERICSSON"
                 }
             },
             {
@@ -229,7 +229,7 @@ class VectorStore:
                 "metadata": {
                     "category": "ホワイトリスト局のフィルタ",
                     "feature": "基地局スリープ機能",
-                    "equipment_type": "ERICSSON_MMU"
+                    "equipment_type": "TAKANAWA_ERICSSON"
                 }
             },
             {
@@ -238,7 +238,7 @@ class VectorStore:
                 "metadata": {
                     "category": "ブラックリスト局のフィルタ",
                     "feature": "基地局スリープ機能",
-                    "equipment_type": "ERICSSON_MMU"
+                    "equipment_type": "TAKANAWA_ERICSSON"
                 }
             },
             {
@@ -247,7 +247,7 @@ class VectorStore:
                 "metadata": {
                     "category": "作業データのフィルタ",
                     "feature": "基地局スリープ機能",
-                    "equipment_type": "ERICSSON_MMU"
+                    "equipment_type": "TAKANAWA_ERICSSON"
                 }
             }
         ]
@@ -262,6 +262,10 @@ class VectorStore:
             )
         
         logger.info(f"Added {len(initial_test_items)} initial test items")
+    
+    def get_document_count(self) -> int:
+        """保存されているドキュメント数を取得"""
+        return len(self.documents)
 
 # グローバルインスタンス
 _vector_store = None

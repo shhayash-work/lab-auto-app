@@ -48,6 +48,7 @@ from app.config.settings import (
     ANTHROPIC_API_KEY, ANTHROPIC_MODEL,
     AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN, AWS_REGION, BEDROCK_MODEL
 )
+# knowledge_serviceは遅延ロードで使用
 
 logger = logging.getLogger(__name__)
 
@@ -57,7 +58,21 @@ class LLMService:
     def __init__(self, provider: str = "ollama"):
         self.provider = provider
         self.client = None
+        
+        # knowledge_service（遅延ロード）
+        self._knowledge_service = None
         self._setup_client()
+    
+    def _get_knowledge_service(self):
+        """knowledge_serviceを遅延ロード"""
+        if self._knowledge_service is None:
+            try:
+                from app.services.knowledge_service import get_knowledge_service
+                self._knowledge_service = get_knowledge_service()
+            except Exception as e:
+                logger.warning(f"Knowledge service initialization failed: {e}")
+                self._knowledge_service = None
+        return self._knowledge_service
     
     def _setup_client(self):
         """クライアントをセットアップ"""
@@ -320,15 +335,16 @@ class LLMService:
     def analyze_validation_result(self, test_item: Dict[str, Any], equipment_response: Dict[str, Any]) -> Dict[str, Any]:
         """検証結果を分析"""
         system_prompt = """あなたは通信設備の検証エキスパートです。
-基地局設備からの応答データを分析し、テスト項目の合格/不合格を判定してください。
+基地局設備からの応答データを分析し、テスト項目の判定を行ってください。
 
 判定基準:
 - PASS: 期待される動作が正常に実行され、すべての条件を満たしている
-- FAIL: 期待される動作が実行されない、または条件を満たしていない
+- FAIL: 期待される動作が実行されない、または明確に条件を満たしていない
+- NEEDS_CHECK: 結果が曖昧、予期しない値、または判断に迷う場合
 
 応答は必ずJSON形式で以下の構造にしてください:
 {
-    "result": "PASS|FAIL",
+    "result": "PASS|FAIL|NEEDS_CHECK",
     "confidence": 0.0-1.0,
     "analysis": "詳細な分析内容",
     "issues": ["問題点のリスト"],
@@ -339,7 +355,6 @@ class LLMService:
 テスト項目:
 - カテゴリ: {test_item.get('category', 'N/A')}
 - 条件: {test_item.get('condition', {}).get('condition_text', 'N/A')}
-- 期待件数: {test_item.get('condition', {}).get('expected_count', 0)}
 
 設備応答データ:
 {json.dumps(equipment_response, ensure_ascii=False, indent=2)}
@@ -403,8 +418,10 @@ class LLMService:
     
     
     def generate_test_items(self, feature_name: str, equipment_types: List[str], progress_callback=None) -> List[Dict[str, Any]]:
-        """検証項目を生成"""
-        system_prompt = """あなたは通信設備の検証エキスパートです。
+        """検証項目を生成（知見学習機能付き）"""
+        
+        # 知見学習によるプロンプト強化
+        base_system_prompt = """あなたは通信設備の検証エキスパートです。
 新機能に対する検証項目を生成してください。
 
 以下の観点を含めてください:
@@ -423,6 +440,19 @@ class LLMService:
 ]
 
 検証条件は対象設備での成功・失敗を判定するための具体的な条件を記述してください。"""
+        
+        # 知見学習機能による強化
+        enhanced_system_prompt = base_system_prompt
+        knowledge_service = self._get_knowledge_service()
+        if knowledge_service:
+            try:
+                enhanced_system_prompt = knowledge_service.enhance_item_generation_prompt(
+                    base_system_prompt, feature_name, equipment_types
+                )
+            except Exception as e:
+                logger.warning(f"Knowledge enhancement failed: {e}")
+        
+        system_prompt = enhanced_system_prompt
         
         # RAGベクターDBから関連する過去の検証項目を検索
         if progress_callback:

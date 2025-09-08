@@ -31,8 +31,7 @@ def create_dummy_test_items() -> List[TestItem]:
             category=TestCategory.CM_DATA_ACQUISITION,
             condition=TestCondition(
                 condition_text="CMデータの取得成功",
-                expected_count=1,
-                equipment_types=[EquipmentType.ERICSSON_MMU]
+                equipment_types=[EquipmentType.TAKANAWA_ERICSSON]
             )
         ),
         TestItem(
@@ -41,8 +40,7 @@ def create_dummy_test_items() -> List[TestItem]:
             category=TestCategory.ESG_SELECTION,
             condition=TestCondition(
                 condition_text="スリープモード移行確認",
-                expected_count=1,
-                equipment_types=[EquipmentType.SAMSUNG_AUV1]
+                equipment_types=[EquipmentType.TAKANAWA_SAMSUNG]
             )
         ),
         TestItem(
@@ -51,8 +49,7 @@ def create_dummy_test_items() -> List[TestItem]:
             category=TestCategory.ESG_CREATION,
             condition=TestCondition(
                 condition_text="アクセス制御性能測定",
-                expected_count=5,
-                equipment_types=[EquipmentType.ERICSSON_RRU]
+                equipment_types=[EquipmentType.OOKAYAMA_NOKIA]
             )
         )
     ]

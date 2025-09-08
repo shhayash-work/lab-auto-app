@@ -82,7 +82,7 @@ def create_star_chart_dataframe(results: List[ValidationResult]) -> pd.DataFrame
         df_data['カテゴリ'] = categories
         df_data['検証条件'] = condition_texts
         
-        # 各設備タイプを列として追加
+        # 各設備タイプを列として追加（フル名で表示）
         for equipment_type in equipment_types:
             column_data = []
             
@@ -102,6 +102,7 @@ def create_star_chart_dataframe(results: List[ValidationResult]) -> pd.DataFrame
                 
                 column_data.append(symbol)
             
+            # 設備名はフル名で表示（例: 高輪ゲートウェイシティ_Ericsson）
             df_data[equipment_type] = column_data
         
         # DataFrameを作成
@@ -323,14 +324,13 @@ def create_sample_star_chart() -> pd.DataFrame:
         pd.DataFrame: サンプル星取表
     """
     data = {
-        'シナリオ': ['正常スリープ', '不正なデータ', '異常系テスト'],
-        'Ericsson-MMU': ['●', '×', '△'],
-        'Ericsson-RRU': ['●', '-', '×'],
-        'Samsung-AUv1': ['●', '●', '●'],
-        'Samsung-AUv2': ['●', '●', '●']
+        '検証条件': ['1. 正常スリープモード検証', '2. 不正データ処理検証', '3. 異常系エラーハンドリング検証'],
+        '高輪ゲートウェイシティ_Ericsson': ['●', '×', '△'],
+        '高輪ゲートウェイシティ_Nokia': ['●', '●', '×'],
+        '大岡山ラボ_Samsung': ['●', '●', '●']
     }
     
     df = pd.DataFrame(data)
-    df.set_index('シナリオ', inplace=True)
+    df.set_index('検証条件', inplace=True)
     
     return df

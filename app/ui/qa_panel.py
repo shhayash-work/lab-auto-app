@@ -45,7 +45,7 @@ def render_qa_interface(llm_provider: str, use_streaming: bool = True, show_thin
     sample_questions = [
         "最近失敗した検証項目はありますか？",
         "基地局スリープ機能の検証結果を教えてください",
-        "Ericsson-MMU設備で問題が発生した検証はありますか？",
+        "高輪ゲートウェイシティ_Ericsson設備で問題が発生した検証はありますか？",
         "成功率が低い検証項目を特定してください",
         "今日実行された検証の結果はどうでしたか？",
         "特定の設備タイプで頻繁に失敗する検証項目はありますか？"
@@ -71,38 +71,42 @@ def render_qa_interface(llm_provider: str, use_streaming: bool = True, show_thin
                 # LLMサービスを初期化
                 llm_service = get_llm_service(llm_provider)
                 
-                # RAGシステムの動作可視化
-                with st.spinner("🔍 関連検証バッチを検索中..."):
+                    # RAGシステムの動作可視化
+                with st.spinner("🔍 関連検証データを検索中..."):
                     # リアルなバッチデータを取得
                     realistic_batches = load_realistic_batches()
                     
-                    # ベクター検索の実行（テスト項目から）
-                    vector_store = get_vector_store()
-                    test_item_results = vector_store.search(question, top_k=3)
+                    # 検証結果専用ベクター検索の実行
+                    from app.services.validation_result_vector_store import get_validation_result_vector_store
+                    result_vector_store = get_validation_result_vector_store()
+                    vector_search_results = result_vector_store.search_similar_documents(question, top_k=5)
                     
-                    # 直接バッチデータから関連するものを検索
-                    batch_results = _search_batches_directly(question, realistic_batches, top_k=5)
+                    # 直接バッチデータから関連するものを検索（補完用）
+                    batch_results = _search_batches_directly(question, realistic_batches, top_k=3)
                     
-                    # 結果を統合
-                    search_results = batch_results
+                    # 結果を統合（ベクター検索をメインに使用）
+                    search_results = {
+                        'vector_results': vector_search_results,
+                        'batch_results': batch_results
+                    }
                     
-                    if search_results:
-                        st.success(f"✅ {len(search_results)}件の関連バッチを発見")
+                    # ベクター検索結果を統一スタイルで表示
+                    if vector_search_results:
+                        st.info(f"✅ {len(vector_search_results)}件の関連検証結果が見つかりました")
+                    else:
+                        st.info("関連する検証結果が見つかりませんでした")
                         
                         # 検索結果の表示（詳細表示オプション）
-                        if show_thinking:
-                            with st.expander("🔍 検索された関連バッチ", expanded=False):
-                                for i, result in enumerate(search_results):
-                                    st.write(f"**{i+1}. {result.get('name', 'Unknown')}**")
-                                    st.write(f"- 実行日: {result.get('created_at', 'Unknown')}")
-                                    st.write(f"- ステータス: {result.get('status', 'Unknown')}")
-                                    st.write(f"- 試験ブロック: {result.get('test_block', 'Unknown')}")
-                                    if result.get('results'):
-                                        success_count = len([r for r in result['results'] if r.get('result') == 'PASS'])
-                                        total_count = len(result['results'])
-                                        st.write(f"- 成功率: {success_count}/{total_count} ({success_count/total_count*100:.1f}%)")
-                    else:
-                        st.warning("関連する検証バッチが見つかりませんでした")
+                        if show_thinking and vector_search_results:
+                            with st.expander("🔍 検索された検証結果", expanded=False):
+                                for i, result in enumerate(vector_search_results):
+                                    metadata = result.get('metadata', {})
+                                    st.write(f"**{i+1}. 類似度: {result.get('similarity', 0):.3f}**")
+                                    st.write(f"- バッチ: {metadata.get('batch_name', 'Unknown')}")
+                                    st.write(f"- 設備: {metadata.get('equipment_type', 'Unknown')}")
+                                    st.write(f"- 結果: {metadata.get('result', 'Unknown')}")
+                                    st.write(f"- 内容プレビュー: {result.get('content', '')[:100]}...")
+                                    st.write("---")
                 
                 # 思考過程表示
                 if show_thinking:
@@ -309,11 +313,12 @@ def _search_batches_directly(question: str, batches: List[Dict], top_k: int = 5)
                 score += 4
         
         # 設備タイプでの一致
-        if 'ericsson' in question_lower or 'mmu' in question_lower:
+        if 'ericsson' in question_lower or 'nokia' in question_lower or 'samsung' in question_lower:
             # 結果から設備タイプを確認
             results = batch.get('results', [])
             for result in results:
-                if 'Ericsson-MMU' in result.get('equipment_type', ''):
+                equipment_type = result.get('equipment_type', '')
+                if any(vendor in equipment_type for vendor in ['Ericsson', 'Nokia', 'Samsung']):
                     score += 2
                     break
         
@@ -327,14 +332,52 @@ def _search_batches_directly(question: str, batches: List[Dict], top_k: int = 5)
     
     return scored_batches[:top_k]
 
-def _prepare_rag_context(search_results: List[Dict]) -> str:
-    """RAGコンテキストを準備"""
-    if not search_results:
-        return "関連する検証バッチが見つかりませんでした。"
-    
+def _prepare_rag_context(search_results) -> str:
+    """RAGコンテキストを準備（ベクター検索とバッチ検索の統合）"""
     context_parts = []
-    for i, result in enumerate(search_results):
-        context_parts.append(f"""
+    
+    # 新しい構造（辞書形式）の場合
+    if isinstance(search_results, dict):
+        # ベクター検索結果を処理
+        vector_results = search_results.get('vector_results', [])
+        if vector_results:
+            context_parts.append("【ベクター検索による関連検証結果】")
+            for i, result in enumerate(vector_results[:3]):  # 上位3件
+                context_parts.append(f"""
+検証結果 {i+1} (類似度: {result.get('similarity', 0):.2f}):
+{result.get('content', 'Unknown')}
+""")
+        
+        # バッチ検索結果を処理
+        batch_results = search_results.get('batch_results', [])
+        if batch_results:
+            context_parts.append("\n【バッチ検索による関連検証バッチ】")
+            for i, result in enumerate(batch_results):
+                context_parts.append(f"""
+検証バッチ {i+1}:
+- 名前: {result.get('name', 'Unknown')}
+- 実行日: {result.get('created_at', 'Unknown')}
+- ステータス: {result.get('status', 'Unknown')}
+- 試験ブロック: {result.get('test_block', 'Unknown')}""")
+                
+                # 結果の詳細
+                if result.get('results'):
+                    results = result['results']
+                    success_count = len([r for r in results if r.get('result') == 'PASS'])
+                    fail_count = len([r for r in results if r.get('result') == 'FAIL'])
+                    total_count = len(results)
+                    
+                    context_parts.append(f"""- 検証結果: 成功 {success_count}件、失敗 {fail_count}件、合計 {total_count}件
+- 成功率: {success_count/total_count*100:.1f}%""")
+    
+    # 従来の構造（リスト形式）の場合
+    elif isinstance(search_results, list):
+        if not search_results:
+            return "関連する検証バッチが見つかりませんでした。"
+        
+        context_parts.append("【検索による関連検証バッチ】")
+        for i, result in enumerate(search_results):
+            context_parts.append(f"""
 検証バッチ {i+1}:
 - 名前: {result.get('name', 'Unknown')}
 - 実行日: {result.get('created_at', 'Unknown')}
@@ -378,6 +421,10 @@ def _prepare_rag_context(search_results: List[Dict]) -> str:
             context_parts.append(f"- テスト項目数: {len(test_items)}件")
             for item in test_items[:2]:  # 最大2件まで
                 context_parts.append(f"  * {item.get('condition_text', 'Unknown')}")
+    
+    # どちらの構造でもない場合
+    if not context_parts:
+        return "関連する検証データが見つかりませんでした。"
     
     return "\n".join(context_parts)
 

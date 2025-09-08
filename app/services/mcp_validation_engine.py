@@ -137,13 +137,25 @@ class UnifiedValidationEngine:
         
         error_results = []
         for item in test_items:
+            # テストアイテムの最初の設備を使用、なければデフォルト
+            equipment_type = EquipmentType.TAKANAWA_ERICSSON  # デフォルト
+            if item.condition.equipment_types:
+                first_equipment = item.condition.equipment_types[0]
+                if hasattr(first_equipment, 'value'):
+                    equipment_type = first_equipment
+                else:
+                    # 文字列の場合、対応するEquipmentTypeを検索
+                    for et in EquipmentType:
+                        if et.value == str(first_equipment):
+                            equipment_type = et
+                            break
+            
             result = ValidationResult(
                 id=str(uuid.uuid4()),
                 test_item_id=item.id,
-                equipment_type=EquipmentType.ERICSSON_MMU,  # デフォルト設備
-                scenario="エラー発生",
+                equipment_type=equipment_type,
                 result=TestResult.FAIL,
-                error_message=f"実行エラー: {error_message}",
+                details=f"実行エラー: {error_message}",
                 confidence=0.0,
                 execution_time=0.0,
                 created_at=datetime.now()
@@ -242,7 +254,7 @@ async def main():
                     condition=TestCondition(
                         condition_text="CMデータの取得成功",
                         expected_count=1,
-                        equipment_types=[EquipmentType.ERICSSON_MMU]
+                        equipment_types=[EquipmentType.TAKANAWA_ERICSSON]
                     ),
                     scenarios=["正常スリープ"]
                 )

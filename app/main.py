@@ -34,12 +34,139 @@ from app.services.validation_engine import get_validation_engine
 from app.services.mcp_validation_engine import get_unified_validation_engine
 from app.services.provider_manager import get_provider_manager, ProviderStatus
 from app.utils.excel_parser import parse_excel_test_items
-from app.utils.star_chart import create_star_chart_dataframe
 from app.ui.qa_panel import render_qa_panel
+from app.ui.review_panel import render_review_panel
 
 # ログ設定
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# 星取表関数
+def create_star_chart_dataframe(results: List[ValidationResult]) -> pd.DataFrame:
+    """
+    検証結果から星取表のDataFrameを作成（検証条件×設備のマトリクス形式）
+    
+    Args:
+        results: 検証結果のリスト
+        
+    Returns:
+        pd.DataFrame: 星取表形式のデータフレーム
+    """
+    if not results:
+        return pd.DataFrame({"メッセージ": ["表示するデータがありません"]})
+    
+    try:
+        # 検証条件別、設備別に結果を整理
+        chart_data = []
+        equipment_set = set()
+        
+        for i, result in enumerate(results, 1):
+            # 結果の値を取得
+            if isinstance(result, dict):
+                equipment = result.get('equipment_type', 'Unknown')
+                result_value = result.get('result', 'FAIL')
+                condition = result.get('condition_text', '検証条件情報なし')
+                test_item_id = result.get('test_item_id', '')
+            else:
+                # フル設備名を使用（高輪ゲートウェイシティ_Ericsson形式）
+                equipment = result.equipment_type.value if hasattr(result.equipment_type, 'value') else str(result.equipment_type)
+                result_value = result.result.value if hasattr(result.result, 'value') else str(result.result)
+                test_item_id = getattr(result, 'test_item_id', '')
+                
+                # 検証条件を取得（複数の方法で試行）
+                condition = '検証条件情報なし'
+                
+                # 1. 直接属性から取得
+                if hasattr(result, 'condition_text'):
+                    condition = result.condition_text
+                # 2. セッション状態から検証項目を検索
+                elif test_item_id:
+                    test_items = st.session_state.get('test_items', [])
+                    for item in test_items:
+                        if hasattr(item, 'id') and item.id == test_item_id:
+                            if hasattr(item, 'condition') and hasattr(item.condition, 'condition_text'):
+                                condition = item.condition.condition_text
+                                break
+                # 3. scenarioから推測
+                elif hasattr(result, 'scenario') and result.scenario:
+                    condition = result.scenario
+            
+            # 設備名はフル名のまま使用（高輪ゲートウェイシティ_Ericsson形式）
+            equipment_set.add(equipment)
+            
+            # 結果をシンボルに変換
+            if result_value == 'PASS':
+                symbol = "●"
+            elif result_value == 'FAIL':
+                symbol = "×"
+            elif result_value == 'NEEDS_CHECK':
+                symbol = "△"
+            else:
+                symbol = "-"
+            
+            # 行データとして保存（検証条件のみ）
+            chart_data.append({
+                '検証条件': condition,
+                equipment: symbol
+            })
+        
+        # DataFrameを作成
+        if not chart_data:
+            return pd.DataFrame({"メッセージ": ["表示するデータがありません"]})
+        
+        # 設備別にデータを統合
+        consolidated_data = {}
+        for row in chart_data:
+            key = row['検証条件']
+            if key not in consolidated_data:
+                consolidated_data[key] = {'検証条件': key}
+            
+            # 設備の結果を追加
+            for col, val in row.items():
+                if col != '検証条件':
+                    consolidated_data[key][col] = val
+        
+        # DataFrameに変換
+        df_rows = list(consolidated_data.values())
+        df = pd.DataFrame(df_rows)
+        
+        # 全設備に対して列を作成（存在しない組み合わせは"-"）
+        for equipment in sorted(equipment_set):
+            if equipment not in df.columns:
+                df[equipment] = "-"
+        
+        # 欠損値を"-"で埋める
+        df = df.fillna("-")
+        
+        # 列の順序を調整（検証条件、設備名でソート）
+        fixed_cols = ['検証条件']
+        equipment_cols = sorted([col for col in df.columns if col not in fixed_cols])
+        df = df[fixed_cols + equipment_cols]
+        
+        return df
+        
+    except Exception as e:
+        logger.error(f"Failed to create star chart: {e}")
+        return pd.DataFrame({"エラー": [f"星取表の作成に失敗しました: {str(e)}"]})
+
+def convert_result_to_symbol(result: TestResult) -> str:
+    """
+    テスト結果を星取表の記号に変換
+    
+    Args:
+        result: テスト結果
+        
+    Returns:
+        str: 対応する記号
+    """
+    symbol_mapping = {
+        TestResult.PASS: "●",        # 合格
+        TestResult.FAIL: "×",        # 不合格
+        TestResult.WARNING: "△",     # 警告
+        TestResult.NOT_EXECUTED: "-" # 未実行
+    }
+    
+    return symbol_mapping.get(result, "-")
 
 # Streamlit設定
 st.set_page_config(**STREAMLIT_CONFIG)
@@ -199,35 +326,39 @@ def render_dashboard():
     today_batches = [b for b in realistic_batches if b.get('created_at', '').startswith(today)]
     today_count = len(today_batches)  # バッチ数
     
-    # 成功数・失敗数・実行中を計算（バッチ単位）
+    # 成功数・失敗数・要確認数・実行中を計算（バッチ単位）
     success_count = 0
     fail_count = 0
+    needs_check_count = 0
     running_count = 0
     
     for batch in today_batches:
-        if batch.get('status') == 'completed':
-            # バッチ全体が成功かどうかで判定
-            batch_results = batch.get('results', [])
-            if batch_results and all(r.get('result') == 'PASS' for r in batch_results):
-                success_count += 1
-            else:
-                fail_count += 1
-        elif batch.get('status') == 'running':
-            running_count += 1
-        elif batch.get('status') == 'failed':
+        batch_status = calculate_batch_status(batch.get('results', []))
+        
+        if batch_status == "成功":
+            success_count += 1
+        elif batch_status == "失敗":
             fail_count += 1
+        elif batch_status == "要確認":
+            needs_check_count += 1
+        elif batch_status == "実行中":
+            running_count += 1
     
     # ダミーデータで補完（デモ用）
     if today_count == 0:
         today_count = 6
         success_count = 4
         fail_count = 1
+        needs_check_count = 0
         running_count = 1
     
+    # 失敗数（要確認）＝失敗数＋要確認数
+    fail_and_check_count = fail_count + needs_check_count
+    
     # 今日の検証に対する割合計算
-    total_today = success_count + fail_count + running_count
+    total_today = success_count + fail_count + needs_check_count + running_count
     success_percentage = int((success_count / total_today) * 100) if total_today > 0 else 67
-    fail_percentage = int((fail_count / total_today) * 100) if total_today > 0 else 17
+    fail_and_check_percentage = int((fail_and_check_count / total_today) * 100) if total_today > 0 else 17
     running_percentage = int((running_count / total_today) * 100) if total_today > 0 else 16
     
     # メトリクス表示（件数ベースで4つのパネル）
@@ -262,12 +393,12 @@ def render_dashboard():
     with col3:
         st.markdown(f"""
         <div class="metric-card">
-            <h3>失敗数</h3>
+            <h3>失敗数（要確認）</h3>
             <div class="metric-value">
-                {fail_count}<span style="font-size: 40px;">件</span>
+                {fail_and_check_count}<span style="font-size: 40px;">件</span>
             </div>
             <div class="metric-delta" style="color: #999; font-size: 16px;">
-                {fail_percentage}%
+                {fail_and_check_percentage}%
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -317,30 +448,37 @@ def render_dashboard():
     with col1:
         st.markdown("**<span style='font-size: 22px; color: #000000;'>検証結果分布</span>**", unsafe_allow_html=True)
         
-        # 実際のデータまたはサンプルデータ
-        validation_results = []  # 初期化
-        if validation_results:
-            pass_count = sum(1 for r in validation_results if r.result.value == 'PASS')
-            fail_count = sum(1 for r in validation_results if r.result.value == 'FAIL')
-            warning_count = sum(1 for r in validation_results if r.result.value == 'WARNING')
-            results_data = {
-                'Result': ['成功', '失敗', '警告'],
-                'Count': [pass_count, fail_count, warning_count]
+        # 実データに基づく結果分布計算
+        def calculate_result_distribution(all_batches):
+            success_count = fail_count = needs_check_count = running_count = 0
+            
+            for batch in all_batches:
+                batch_status = calculate_batch_status(batch.get('results', []))
+                if batch_status == "成功":
+                    success_count += 1
+                elif batch_status == "失敗":
+                    fail_count += 1
+                elif batch_status == "要確認":
+                    needs_check_count += 1
+                elif batch_status == "実行中":
+                    running_count += 1
+            
+            return {
+                'Result': ['成功', '失敗', '要確認', '実行中'],
+                'Count': [success_count, fail_count, needs_check_count, running_count]
             }
-        else:
-            results_data = {
-                'Result': ['成功', '失敗', '警告'],
-                'Count': [15, 3, 2]
-            }
+        
+        results_data = calculate_result_distribution(realistic_batches)
         
         fig = px.pie(
             results_data, 
             values='Count', 
             names='Result',
             color_discrete_map={
-                '成功': '#007bff',  # 青
-                '失敗': '#fd7e14',  # オレンジ
-                '警告': '#dc3545'   # 赤
+                '成功': '#28a745',  # 緑
+                '失敗': '#dc3545',  # 赤
+                '要確認': '#fd7e14', # オレンジ
+                '実行中': '#007bff'  # 青
             }
         )
         # 参考アプリスタイルに合わせてフォントサイズを調整
@@ -364,10 +502,31 @@ def render_dashboard():
     
     with col2:
         st.markdown("**<span style='font-size: 22px; color: #000000;'>設備別成功率</span>**", unsafe_allow_html=True)
-        equipment_data = {
-            'Equipment': ['Ericsson-MMU', 'Ericsson-RRU', 'Samsung-AUv1', 'Samsung-AUv2'],
-            'Success Rate': [90, 85, 88, 92]
-        }
+        
+        # 実データに基づく設備別成功率計算
+        def calculate_equipment_success_rate(all_batches):
+            equipment_stats = {}
+            
+            for batch in all_batches:
+                for result in batch.get('results', []):
+                    eq_type = result.get('equipment_type', 'Unknown')
+                    if eq_type not in equipment_stats:
+                        equipment_stats[eq_type] = {'total': 0, 'success': 0}
+                    
+                    equipment_stats[eq_type]['total'] += 1
+                    if result.get('result') == 'PASS':
+                        equipment_stats[eq_type]['success'] += 1
+            
+            # 成功率計算とデータ構造変換
+            equipment_data = {'Equipment': [], 'Success Rate': []}
+            for eq_type, stats in equipment_stats.items():
+                success_rate = (stats['success'] / stats['total'] * 100) if stats['total'] > 0 else 0
+                equipment_data['Equipment'].append(eq_type)
+                equipment_data['Success Rate'].append(round(success_rate, 1))
+            
+            return equipment_data
+        
+        equipment_data = calculate_equipment_success_rate(realistic_batches)
         fig = px.bar(
             equipment_data,
             x='Equipment',
@@ -392,6 +551,24 @@ def render_dashboard():
         )
         st.plotly_chart(fig, width="stretch")
 
+def calculate_batch_status(batch_results):
+    """バッチの統一ステータス判定"""
+    if not batch_results:
+        return "実行中"
+    
+    has_fail = any(r.get('result') == 'FAIL' for r in batch_results)
+    has_needs_check = any(r.get('result') == 'NEEDS_CHECK' for r in batch_results) 
+    has_running = any(r.get('result') == 'RUNNING' for r in batch_results)
+    
+    if has_running:
+        return "実行中"  # 青
+    elif has_fail:
+        return "失敗"     # 赤  
+    elif has_needs_check:
+        return "要確認"   # オレンジ
+    else:
+        return "成功"     # 緑
+
 def render_recent_batches(filter_type: str, limit: int):
     """最近の検証バッチを表示（リアルなデータ連携）"""
     # リアルなデータを読み込み
@@ -411,32 +588,48 @@ def render_recent_batches(filter_type: str, limit: int):
         else:
             success_rate = 0
         
-        # ステータスを日本語に変換
-        status_map = {
-            'completed': '成功',
-            'failed': '失敗', 
-            'running': '実行中'
-        }
-        status = status_map.get(batch.get('status'), '不明')
+        # 統一ステータス判定を使用
+        status = calculate_batch_status(results)
         
         # フィルタリング
         if filter_type == "success" and status != "成功":
             continue
-        elif filter_type == "failed" and status != "失敗":
+        elif filter_type == "failed" and status not in ["失敗", "要確認"]:
             continue
         elif filter_type == "running" and status != "実行中":
             continue
         
-        # 実行時刻を変換
+        # 実行時間を計算
+        execution_time_display = '不明'
+        if status == '実行中':
+            execution_time_display = 'None（実行中）'
+        else:
+            # バッチの実行時間を計算
+            results = batch.get('results', [])
+            if results:
+                # 全ての検証項目の実行時間を合計
+                total_time = sum(r.get('execution_time', 0) for r in results)
+                execution_time_display = f"{total_time:.1f}s"
+            elif batch.get('completed_at') and batch.get('created_at'):
+                # バッチレベルの時間計算
+                try:
+                    start_time = datetime.fromisoformat(batch['created_at'].replace('Z', '+00:00'))
+                    end_time = datetime.fromisoformat(batch['completed_at'].replace('Z', '+00:00'))
+                    duration = (end_time - start_time).total_seconds()
+                    execution_time_display = f"{duration:.1f}s"
+                except:
+                    execution_time_display = '不明'
+        
+        # 実行時刻を変換（表示用）
         created_at = batch.get('created_at', '')
         if created_at:
             try:
                 dt = datetime.fromisoformat(created_at.replace('Z', '+00:00'))
-                execution_time = dt.strftime('%m/%d %H:%M')
+                execution_date = dt.strftime('%m/%d %H:%M')
             except:
-                execution_time = created_at[:16].replace('T', ' ')
+                execution_date = created_at[:16].replace('T', ' ')
         else:
-            execution_time = '不明'
+            execution_date = '不明'
         
         # 実行時間を計算
         started_at = batch.get('started_at')
@@ -454,11 +647,11 @@ def render_recent_batches(filter_type: str, limit: int):
         
         batch_data.append({
             "バッチ名": batch.get('name', ''),
-            "実行時刻": execution_time,
+            "実行時刻": execution_date,
             "検証項目数": len(batch.get('test_items', [])),
             "成功率": f"{success_rate}%",
             "ステータス": status,
-            "実行時間": duration_str
+            "実行時間": execution_time_display
         })
         
         if len(batch_data) >= limit:
@@ -546,11 +739,32 @@ def render_ai_generation(selected_provider=None):
         feature_name = st.text_input("新機能名", placeholder="例: 基地局スリープ機能")
     
     with col2:
-        equipment_types = st.multiselect(
-            "対象設備",
-            options=[eq.value for eq in EquipmentType],
-            help="検証対象とする設備を選択してください"
+        # 生成項目数は自動決定（削除）
+        pass
+    
+    # 設備選択を分離
+    col3, col4 = st.columns(2)
+    
+    with col3:
+        lab_name = st.text_input(
+            "ラボ設備名",
+            placeholder="例: 高輪ゲートウェイシティ",
+            help="検証を実行するラボ設備名を入力"
         )
+    
+    with col4:
+        vendors = ["Ericsson", "Nokia", "Samsung", "その他"]
+        vendor_name = st.selectbox(
+            "対象設備",
+            options=vendors,
+            help="検証対象の設備ベンダーを選択"
+        )
+        
+        if vendor_name == "その他":
+            vendor_name = st.text_input(
+                "対象設備（手入力）",
+                placeholder="例: Huawei"
+            )
     
     # サイドバーで選択されたプロバイダーを使用
     if selected_provider:
@@ -560,7 +774,10 @@ def render_ai_generation(selected_provider=None):
         return
     
     if st.button("AI生成実行", type="primary"):
-        if feature_name and equipment_types:
+        if feature_name and lab_name and vendor_name:
+            # 設備タイプを組み合わせ形式で作成
+            equipment_type_str = f"{lab_name}_{vendor_name}"
+            equipment_types = [equipment_type_str]
             try:
                 # プロバイダー情報を表示
                 provider_manager = get_provider_manager()
@@ -686,8 +903,7 @@ def render_ai_generation(selected_provider=None):
                         category=TestCategory.CM_DATA_ACQUISITION,  # デフォルト
                         condition=TestCondition(
                             condition_text=item.get('condition_text', ''),
-                            expected_count=1,  # デフォルト値として保持
-                            equipment_types=[EquipmentType(eq) for eq in equipment_types]
+                            equipment_types=[equipment_type_str]
                         ),
                     )
                     test_items.append(test_item)
@@ -712,7 +928,7 @@ def render_ai_generation(selected_provider=None):
                 
                 logger.error(f"AI generation error: {e}")
         else:
-            st.warning("機能名と対象設備を入力してください")
+            st.warning("機能名、ラボ設備名、対象設備を入力してください")
 
 def render_excel_upload():
     """ExcelアップロードUI"""
@@ -763,6 +979,8 @@ def render_manual_creation():
                 placeholder="例: 基地局スリープ機能",
                 help="検証対象の機能名を入力"
             )
+        
+        with col2:
             category = st.text_input(
                 "カテゴリ", 
                 placeholder="例: CMデータの取得",
@@ -770,19 +988,31 @@ def render_manual_creation():
                 value="" if clear_inputs else st.session_state.get('manual_category', "")
             )
         
-        with col2:
-            expected_count = st.number_input(
-                "期待件数", 
-                min_value=0, 
-                value=1 if clear_inputs else st.session_state.get('manual_expected_count', 1),
-                help="期待される結果の件数"
+        col3, col4 = st.columns(2)
+        
+        with col3:
+            lab_name = st.text_input(
+                "ラボ設備名",
+                placeholder="例: 高輪ゲートウェイシティ",
+                value="" if clear_inputs else st.session_state.get('manual_lab_name', ""),
+                help="検証を実行するラボ設備名を入力"
             )
-            equipment_types = st.multiselect(
+        
+        with col4:
+            vendors = ["Ericsson", "Nokia", "Samsung", "その他"]
+            vendor_name = st.selectbox(
                 "対象設備",
-                options=[eq.value for eq in EquipmentType],
-                default=[] if clear_inputs else st.session_state.get('manual_equipment_types', [EquipmentType.ERICSSON_MMU.value]),
-                help="検証対象の設備を選択"
+                options=vendors,
+                index=0 if clear_inputs else st.session_state.get('manual_vendor_index', 0),
+                help="検証対象の設備ベンダーを選択"
             )
+            
+            if vendor_name == "その他":
+                vendor_name = st.text_input(
+                    "対象設備（手入力）",
+                    placeholder="例: Huawei",
+                    value="" if clear_inputs else st.session_state.get('manual_custom_vendor', "")
+                )
         
         # 検証条件
         condition_text = st.text_area(
@@ -794,12 +1024,15 @@ def render_manual_creation():
         
         
         if st.form_submit_button("検証項目を追加"):
-            if test_block and condition_text and equipment_types:
+            if test_block and condition_text and lab_name and vendor_name:
                 # カテゴリをTestCategoryから探すか、デフォルトを使用
                 try:
                     test_category = TestCategory(category) if category in [cat.value for cat in TestCategory] else TestCategory.CM_DATA_ACQUISITION
                 except:
                     test_category = TestCategory.CM_DATA_ACQUISITION
+                
+                # 設備タイプを組み合わせ形式で作成
+                equipment_type_str = f"{lab_name}_{vendor_name}"
                 
                 test_item = TestItem(
                     id=str(uuid.uuid4()),
@@ -807,8 +1040,7 @@ def render_manual_creation():
                     category=test_category,
                     condition=TestCondition(
                         condition_text=condition_text,
-                        expected_count=expected_count,
-                        equipment_types=[EquipmentType(eq) for eq in equipment_types]
+                        equipment_types=[equipment_type_str]
                     )
                 )
                 
@@ -874,8 +1106,7 @@ def render_test_items_table():
             "試験ブロック": item.test_block,
             "カテゴリ": item.category.value if hasattr(item.category, 'value') else str(item.category),
             "検証条件": item.condition.condition_text,
-            "期待件数": item.condition.expected_count,
-            "対象設備": ", ".join([eq.value for eq in item.condition.equipment_types]),
+            "対象設備": ", ".join([eq.value if hasattr(eq, 'value') else str(eq) for eq in item.condition.equipment_types]),
             "インデックス": i
         })
     
@@ -1004,17 +1235,22 @@ def render_test_items_table():
                     )
                 
                 with col2:
-                    new_expected_count = st.number_input(
-                        "期待件数", 
-                        value=item.condition.expected_count,
-                        min_value=0,
-                        key=f"edit_count_{i}"
-                    )
-                    new_equipment_types = st.multiselect(
+                    # 既存の設備タイプを文字列として取得（カンマ区切り）
+                    current_equipment_text = ""
+                    for eq in item.condition.equipment_types:
+                        if hasattr(eq, 'value'):
+                            value = eq.value
+                        else:
+                            value = str(eq)
+                        if current_equipment_text:
+                            current_equipment_text += ", "
+                        current_equipment_text += value
+                    
+                    new_equipment_types = st.text_input(
                         "対象設備",
-                        options=[eq.value for eq in EquipmentType],
-                        default=[eq.value for eq in item.condition.equipment_types],
-                        key=f"edit_equipment_{i}"
+                        value=current_equipment_text,
+                        key=f"edit_equipment_{i}",
+                        help="設備名をカンマ区切りで入力してください"
                     )
                 
                 new_condition_text = st.text_area(
@@ -1039,6 +1275,28 @@ def render_test_items_table():
                     except:
                         test_category = TestCategory.FUNCTIONAL
                     
+                    # 設備タイプを文字列から分割してリストに変換（カンマ区切り）
+                    equipment_text = st.session_state[f"edit_equipment_{i}"]
+                    equipment_list = [eq.strip() for eq in equipment_text.split(',') if eq.strip()]
+                    
+                    # 利用可能な設備タイプに一致するもののみ使用、そうでなければそのまま文字列として保持
+                    equipment_types = []
+                    for eq_name in equipment_list:
+                        try:
+                            # EquipmentTypeに存在するかチェック
+                            eq_type = None
+                            for et in EquipmentType:
+                                if et.value == eq_name:
+                                    eq_type = et
+                                    break
+                            if eq_type:
+                                equipment_types.append(eq_type)
+                            else:
+                                # 存在しない場合は文字列として保持（互換性のため）
+                                equipment_types.append(eq_name)
+                        except:
+                            equipment_types.append(eq_name)
+                    
                     # 更新されたTestItemを作成
                     updated_item = TestItem(
                         id=item.id,
@@ -1046,8 +1304,7 @@ def render_test_items_table():
                         category=test_category,
                         condition=TestCondition(
                             condition_text=st.session_state[f"edit_condition_{i}"],
-                            expected_count=st.session_state[f"edit_count_{i}"],
-                            equipment_types=[EquipmentType(eq) for eq in st.session_state[f"edit_equipment_{i}"]]
+                            equipment_types=equipment_types
                         ),
                         created_at=item.created_at,
                         updated_at=datetime.now()
@@ -1130,7 +1387,7 @@ def render_validation_execution(selected_provider=None):
                 "試験ブロック": item.test_block,
                 "カテゴリ": item.category.value if hasattr(item.category, 'value') else str(item.category),
                 "検証条件": item.condition.condition_text,
-                "対象設備": ", ".join([eq.value for eq in item.condition.equipment_types]),
+                "対象設備": ", ".join([eq.value if hasattr(eq, 'value') else str(eq) for eq in item.condition.equipment_types]),
                 "インデックス": i
             })
         
@@ -1291,7 +1548,8 @@ def execute_validation_batch(test_items: List[TestItem], batch_name: str, llm_pr
         
         # エラー時の表示更新
         progress_bar.progress(0.0)
-        status_text.text(f"❌ 検証実行に失敗しました")
+        spinner_placeholder.empty()
+        thinking_container.error("❌ 検証実行に失敗しました")
         
         st.error(f"❌ 検証実行に失敗しました: {str(e)}")
         st.code(error_details)
@@ -1336,6 +1594,15 @@ def render_realtime_results(results: List[ValidationResult]):
             confidence = result.confidence
             execution_time = result.execution_time
         
+        # 結果を日本語化
+        result_map = {
+            "PASS": "合格",
+            "FAIL": "不合格", 
+            "NEEDS_CHECK": "要確認",
+            "WARNING": "警告"
+        }
+        result_value = result_map.get(result_value, result_value)
+        
         data.append({
             "検証条件": condition_text,
             "対象設備": equipment_type,
@@ -1350,11 +1617,11 @@ def render_realtime_results(results: List[ValidationResult]):
         
         # 結果に応じて色分け
         def color_result(val):
-            if val == "PASS":
+            if val == "PASS" or val == "合格":
                 return "background-color: #d4edda; color: #155724; font-weight: bold;"
-            elif val == "FAIL":
+            elif val == "FAIL" or val == "不合格":
                 return "background-color: #f8d7da; color: #721c24; font-weight: bold;"
-            elif val == "WARNING":
+            elif val == "NEEDS_CHECK" or val == "要確認":
                 return "background-color: #fff3cd; color: #856404; font-weight: bold;"
             return ""
         
@@ -1391,13 +1658,13 @@ def render_batch_summary(batch: ValidationBatch):
             "warning_count": 0,
             "success_rate": 0.0,
             "average_execution_time": 0.0,
-            "status": batch.status.value
+            "status": batch.status.value if hasattr(batch.status, 'value') else str(batch.status)
         }
     else:
         total_tests = len(batch.results)
         pass_count = sum(1 for r in batch.results if r.result == TestResult.PASS)
         fail_count = sum(1 for r in batch.results if r.result == TestResult.FAIL)
-        warning_count = sum(1 for r in batch.results if r.result == TestResult.WARNING)
+        warning_count = sum(1 for r in batch.results if r.result == TestResult.NEEDS_CHECK)
         
         success_rate = pass_count / total_tests if total_tests > 0 else 0.0
         avg_execution_time = sum(r.execution_time for r in batch.results) / total_tests if total_tests > 0 else 0.0
@@ -1410,7 +1677,7 @@ def render_batch_summary(batch: ValidationBatch):
             "warning_count": warning_count,
             "success_rate": success_rate,
             "average_execution_time": avg_execution_time,
-            "status": batch.status if isinstance(batch.status, str) else batch.status.value
+            "status": batch.status if isinstance(batch.status, str) else (batch.status.value if hasattr(batch.status, 'value') else str(batch.status))
         }
     
     # メトリクス表示（文字サイズを大きく）
@@ -1468,7 +1735,7 @@ def render_batch_summary(batch: ValidationBatch):
         result_counts = {
             'PASS': summary['pass_count'],
             'FAIL': summary['fail_count'],
-            'WARNING': summary['warning_count']
+            'NEEDS_CHECK': summary['warning_count']
         }
         
         # データを日本語ラベルに変換
@@ -1483,9 +1750,9 @@ def render_batch_summary(batch: ValidationBatch):
         if result_counts['FAIL'] > 0:
             result_data['Result'].append('失敗')
             result_data['Count'].append(result_counts['FAIL'])
-        if result_counts['WARNING'] > 0:
-            result_data['Result'].append('警告')
-            result_data['Count'].append(result_counts['WARNING'])
+        if result_counts['NEEDS_CHECK'] > 0:
+            result_data['Result'].append('要確認')
+            result_data['Count'].append(result_counts['NEEDS_CHECK'])
         
         if result_data['Count']:
             fig = px.pie(
@@ -1493,9 +1760,10 @@ def render_batch_summary(batch: ValidationBatch):
                 values='Count', 
                 names='Result',
                 color_discrete_map={
-                    '成功': '#007bff',  # 青
-                    '失敗': '#fd7e14',  # オレンジ
-                    '警告': '#dc3545'   # 赤
+                    '成功': '#28a745',  # 緑
+                    '失敗': '#dc3545',  # 赤
+                    '要確認': '#fd7e14', # オレンジ
+                    '実行中': '#007bff'  # 青
                 }
             )
             # ダッシュボードと完全に同じスタイル
@@ -1582,20 +1850,41 @@ def render_results_viewer():
     executed_batches = st.session_state.get('executed_batches', [])
     current_batch = st.session_state.get('current_batch')
     
+    # デバッグ情報
+    st.info(f"セッション状態の実行済みバッチ数: {len(executed_batches)}")
     if current_batch:
-        executed_batches.append({
-            'name': current_batch.name,
-            'id': current_batch.id,
-            'completed_at': current_batch.completed_at.strftime("%Y/%m/%d %H:%M:%S") if current_batch.completed_at else "実行中",
-            'results': current_batch.results
-        })
+        st.info(f"現在のバッチ: {current_batch.name} (結果数: {len(current_batch.results) if current_batch.results else 0})")
     
-    if not executed_batches:
-        st.info("実行済み検証バッチがありません。検証を実行してください。")
+    # 実行済みバッチリストを作成（current_batchの重複を避ける）
+    batch_list = []
+    
+    # 既存の実行済みバッチを追加
+    for batch in executed_batches:
+        batch_list.append(batch)
+    
+    # 現在のバッチを追加（重複チェック）
+    if current_batch and current_batch.results:  # 結果がある場合のみ
+        # 重複チェック
+        existing_ids = [b.get('id') for b in batch_list]
+        if current_batch.id not in existing_ids:
+            batch_list.append({
+                'name': current_batch.name,
+                'id': current_batch.id,
+                'completed_at': current_batch.completed_at.strftime("%Y/%m/%d %H:%M:%S") if current_batch.completed_at else "実行中",
+                'results': current_batch.results
+            })
+    
+    if not batch_list:
+        st.warning("実行済み検証バッチがありません。")
+        st.markdown("**検証を実行する手順:**")
+        st.markdown("1. 左側メニューで「検証手動実行」を選択")
+        st.markdown("2. 「検証項目入力」で検証項目を作成")
+        st.markdown("3. 「検証実行」でバッチを実行")
+        st.markdown("4. 実行完了後にこのページで結果を確認")
         return
     
     # バッチ選択
-    batch_options = [f"{batch['name']} ({batch['completed_at']})" for batch in executed_batches]
+    batch_options = [f"{batch['name']} ({batch['completed_at']})" for batch in batch_list]
     selected_batch_name = st.selectbox(
         "表示するバッチを選択",
         options=batch_options,
@@ -1604,7 +1893,7 @@ def render_results_viewer():
     
     # 選択されたバッチの結果を取得
     selected_batch_index = batch_options.index(selected_batch_name)
-    selected_batch = executed_batches[selected_batch_index]
+    selected_batch = batch_list[selected_batch_index]
     validation_results = selected_batch['results']
     
     if not validation_results:
@@ -1653,6 +1942,7 @@ def render_results_viewer():
     if show_details:
         render_detailed_results_table(filtered_results)
 
+
 def render_star_chart(results: List[ValidationResult]):
     """星取表を表示"""
     st.subheader("星取表")
@@ -1660,7 +1950,7 @@ def render_star_chart(results: List[ValidationResult]):
     try:
         df = create_star_chart_dataframe(results)
         
-        # スタイル適用
+        # スタイル適用（設備列に対して）
         def style_star_chart(val):
             if val == "●":
                 return "background-color: #d4edda; color: #155724; font-weight: bold;"
@@ -1670,8 +1960,33 @@ def render_star_chart(results: List[ValidationResult]):
                 return "background-color: #fff3cd; color: #856404; font-weight: bold;"
             return ""
         
-        styled_df = df.style.applymap(style_star_chart)
-        st.dataframe(styled_df, use_container_width=True)
+        # 設備列のみにスタイルを適用（検証条件、メッセージは除外）
+        equipment_columns = [col for col in df.columns if col not in ["メッセージ", "検証条件"]]
+        if equipment_columns:
+            styled_df = df.style.applymap(style_star_chart, subset=equipment_columns)
+        else:
+            styled_df = df.style
+        
+        # 列幅の設定
+        column_config = {}
+        for col in df.columns:
+            if col == "検証条件":
+                column_config[col] = st.column_config.TextColumn(
+                    "検証条件",
+                    width="large"
+                )
+            elif col not in ["メッセージ"]:
+                column_config[col] = st.column_config.Column(
+                    col,
+                    width="medium"
+                )
+        
+        st.dataframe(
+            styled_df, 
+            use_container_width=True, 
+            hide_index=False,
+            column_config=column_config
+        )
         
     except Exception as e:
         st.error(f"星取表の生成に失敗しました: {str(e)}")
@@ -1684,9 +1999,18 @@ def render_detailed_results_table(results: List[ValidationResult]):
     # データフレーム作成
     data = []
     for i, result in enumerate(results):
-        # 検証条件を取得
+        # 検証条件を取得 - バッチデータから直接取得
         condition_text = "検証条件情報なし"
-        if hasattr(result, 'test_item_id') and result.test_item_id:
+        if isinstance(result, dict):
+            # 辞書形式の場合、test_idから条件を推定
+            condition_text = result.get('condition_text', "検証条件情報なし")
+            if condition_text == "検証条件情報なし":
+                # 判定根拠から条件を推定
+                details = result.get('details', '')
+                if '測定値:' in details and '閾値:' in details:
+                    condition_text = f"測定条件（詳細は判定根拠を参照）"
+        elif hasattr(result, 'test_item_id') and result.test_item_id:
+            # オブジェクト形式の場合、セッションから検索
             test_items = st.session_state.get('test_items', [])
             for item in test_items:
                 if item.id == result.test_item_id:
@@ -1726,6 +2050,15 @@ def render_detailed_results_table(results: List[ValidationResult]):
             execution_time = result.execution_time
             created_at_str = result.created_at.strftime("%H:%M:%S")
         
+        # 結果を日本語化
+        result_map = {
+            "PASS": "合格",
+            "FAIL": "不合格", 
+            "NEEDS_CHECK": "要確認",
+            "WARNING": "警告"
+        }
+        result_value = result_map.get(result_value, result_value)
+        
         data.append({
             "検証条件": condition_text,
             "対象設備": equipment_type,
@@ -1740,10 +2073,12 @@ def render_detailed_results_table(results: List[ValidationResult]):
     
     # 結果に応じて色分け
     def color_result(val):
-        if val == "PASS":
+        if val == "PASS" or val == "合格":
             return "background-color: #d4edda"
-        elif val == "FAIL":
+        elif val == "FAIL" or val == "不合格":
             return "background-color: #f8d7da"
+        elif val == "NEEDS_CHECK" or val == "要確認":
+            return "background-color: #fff3cd"
         elif val == "WARNING":
             return "background-color: #fff3cd"
         return ""
@@ -1954,7 +2289,7 @@ def main():
         if main_menu == "ダッシュボード":
             sub_page = st.radio(
                 "ダッシュボード",
-                ["検証サマリ", "検証バッチ一覧", "AI質疑応答"],
+                ["検証サマリ", "検証レビュー", "検証バッチ一覧", "AI質疑応答"],
                 index=0
             )
         else:  # 検証手動実行
@@ -2036,18 +2371,23 @@ def main():
         st.info(f"バージョン: {APP_VERSION}")
         
         # モック設備ステータス
-        from mock_equipment.equipment_simulator import mock_equipment_manager
-        equipment_status = mock_equipment_manager.get_equipment_status()
-        
         st.subheader("設備ステータス")
-        for eq_type, status in equipment_status.items():
-            status_icon = "🟢" if status['status'] == 'active' else "🔴"
+        # 新しい設備名での表示
+        mock_equipment_list = [
+            "高輪ゲートウェイシティ_Ericsson",
+            "高輪ゲートウェイシティ_Nokia", 
+            "大岡山ラボ_Samsung"
+        ]
+        for eq_type in mock_equipment_list:
+            status_icon = "🟢"  # デモ用に全てアクティブ
             st.text(f"{status_icon} {eq_type}")
     
     # メインコンテンツ
     if main_menu == "ダッシュボード":
         if sub_page == "検証サマリ":
             render_dashboard()
+        elif sub_page == "検証レビュー":
+            render_review_panel()
         elif sub_page == "検証バッチ一覧":
             render_batch_list()
         elif sub_page == "AI質疑応答":

@@ -34,12 +34,12 @@ def create_realistic_validation_data():
     
     # 設備タイプと実行日のバリエーション
     equipment_combinations = [
-        [EquipmentType.ERICSSON_MMU],
-        [EquipmentType.SAMSUNG_AUV1], 
-        [EquipmentType.ERICSSON_RRU],
-        [EquipmentType.SAMSUNG_AUV2],
-        [EquipmentType.ERICSSON_MMU, EquipmentType.ERICSSON_RRU],
-        [EquipmentType.SAMSUNG_AUV1, EquipmentType.SAMSUNG_AUV2]
+        [EquipmentType.TAKANAWA_ERICSSON],
+        [EquipmentType.TAKANAWA_SAMSUNG], 
+        [EquipmentType.OOKAYAMA_NOKIA],
+        [EquipmentType.OOKAYAMA_SAMSUNG],
+        [EquipmentType.TAKANAWA_ERICSSON, EquipmentType.OOKAYAMA_ERICSSON],
+        [EquipmentType.TAKANAWA_SAMSUNG, EquipmentType.OOKAYAMA_SAMSUNG]
     ]
     
     batches = []
@@ -218,7 +218,6 @@ def create_test_item_for_block(test_block: str, equipment_types: list, index: in
         category=condition_data[2],
         condition=TestCondition(
             condition_text=condition_data[1],
-            expected_count=1 + (index % 3),
             equipment_types=equipment_types
         )
     )

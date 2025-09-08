@@ -48,7 +48,6 @@ def parse_excel_test_items(uploaded_file) -> List[TestItem]:
                 test_block = row.get('試験ブロック', f'ブロック{test_number}')
                 category_name = row.get('項目', 'CMデータの取得')
                 condition_text = row.get('条件', '')
-                expected_count = row.get('COUNT', 0)
                 
                 # NaN値の処理
                 if pd.isna(test_block):
@@ -63,8 +62,8 @@ def parse_excel_test_items(uploaded_file) -> List[TestItem]:
                 # カテゴリをマッピング
                 category = map_category_name(category_name)
                 
-                # 設備タイプとシナリオを抽出
-                equipment_types, scenarios = extract_equipment_and_scenarios(row, df.columns)
+                # 設備タイプを抽出
+                equipment_types, _ = extract_equipment_and_scenarios(row, df.columns)
                 
                 # TestItemオブジェクトを作成
                 test_item = TestItem(
@@ -73,10 +72,8 @@ def parse_excel_test_items(uploaded_file) -> List[TestItem]:
                     category=category,
                     condition=TestCondition(
                         condition_text=str(condition_text),
-                        expected_count=int(expected_count) if isinstance(expected_count, (int, float)) else 0,
                         equipment_types=equipment_types
-                    ),
-                    scenarios=scenarios
+                    )
                 )
                 
                 test_items.append(test_item)
@@ -149,13 +146,13 @@ def extract_equipment_and_scenarios(row: pd.Series, columns: pd.Index) -> tuple[
             # 設備タイプを特定
             equipment_type = None
             if 'Ericsson-MMU' in col_str:
-                equipment_type = EquipmentType.ERICSSON_MMU
+                equipment_type = EquipmentType.TAKANAWA_ERICSSON
             elif 'Ericsson-RRU' in col_str:
-                equipment_type = EquipmentType.ERICSSON_RRU
+                equipment_type = EquipmentType.OOKAYAMA_ERICSSON
             elif 'Samsng-AUv1' in col_str or 'Samsung-AUv1' in col_str:
-                equipment_type = EquipmentType.SAMSUNG_AUV1
+                equipment_type = EquipmentType.TAKANAWA_SAMSUNG
             elif 'Samsng-AUv2' in col_str or 'Samsung-AUv2' in col_str:
-                equipment_type = EquipmentType.SAMSUNG_AUV2
+                equipment_type = EquipmentType.OOKAYAMA_SAMSUNG
             
             if equipment_type:
                 if equipment_type not in equipment_types:
@@ -168,7 +165,7 @@ def extract_equipment_and_scenarios(row: pd.Series, columns: pd.Index) -> tuple[
     
     # デフォルト値
     if not equipment_types:
-        equipment_types = [EquipmentType.ERICSSON_MMU]
+        equipment_types = [EquipmentType.TAKANAWA_ERICSSON]
     
     if not scenarios:
         scenarios = ['正常動作']

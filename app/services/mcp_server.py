@@ -65,7 +65,7 @@ def get_test_items() -> Dict[str, Any]:
                     "category": "正常系",
                     "condition": "CMデータの取得成功",
                     "expected_count": 1,
-                    "equipment_types": ["ERICSSON_MMU", "SAMSUNG_AUV1"],
+                    "equipment_types": ["TAKANAWA_ERICSSON", "TAKANAWA_SAMSUNG"],
                     "scenarios": ["正常スリープ", "スリープ復帰"]
                 },
                 {
@@ -74,7 +74,7 @@ def get_test_items() -> Dict[str, Any]:
                     "category": "異常系",
                     "condition": "異常データでのエラー処理",
                     "expected_count": 0,
-                    "equipment_types": ["ERICSSON_RRU"],
+                    "equipment_types": ["OOKAYAMA_ERICSSON"],
                     "scenarios": ["異常データ入力", "タイムアウト"]
                 }
             ]
@@ -100,7 +100,7 @@ def send_command_to_equipment(equipment_id: str, command: str, parameters: Optio
     ラボ設備にコマンドを送信して応答を取得
     
     Args:
-        equipment_id: 設備ID (例: "ERICSSON_MMU_001")
+        equipment_id: 設備ID (例: "TAKANAWA_ERICSSON_001")
         command: 実行するコマンド (例: "get_signal_strength", "check_sleep_status")
         parameters: コマンドパラメータ (オプション)
     

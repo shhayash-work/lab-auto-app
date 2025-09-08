@@ -1,55 +1,52 @@
 [
   {
-    "id": "batch_20250907_231946_0",
-    "name": "検証バッチ_基地局スリープ機能_20250907_231946",
-    "created_at": "2025/09/07 23:19:46",
+    "id": "batch_20250908_154029_0",
+    "name": "検証バッチ_基地局スリープ機能_20250908_154029",
+    "created_at": "2025/09/08 15:40:29",
     "completed_at": null,
     "status": "running",
     "test_items": [
       {
-        "id": "83cbaeb2-a7d1-4203-b0ba-e0a82d3a0b6f",
+        "id": "e494076f-1276-407f-8cdd-542ffdd2bc25",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548308",
-        "updated_at": "2025-09-07T23:19:46.548308"
+        "created_at": "2025-09-08T15:40:29.716766",
+        "updated_at": "2025-09-08T15:40:29.716767"
       },
       {
-        "id": "a71f703e-3b1f-44e5-a98e-2e6eea3b5b96",
+        "id": "7e4ae9ac-3d77-4172-8281-0f3e05066255",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548325",
-        "updated_at": "2025-09-07T23:19:46.548325"
+        "created_at": "2025-09-08T15:40:29.716782",
+        "updated_at": "2025-09-08T15:40:29.716782"
       },
       {
-        "id": "aa20ada2-3a4b-4bfb-8a99-d3677d1abd04",
+        "id": "82784598-828a-4f6f-b287-99af3fe94262",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548336",
-        "updated_at": "2025-09-07T23:19:46.548336"
+        "created_at": "2025-09-08T15:40:29.716793",
+        "updated_at": "2025-09-08T15:40:29.716793"
       }
     ],
     "results": [],
@@ -57,526 +54,628 @@
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250907_221946_1",
-    "name": "検証バッチ_基地局スリープ機能_20250907_221946",
-    "created_at": "2025/09/07 22:19:46",
-    "completed_at": "2025/09/07 22:19:46",
+    "id": "batch_20250908_144029_1",
+    "name": "検証バッチ_基地局スリープ機能_20250908_144029",
+    "created_at": "2025/09/08 14:40:29",
+    "completed_at": "2025/09/08 14:40:29",
     "status": "completed",
     "test_items": [
       {
-        "id": "0b967a1e-40c0-4218-beba-930ee20e905b",
+        "id": "6cf667a3-4469-4055-b83c-b272ddc2dd62",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548502",
-        "updated_at": "2025-09-07T23:19:46.548502"
+        "created_at": "2025-09-08T15:40:29.716946",
+        "updated_at": "2025-09-08T15:40:29.716947"
       },
       {
-        "id": "52ca9055-8255-48e1-b37f-87afb87005b0",
+        "id": "80276615-d536-43d4-96d0-c576c2511eda",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548511",
-        "updated_at": "2025-09-07T23:19:46.548512"
+        "created_at": "2025-09-08T15:40:29.716955",
+        "updated_at": "2025-09-08T15:40:29.716956"
       },
       {
-        "id": "681088dc-5e99-49f1-90c2-5581d7eaabf2",
+        "id": "255f5bf2-b7b3-42e2-885e-4f16fad7db1c",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548520",
-        "updated_at": "2025-09-07T23:19:46.548520"
+        "created_at": "2025-09-08T15:40:29.716964",
+        "updated_at": "2025-09-08T15:40:29.716964"
       }
     ],
     "results": [
       {
-        "id": "bb1f9fac-6ff6-4d71-9ee7-d9bd05044418",
-        "test_item_id": "0b967a1e-40c0-4218-beba-930ee20e905b",
-        "equipment_type": "Ericsson-MMU",
+        "id": "39d3741d-1d56-4c33-ac99-203628ce5798",
+        "test_item_id": "6cf667a3-4469-4055-b83c-b272ddc2dd62",
+        "equipment_type": "高輪ゲートウェイシティ_Ericsson",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
         "response_data": {},
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T23:19:46.548530"
+        "created_at": "2025-09-08T15:40:29.716975",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "fd830b83-e36e-4086-89d0-29103fae0b5a",
-        "test_item_id": "52ca9055-8255-48e1-b37f-87afb87005b0",
-        "equipment_type": "Samsung-AUv1",
+        "id": "a4d51aa9-0ddd-4f4e-bbca-351ff9611f03",
+        "test_item_id": "80276615-d536-43d4-96d0-c576c2511eda",
+        "equipment_type": "高輪ゲートウェイシティ_Samsung",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
         "response_data": {},
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T22:19:46.548542"
+        "created_at": "2025-09-08T14:40:29.716987",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "f703115f-812a-420a-a969-897042bdd5fd",
-        "test_item_id": "681088dc-5e99-49f1-90c2-5581d7eaabf2",
-        "equipment_type": "Ericsson-RRU",
+        "id": "42731afd-630a-4fe8-b10a-d893631d6c79",
+        "test_item_id": "255f5bf2-b7b3-42e2-885e-4f16fad7db1c",
+        "equipment_type": "大岡山ラボ_Nokia",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
         "response_data": {},
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T21:19:46.548554"
+        "created_at": "2025-09-08T13:40:29.717000",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250906_211946_2",
-    "name": "検証バッチ_基地局スリープ機能_20250906_211946",
-    "created_at": "2025/09/06 21:19:46",
-    "completed_at": "2025/09/06 21:19:46",
+    "id": "batch_20250907_134029_2",
+    "name": "検証バッチ_基地局スリープ機能_20250907_134029",
+    "created_at": "2025/09/07 13:40:29",
+    "completed_at": "2025/09/07 13:40:29",
     "status": "completed",
     "test_items": [
       {
-        "id": "9da0688f-2075-4aed-a86e-30c1b0ec8845",
+        "id": "336102b2-7cad-4c09-8be7-ac3f9ce98375",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548632",
-        "updated_at": "2025-09-07T23:19:46.548632"
+        "created_at": "2025-09-08T15:40:29.717080",
+        "updated_at": "2025-09-08T15:40:29.717081"
       },
       {
-        "id": "e3e195b6-537c-48dc-b150-9d29f855ca7c",
+        "id": "fe550079-e760-4fa2-b1eb-ba6ebd908ef1",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548641",
-        "updated_at": "2025-09-07T23:19:46.548641"
+        "created_at": "2025-09-08T15:40:29.717092",
+        "updated_at": "2025-09-08T15:40:29.717092"
       },
       {
-        "id": "de13e203-24cd-45a0-95c7-533400a2aac3",
+        "id": "d463d2aa-398d-4dbb-9329-72a11d6ad1a4",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548649",
-        "updated_at": "2025-09-07T23:19:46.548649"
+        "created_at": "2025-09-08T15:40:29.717100",
+        "updated_at": "2025-09-08T15:40:29.717100"
       }
     ],
     "results": [
       {
-        "id": "8435d178-f5eb-4355-a07f-87de5270377b",
-        "test_item_id": "9da0688f-2075-4aed-a86e-30c1b0ec8845",
-        "equipment_type": "Ericsson-MMU",
+        "id": "8fe90c75-41b4-479e-9c39-96f5feba6279",
+        "test_item_id": "336102b2-7cad-4c09-8be7-ac3f9ce98375",
+        "equipment_type": "高輪ゲートウェイシティ_Ericsson",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
         "response_data": {},
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T23:19:46.548658"
+        "created_at": "2025-09-08T15:40:29.717109",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "7fb1db7f-a159-4c98-9c74-cd50861f5478",
-        "test_item_id": "e3e195b6-537c-48dc-b150-9d29f855ca7c",
-        "equipment_type": "Samsung-AUv1",
+        "id": "8d24d9ad-4eaf-455e-be2c-7fe818b4594e",
+        "test_item_id": "fe550079-e760-4fa2-b1eb-ba6ebd908ef1",
+        "equipment_type": "高輪ゲートウェイシティ_Samsung",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
         "response_data": {},
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T22:19:46.548669"
+        "created_at": "2025-09-08T14:40:29.717121",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "ab189a3b-9918-4ee1-b5ff-380146978e40",
-        "test_item_id": "de13e203-24cd-45a0-95c7-533400a2aac3",
-        "equipment_type": "Ericsson-RRU",
+        "id": "f2652d3c-3bcf-417a-b255-692c3f9f7467",
+        "test_item_id": "d463d2aa-398d-4dbb-9329-72a11d6ad1a4",
+        "equipment_type": "大岡山ラボ_Nokia",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
         "response_data": {},
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T21:19:46.548680"
+        "created_at": "2025-09-08T13:40:29.717132",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250906_201946_3",
-    "name": "検証バッチ_基地局スリープ機能_20250906_201946",
-    "created_at": "2025/09/06 20:19:46",
-    "completed_at": "2025/09/06 20:19:46",
+    "id": "batch_20250907_124029_3",
+    "name": "検証バッチ_基地局スリープ機能_20250907_124029",
+    "created_at": "2025/09/07 12:40:29",
+    "completed_at": "2025/09/07 12:40:29",
     "status": "completed",
     "test_items": [
       {
-        "id": "3850eb77-f473-4cdf-a66e-c7716b19cb0d",
+        "id": "35f5da34-5721-4023-be18-c1c2c52c29bc",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548747",
-        "updated_at": "2025-09-07T23:19:46.548747"
+        "created_at": "2025-09-08T15:40:29.717202",
+        "updated_at": "2025-09-08T15:40:29.717202"
       },
       {
-        "id": "fbb5544e-8436-486b-a4df-a30b9c791ecc",
+        "id": "97ee7fb2-3064-4f59-b983-8805a60e4a53",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548755",
-        "updated_at": "2025-09-07T23:19:46.548756"
+        "created_at": "2025-09-08T15:40:29.717210",
+        "updated_at": "2025-09-08T15:40:29.717210"
       },
       {
-        "id": "9aeacb1f-b3ed-460f-986e-ee0cfc384fc8",
+        "id": "c732bea2-4912-45a9-980f-3689c29d99b9",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548763",
-        "updated_at": "2025-09-07T23:19:46.548764"
+        "created_at": "2025-09-08T15:40:29.717218",
+        "updated_at": "2025-09-08T15:40:29.717218"
       }
     ],
     "results": [
       {
-        "id": "bafaab37-7a65-424a-b9bd-5fd8baad4146",
-        "test_item_id": "3850eb77-f473-4cdf-a66e-c7716b19cb0d",
-        "equipment_type": "Ericsson-MMU",
+        "id": "23040e38-a28c-4ebe-8603-2d58c5bbc81c",
+        "test_item_id": "35f5da34-5721-4023-be18-c1c2c52c29bc",
+        "equipment_type": "高輪ゲートウェイシティ_Ericsson",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
         "response_data": {},
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T23:19:46.548772"
+        "created_at": "2025-09-08T15:40:29.717227",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "048ed7c9-ca86-4b02-8980-c097b8c6e5b2",
-        "test_item_id": "fbb5544e-8436-486b-a4df-a30b9c791ecc",
-        "equipment_type": "Samsung-AUv1",
+        "id": "87e86400-14c1-4fb5-8671-114b9ca4ab53",
+        "test_item_id": "97ee7fb2-3064-4f59-b983-8805a60e4a53",
+        "equipment_type": "高輪ゲートウェイシティ_Samsung",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
         "response_data": {},
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T22:19:46.548784"
+        "created_at": "2025-09-08T14:40:29.717238",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "5f2d6cbc-28ab-41df-955b-431ea9e9cb23",
-        "test_item_id": "9aeacb1f-b3ed-460f-986e-ee0cfc384fc8",
-        "equipment_type": "Ericsson-RRU",
+        "id": "030db78a-7ad7-4801-bed8-d0fb0aac4fd8",
+        "test_item_id": "c732bea2-4912-45a9-980f-3689c29d99b9",
+        "equipment_type": "大岡山ラボ_Nokia",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
         "response_data": {},
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T21:19:46.548795"
+        "created_at": "2025-09-08T13:40:29.717250",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250905_191946_4",
-    "name": "検証バッチ_基地局スリープ機能_20250905_191946",
-    "created_at": "2025/09/05 19:19:46",
-    "completed_at": "2025/09/05 19:19:46",
+    "id": "batch_20250906_114029_4",
+    "name": "検証バッチ_基地局スリープ機能_20250906_114029",
+    "created_at": "2025/09/06 11:40:29",
+    "completed_at": "2025/09/06 11:40:29",
     "status": "completed",
     "test_items": [
       {
-        "id": "89fef9f2-bbd6-4192-bd5e-abe00acc35a4",
+        "id": "d7d0447a-66f0-43ca-9adf-cc1efeaa4612",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548860",
-        "updated_at": "2025-09-07T23:19:46.548861"
+        "created_at": "2025-09-08T15:40:29.717319",
+        "updated_at": "2025-09-08T15:40:29.717319"
       },
       {
-        "id": "b74ba78e-33d1-4f78-8835-545ed3630595",
+        "id": "a6061e75-5246-454d-8e6a-24289fc8b549",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548870",
-        "updated_at": "2025-09-07T23:19:46.548871"
+        "created_at": "2025-09-08T15:40:29.717327",
+        "updated_at": "2025-09-08T15:40:29.717328"
       },
       {
-        "id": "e3e982a0-0cbb-4387-87d8-eb85405ef1b4",
+        "id": "bf6f20a0-0fac-44d0-86bf-ddf4055ede88",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548879",
-        "updated_at": "2025-09-07T23:19:46.548879"
+        "created_at": "2025-09-08T15:40:29.717336",
+        "updated_at": "2025-09-08T15:40:29.717336"
       }
     ],
     "results": [
       {
-        "id": "4419aed8-0a96-4aa1-9612-862cafd9ef1a",
-        "test_item_id": "89fef9f2-bbd6-4192-bd5e-abe00acc35a4",
-        "equipment_type": "Ericsson-MMU",
+        "id": "a96bd533-5564-48d6-8715-0252ef8ccbc7",
+        "test_item_id": "d7d0447a-66f0-43ca-9adf-cc1efeaa4612",
+        "equipment_type": "高輪ゲートウェイシティ_Ericsson",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
         "response_data": {},
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T23:19:46.548888"
+        "created_at": "2025-09-08T15:40:29.717345",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "fffdde39-3c65-419c-83e7-2ac1be3826d1",
-        "test_item_id": "b74ba78e-33d1-4f78-8835-545ed3630595",
-        "equipment_type": "Samsung-AUv1",
+        "id": "3ecdf04c-732c-499c-a2bc-f766a182cfa5",
+        "test_item_id": "a6061e75-5246-454d-8e6a-24289fc8b549",
+        "equipment_type": "高輪ゲートウェイシティ_Samsung",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
         "response_data": {},
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T22:19:46.548898"
+        "created_at": "2025-09-08T14:40:29.717356",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "17625e9d-60bb-479b-8fd4-1d1d0f9e2a16",
-        "test_item_id": "e3e982a0-0cbb-4387-87d8-eb85405ef1b4",
-        "equipment_type": "Ericsson-RRU",
+        "id": "4e5e1158-0cad-4c8c-8374-417497d70a4e",
+        "test_item_id": "bf6f20a0-0fac-44d0-86bf-ddf4055ede88",
+        "equipment_type": "大岡山ラボ_Nokia",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
         "response_data": {},
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T21:19:46.548909"
+        "created_at": "2025-09-08T13:40:29.717367",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250905_181946_5",
-    "name": "検証バッチ_基地局スリープ機能_20250905_181946",
-    "created_at": "2025/09/05 18:19:46",
-    "completed_at": "2025/09/05 18:19:46",
+    "id": "batch_20250906_104029_5",
+    "name": "検証バッチ_基地局スリープ機能_20250906_104029",
+    "created_at": "2025/09/06 10:40:29",
+    "completed_at": "2025/09/06 10:40:29",
     "status": "completed",
     "test_items": [
       {
-        "id": "dd15cdb5-e8ee-48b1-9b20-cb5baef1abc5",
+        "id": "d61886d8-3535-4e44-9ffc-363e3d5bdcf4",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548975",
-        "updated_at": "2025-09-07T23:19:46.548975"
+        "created_at": "2025-09-08T15:40:29.717483",
+        "updated_at": "2025-09-08T15:40:29.717484"
       },
       {
-        "id": "616affbe-3fc5-4d4c-931b-71da5d0e77c8",
+        "id": "20051e4a-3234-4a5a-9662-56d6b3494d1a",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548983",
-        "updated_at": "2025-09-07T23:19:46.548983"
+        "created_at": "2025-09-08T15:40:29.717492",
+        "updated_at": "2025-09-08T15:40:29.717492"
       },
       {
-        "id": "b24eb819-6585-4b98-b3d6-bbef317046ce",
+        "id": "b0d9c916-b73f-4d42-bbe3-9ab6c95988c0",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.548991",
-        "updated_at": "2025-09-07T23:19:46.548991"
+        "created_at": "2025-09-08T15:40:29.717501",
+        "updated_at": "2025-09-08T15:40:29.717501"
       }
     ],
     "results": [
       {
-        "id": "10f0def5-b5af-4975-ba51-8fd30ce1e110",
-        "test_item_id": "dd15cdb5-e8ee-48b1-9b20-cb5baef1abc5",
-        "equipment_type": "Ericsson-MMU",
+        "id": "5d245926-3c6e-44a1-81fa-a5fb85a7c83f",
+        "test_item_id": "d61886d8-3535-4e44-9ffc-363e3d5bdcf4",
+        "equipment_type": "高輪ゲートウェイシティ_Ericsson",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
         "response_data": {},
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T23:19:46.549002"
+        "created_at": "2025-09-08T15:40:29.717510",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "9ad88be4-5438-4af8-adff-6b03f3e10b64",
-        "test_item_id": "616affbe-3fc5-4d4c-931b-71da5d0e77c8",
-        "equipment_type": "Samsung-AUv1",
+        "id": "1ceb7d36-e169-42ff-9c80-e8e5db791627",
+        "test_item_id": "20051e4a-3234-4a5a-9662-56d6b3494d1a",
+        "equipment_type": "高輪ゲートウェイシティ_Samsung",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
         "response_data": {},
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T22:19:46.549012"
+        "created_at": "2025-09-08T14:40:29.717522",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "903998af-bfd0-4acb-834b-51ba818e65ad",
-        "test_item_id": "b24eb819-6585-4b98-b3d6-bbef317046ce",
-        "equipment_type": "Ericsson-RRU",
+        "id": "bbc29413-e11b-41f2-8b3f-727b89fd4dc5",
+        "test_item_id": "b0d9c916-b73f-4d42-bbe3-9ab6c95988c0",
+        "equipment_type": "大岡山ラボ_Nokia",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
         "response_data": {},
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T21:19:46.549023"
+        "created_at": "2025-09-08T13:40:29.717534",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250904_171946_6",
-    "name": "検証バッチ_基地局スリープ機能_20250904_171946",
-    "created_at": "2025/09/04 17:19:46",
-    "completed_at": "2025/09/04 17:19:46",
+    "id": "batch_20250905_094029_6",
+    "name": "検証バッチ_基地局スリープ機能_20250905_094029",
+    "created_at": "2025/09/05 09:40:29",
+    "completed_at": "2025/09/05 09:40:29",
     "status": "failed",
     "test_items": [
       {
-        "id": "151184c2-9ffd-4136-ab04-04bde0ef5dd8",
+        "id": "24adb69d-b9a0-461a-9ceb-d5efa81d5a45",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549084",
-        "updated_at": "2025-09-07T23:19:46.549084"
+        "created_at": "2025-09-08T15:40:29.717607",
+        "updated_at": "2025-09-08T15:40:29.717607"
       },
       {
-        "id": "0bd0d7f0-092d-4a46-9a70-9bcd4a6bf136",
+        "id": "61a1d687-441b-41fe-943a-556ff4b5e1c6",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549093",
-        "updated_at": "2025-09-07T23:19:46.549093"
+        "created_at": "2025-09-08T15:40:29.717615",
+        "updated_at": "2025-09-08T15:40:29.717616"
       },
       {
-        "id": "90e0afa9-6cae-42f3-b1f2-580c87fde918",
+        "id": "1fd9ef11-987a-4b89-b290-230cf3616144",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549101",
-        "updated_at": "2025-09-07T23:19:46.549101"
+        "created_at": "2025-09-08T15:40:29.717624",
+        "updated_at": "2025-09-08T15:40:29.717624"
       }
     ],
     "results": [],
@@ -584,620 +683,743 @@
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250904_161946_7",
-    "name": "検証バッチ_基地局スリープ機能_20250904_161946",
-    "created_at": "2025/09/04 16:19:46",
-    "completed_at": "2025/09/04 16:19:46",
+    "id": "batch_20250905_084029_7",
+    "name": "検証バッチ_基地局スリープ機能_20250905_084029",
+    "created_at": "2025/09/05 08:40:29",
+    "completed_at": "2025/09/05 08:40:29",
     "status": "completed",
     "test_items": [
       {
-        "id": "6cc0d985-c3ec-44ab-920a-49c3974d9c0b",
+        "id": "09ae3470-9c44-4c52-894e-eb70916a17c6",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549186",
-        "updated_at": "2025-09-07T23:19:46.549186"
+        "created_at": "2025-09-08T15:40:29.717713",
+        "updated_at": "2025-09-08T15:40:29.717713"
       },
       {
-        "id": "2abe8aa5-0458-4dd6-9676-80d6e11d539b",
+        "id": "fc991b6a-d207-417a-b9c1-eeb9be0081c8",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549194",
-        "updated_at": "2025-09-07T23:19:46.549194"
+        "created_at": "2025-09-08T15:40:29.717722",
+        "updated_at": "2025-09-08T15:40:29.717722"
       },
       {
-        "id": "5a50f82b-fb82-48ea-9916-8e6540fcd0b6",
+        "id": "c317b470-7081-4d1f-ae9b-b212c10d68fd",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549202",
-        "updated_at": "2025-09-07T23:19:46.549202"
+        "created_at": "2025-09-08T15:40:29.717730",
+        "updated_at": "2025-09-08T15:40:29.717730"
       }
     ],
     "results": [
       {
-        "id": "16d725ed-5797-4724-9036-8dd387858b6e",
-        "test_item_id": "6cc0d985-c3ec-44ab-920a-49c3974d9c0b",
-        "equipment_type": "Ericsson-MMU",
+        "id": "01d7fbff-bcf3-46fc-b114-4508e59d2211",
+        "test_item_id": "09ae3470-9c44-4c52-894e-eb70916a17c6",
+        "equipment_type": "高輪ゲートウェイシティ_Ericsson",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
         "response_data": {},
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T23:19:46.549212"
+        "created_at": "2025-09-08T15:40:29.717740",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "0b4f1e94-1f6a-4363-9970-0fcb0a53a6c2",
-        "test_item_id": "2abe8aa5-0458-4dd6-9676-80d6e11d539b",
-        "equipment_type": "Samsung-AUv1",
+        "id": "54380fe2-22ae-46d2-b2b6-cc5ee358d304",
+        "test_item_id": "fc991b6a-d207-417a-b9c1-eeb9be0081c8",
+        "equipment_type": "高輪ゲートウェイシティ_Samsung",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
         "response_data": {},
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T22:19:46.549223"
+        "created_at": "2025-09-08T14:40:29.717752",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "d7f567c5-b888-4388-961f-33a4f5c04dc0",
-        "test_item_id": "5a50f82b-fb82-48ea-9916-8e6540fcd0b6",
-        "equipment_type": "Ericsson-RRU",
+        "id": "82ef1ed0-5fb3-4db0-9f0a-561bfb6f6281",
+        "test_item_id": "c317b470-7081-4d1f-ae9b-b212c10d68fd",
+        "equipment_type": "大岡山ラボ_Nokia",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
         "response_data": {},
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T21:19:46.549234"
+        "created_at": "2025-09-08T13:40:29.717763",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250903_151946_8",
-    "name": "検証バッチ_基地局スリープ機能_20250903_151946",
-    "created_at": "2025/09/03 15:19:46",
-    "completed_at": "2025/09/03 15:19:46",
+    "id": "batch_20250904_074029_8",
+    "name": "検証バッチ_基地局スリープ機能_20250904_074029",
+    "created_at": "2025/09/04 07:40:29",
+    "completed_at": "2025/09/04 07:40:29",
     "status": "completed",
     "test_items": [
       {
-        "id": "f48d7e6f-fe93-4ab8-a9cf-499fd26312f9",
+        "id": "ef45e076-ccc5-41de-99b7-07bd54e19ccf",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549294",
-        "updated_at": "2025-09-07T23:19:46.549295"
+        "created_at": "2025-09-08T15:40:29.717831",
+        "updated_at": "2025-09-08T15:40:29.717831"
       },
       {
-        "id": "8bfa80be-928e-445d-a9eb-44acf3169244",
+        "id": "79320065-8192-4b6d-bd78-38cb1576b69d",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549303",
-        "updated_at": "2025-09-07T23:19:46.549303"
+        "created_at": "2025-09-08T15:40:29.717839",
+        "updated_at": "2025-09-08T15:40:29.717839"
       },
       {
-        "id": "eb3abb00-60c1-4527-8014-f27dfb6ed3e0",
+        "id": "bd816b1e-1152-42b7-872c-279041c45677",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549311",
-        "updated_at": "2025-09-07T23:19:46.549311"
+        "created_at": "2025-09-08T15:40:29.717847",
+        "updated_at": "2025-09-08T15:40:29.717847"
       }
     ],
     "results": [
       {
-        "id": "a0924a81-b06b-4a92-a9d6-f01ac6df522c",
-        "test_item_id": "f48d7e6f-fe93-4ab8-a9cf-499fd26312f9",
-        "equipment_type": "Ericsson-MMU",
+        "id": "c9858acf-d80d-43fe-b423-1a0ee8702512",
+        "test_item_id": "ef45e076-ccc5-41de-99b7-07bd54e19ccf",
+        "equipment_type": "高輪ゲートウェイシティ_Ericsson",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
         "response_data": {},
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T23:19:46.549319"
+        "created_at": "2025-09-08T15:40:29.717856",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "a891fd94-3475-44c0-a409-9b4d5f1e411e",
-        "test_item_id": "8bfa80be-928e-445d-a9eb-44acf3169244",
-        "equipment_type": "Samsung-AUv1",
+        "id": "6b942adf-ce79-4c74-ae27-1172648069d6",
+        "test_item_id": "79320065-8192-4b6d-bd78-38cb1576b69d",
+        "equipment_type": "高輪ゲートウェイシティ_Samsung",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
         "response_data": {},
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T22:19:46.549330"
+        "created_at": "2025-09-08T14:40:29.717867",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "264085db-90a1-4e60-a895-9e02a11f7f20",
-        "test_item_id": "eb3abb00-60c1-4527-8014-f27dfb6ed3e0",
-        "equipment_type": "Ericsson-RRU",
+        "id": "5f4bc93a-cbb8-44e4-a170-6c304550b8a3",
+        "test_item_id": "bd816b1e-1152-42b7-872c-279041c45677",
+        "equipment_type": "大岡山ラボ_Nokia",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
         "response_data": {},
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T21:19:46.549341"
+        "created_at": "2025-09-08T13:40:29.717879",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250903_141946_9",
-    "name": "検証バッチ_基地局スリープ機能_20250903_141946",
-    "created_at": "2025/09/03 14:19:46",
-    "completed_at": "2025/09/03 14:19:46",
+    "id": "batch_20250904_064029_9",
+    "name": "検証バッチ_基地局スリープ機能_20250904_064029",
+    "created_at": "2025/09/04 06:40:29",
+    "completed_at": "2025/09/04 06:40:29",
     "status": "completed",
     "test_items": [
       {
-        "id": "80f5bded-6079-471f-a3a1-797d6cf1ada5",
+        "id": "1d66c6be-079e-4907-9770-22017dfc7f79",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549406",
-        "updated_at": "2025-09-07T23:19:46.549407"
+        "created_at": "2025-09-08T15:40:29.717946",
+        "updated_at": "2025-09-08T15:40:29.717947"
       },
       {
-        "id": "93396693-4a5b-4c7d-b839-8e1ee5ea79d9",
+        "id": "65edf48a-645f-43aa-aedc-45da39e6bb4a",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549414",
-        "updated_at": "2025-09-07T23:19:46.549415"
+        "created_at": "2025-09-08T15:40:29.717959",
+        "updated_at": "2025-09-08T15:40:29.717959"
       },
       {
-        "id": "4a22a903-4bd6-4db3-a828-9899f03386bc",
+        "id": "63e93ba5-9004-48c0-969b-7dd34463a2a7",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549422",
-        "updated_at": "2025-09-07T23:19:46.549423"
+        "created_at": "2025-09-08T15:40:29.717967",
+        "updated_at": "2025-09-08T15:40:29.717967"
       }
     ],
     "results": [
       {
-        "id": "8464d992-132e-4214-97aa-43c72be0f352",
-        "test_item_id": "80f5bded-6079-471f-a3a1-797d6cf1ada5",
-        "equipment_type": "Ericsson-MMU",
+        "id": "6fa7ced4-9e58-4251-a763-2f31dc23238b",
+        "test_item_id": "1d66c6be-079e-4907-9770-22017dfc7f79",
+        "equipment_type": "高輪ゲートウェイシティ_Ericsson",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
         "response_data": {},
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T23:19:46.549431"
+        "created_at": "2025-09-08T15:40:29.717976",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "4d59e7ac-93a0-444a-b769-cd39d8e74059",
-        "test_item_id": "93396693-4a5b-4c7d-b839-8e1ee5ea79d9",
-        "equipment_type": "Samsung-AUv1",
+        "id": "30f74d59-7901-474a-9dea-b05e1ce5f541",
+        "test_item_id": "65edf48a-645f-43aa-aedc-45da39e6bb4a",
+        "equipment_type": "高輪ゲートウェイシティ_Samsung",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
         "response_data": {},
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T22:19:46.549442"
+        "created_at": "2025-09-08T14:40:29.717988",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "6b36874a-578b-4c8e-974f-2b2468041e1b",
-        "test_item_id": "4a22a903-4bd6-4db3-a828-9899f03386bc",
-        "equipment_type": "Ericsson-RRU",
+        "id": "d06efe41-e60a-4dc7-adab-998f8d91b6be",
+        "test_item_id": "63e93ba5-9004-48c0-969b-7dd34463a2a7",
+        "equipment_type": "大岡山ラボ_Nokia",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
         "response_data": {},
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T21:19:46.549452"
+        "created_at": "2025-09-08T13:40:29.717999",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250902_131946_10",
-    "name": "検証バッチ_基地局スリープ機能_20250902_131946",
-    "created_at": "2025/09/02 13:19:46",
-    "completed_at": "2025/09/02 13:19:46",
+    "id": "batch_20250903_054029_10",
+    "name": "検証バッチ_基地局スリープ機能_20250903_054029",
+    "created_at": "2025/09/03 05:40:29",
+    "completed_at": "2025/09/03 05:40:29",
     "status": "completed",
     "test_items": [
       {
-        "id": "06701a74-69ac-49f9-8a14-6af7929f6a14",
+        "id": "3ec29a56-a71d-4adf-9012-c63e44dc8065",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549629",
-        "updated_at": "2025-09-07T23:19:46.549629"
+        "created_at": "2025-09-08T15:40:29.718066",
+        "updated_at": "2025-09-08T15:40:29.718066"
       },
       {
-        "id": "b78117ee-c5ee-4d56-8e5f-ea81d0fa597b",
+        "id": "edfc5501-b8ad-4a23-b7d1-240e0a825a8a",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549638",
-        "updated_at": "2025-09-07T23:19:46.549638"
+        "created_at": "2025-09-08T15:40:29.718074",
+        "updated_at": "2025-09-08T15:40:29.718075"
       },
       {
-        "id": "f8853780-7ace-4054-bb3f-da6a6557bcd2",
+        "id": "df5cb82c-c701-474d-b4a6-a3f6027e0e6f",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549646",
-        "updated_at": "2025-09-07T23:19:46.549646"
+        "created_at": "2025-09-08T15:40:29.718082",
+        "updated_at": "2025-09-08T15:40:29.718083"
       }
     ],
     "results": [
       {
-        "id": "765c65ef-ce8a-4e55-9edb-d8fa22a1b042",
-        "test_item_id": "06701a74-69ac-49f9-8a14-6af7929f6a14",
-        "equipment_type": "Ericsson-MMU",
+        "id": "3a07dd56-47de-40ef-b177-11f28490ce5f",
+        "test_item_id": "3ec29a56-a71d-4adf-9012-c63e44dc8065",
+        "equipment_type": "高輪ゲートウェイシティ_Ericsson",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
         "response_data": {},
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T23:19:46.549657"
+        "created_at": "2025-09-08T15:40:29.718091",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "1e68834d-efe1-4eae-99d3-d22bbf00d61d",
-        "test_item_id": "b78117ee-c5ee-4d56-8e5f-ea81d0fa597b",
-        "equipment_type": "Samsung-AUv1",
+        "id": "a9dfd73b-6e06-49ef-b394-269a1c26c843",
+        "test_item_id": "edfc5501-b8ad-4a23-b7d1-240e0a825a8a",
+        "equipment_type": "高輪ゲートウェイシティ_Samsung",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
         "response_data": {},
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T22:19:46.549668"
+        "created_at": "2025-09-08T14:40:29.718102",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "c832694d-8a41-4940-8062-71a6f154d4c3",
-        "test_item_id": "f8853780-7ace-4054-bb3f-da6a6557bcd2",
-        "equipment_type": "Ericsson-RRU",
+        "id": "8ea3f553-5629-4205-8567-1b05aa42aeaa",
+        "test_item_id": "df5cb82c-c701-474d-b4a6-a3f6027e0e6f",
+        "equipment_type": "大岡山ラボ_Nokia",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
         "response_data": {},
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T21:19:46.549679"
+        "created_at": "2025-09-08T13:40:29.718113",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250902_121946_11",
-    "name": "検証バッチ_基地局スリープ機能_20250902_121946",
-    "created_at": "2025/09/02 12:19:46",
-    "completed_at": "2025/09/02 12:19:46",
+    "id": "batch_20250903_044029_11",
+    "name": "検証バッチ_基地局スリープ機能_20250903_044029",
+    "created_at": "2025/09/03 04:40:29",
+    "completed_at": "2025/09/03 04:40:29",
     "status": "completed",
     "test_items": [
       {
-        "id": "46f23472-27ab-47b4-9267-d6ac98138083",
+        "id": "3fa55871-8dad-488f-a462-5673e8113791",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549751",
-        "updated_at": "2025-09-07T23:19:46.549751"
+        "created_at": "2025-09-08T15:40:29.718179",
+        "updated_at": "2025-09-08T15:40:29.718179"
       },
       {
-        "id": "a4cdea55-5c46-4fbc-af53-0f8275605590",
+        "id": "4fca1d94-4b43-4207-b1f3-a3d6130a1cbb",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549759",
-        "updated_at": "2025-09-07T23:19:46.549760"
+        "created_at": "2025-09-08T15:40:29.718187",
+        "updated_at": "2025-09-08T15:40:29.718187"
       },
       {
-        "id": "30b49902-f366-4a47-a351-a1296d7e06c9",
+        "id": "2e11f6e4-5192-4b7b-8d4f-36f7f5310ea0",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549767",
-        "updated_at": "2025-09-07T23:19:46.549767"
+        "created_at": "2025-09-08T15:40:29.718194",
+        "updated_at": "2025-09-08T15:40:29.718195"
       }
     ],
     "results": [
       {
-        "id": "51d0ceff-b4dc-4cb0-8d0a-ac3930de8ab2",
-        "test_item_id": "46f23472-27ab-47b4-9267-d6ac98138083",
-        "equipment_type": "Ericsson-MMU",
+        "id": "713b9d7c-13e8-4531-b13d-f7582918769d",
+        "test_item_id": "3fa55871-8dad-488f-a462-5673e8113791",
+        "equipment_type": "高輪ゲートウェイシティ_Ericsson",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
         "response_data": {},
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T23:19:46.549776"
+        "created_at": "2025-09-08T15:40:29.718203",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "532336e9-b7de-4659-8dfc-8caacbb1c346",
-        "test_item_id": "a4cdea55-5c46-4fbc-af53-0f8275605590",
-        "equipment_type": "Samsung-AUv1",
+        "id": "866a87a6-9ffa-400f-9e4b-0c7f6d2f640c",
+        "test_item_id": "4fca1d94-4b43-4207-b1f3-a3d6130a1cbb",
+        "equipment_type": "高輪ゲートウェイシティ_Samsung",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
         "response_data": {},
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T22:19:46.549786"
+        "created_at": "2025-09-08T14:40:29.718214",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "936ec6b6-4e46-4979-8bd7-86d48b5cff1a",
-        "test_item_id": "30b49902-f366-4a47-a351-a1296d7e06c9",
-        "equipment_type": "Ericsson-RRU",
+        "id": "d944f471-be68-4731-a975-297c126ce14b",
+        "test_item_id": "2e11f6e4-5192-4b7b-8d4f-36f7f5310ea0",
+        "equipment_type": "大岡山ラボ_Nokia",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
         "response_data": {},
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T21:19:46.549797"
+        "created_at": "2025-09-08T13:40:29.718225",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250901_111946_12",
-    "name": "検証バッチ_基地局スリープ機能_20250901_111946",
-    "created_at": "2025/09/01 11:19:46",
-    "completed_at": "2025/09/01 11:19:46",
+    "id": "batch_20250902_034029_12",
+    "name": "検証バッチ_基地局スリープ機能_20250902_034029",
+    "created_at": "2025/09/02 03:40:29",
+    "completed_at": "2025/09/02 03:40:29",
     "status": "completed",
     "test_items": [
       {
-        "id": "1812ffae-0e7f-4f4c-a704-eceb3f472f1f",
+        "id": "d3ee9db2-39a4-43be-83a7-65737bff1aa1",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549860",
-        "updated_at": "2025-09-07T23:19:46.549860"
+        "created_at": "2025-09-08T15:40:29.718294",
+        "updated_at": "2025-09-08T15:40:29.718294"
       },
       {
-        "id": "296bca47-fc49-4635-96e4-d99dd4ed3fa2",
+        "id": "6ed3799c-b90c-4323-b99d-5a83ada8353a",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549868",
-        "updated_at": "2025-09-07T23:19:46.549868"
+        "created_at": "2025-09-08T15:40:29.718302",
+        "updated_at": "2025-09-08T15:40:29.718303"
       },
       {
-        "id": "a50abd2a-266d-48cb-a5b7-a6aa5ecc7c39",
+        "id": "c27c6929-17d9-4196-96b4-6c82e03f1dde",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549876",
-        "updated_at": "2025-09-07T23:19:46.549876"
+        "created_at": "2025-09-08T15:40:29.718310",
+        "updated_at": "2025-09-08T15:40:29.718310"
       }
     ],
     "results": [
       {
-        "id": "d1bedcde-22dc-42fc-a796-b8131f5909ba",
-        "test_item_id": "1812ffae-0e7f-4f4c-a704-eceb3f472f1f",
-        "equipment_type": "Ericsson-MMU",
+        "id": "efb9cc9e-1d61-4573-a043-fbc53bd6203f",
+        "test_item_id": "d3ee9db2-39a4-43be-83a7-65737bff1aa1",
+        "equipment_type": "高輪ゲートウェイシティ_Ericsson",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
         "response_data": {},
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T23:19:46.549885"
+        "created_at": "2025-09-08T15:40:29.718318",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "c3dc0de3-55b5-4471-b8f9-38da5a4dbd93",
-        "test_item_id": "296bca47-fc49-4635-96e4-d99dd4ed3fa2",
-        "equipment_type": "Samsung-AUv1",
+        "id": "51b44dd4-57d1-4a5b-94b7-8cd489be4a61",
+        "test_item_id": "6ed3799c-b90c-4323-b99d-5a83ada8353a",
+        "equipment_type": "高輪ゲートウェイシティ_Samsung",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
         "response_data": {},
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T22:19:46.549895"
+        "created_at": "2025-09-08T14:40:29.718329",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "b9a325ee-ba5f-49dd-84e3-db59769ca9a7",
-        "test_item_id": "a50abd2a-266d-48cb-a5b7-a6aa5ecc7c39",
-        "equipment_type": "Ericsson-RRU",
+        "id": "a586406a-bafe-422e-bf6b-68a2bb09d500",
+        "test_item_id": "c27c6929-17d9-4196-96b4-6c82e03f1dde",
+        "equipment_type": "大岡山ラボ_Nokia",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
         "response_data": {},
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T21:19:46.549907"
+        "created_at": "2025-09-08T13:40:29.718342",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250901_101946_13",
-    "name": "検証バッチ_基地局スリープ機能_20250901_101946",
-    "created_at": "2025/09/01 10:19:46",
-    "completed_at": "2025/09/01 10:19:46",
+    "id": "batch_20250902_024029_13",
+    "name": "検証バッチ_基地局スリープ機能_20250902_024029",
+    "created_at": "2025/09/02 02:40:29",
+    "completed_at": "2025/09/02 02:40:29",
     "status": "failed",
     "test_items": [
       {
-        "id": "e8722028-025b-4863-a891-899db0ae1c81",
+        "id": "de1dd934-1782-499b-9137-f936f9159341",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549967",
-        "updated_at": "2025-09-07T23:19:46.549967"
+        "created_at": "2025-09-08T15:40:29.718408",
+        "updated_at": "2025-09-08T15:40:29.718408"
       },
       {
-        "id": "35a9e417-63f3-43ba-b489-25a2b422c8bc",
+        "id": "1ff275c1-c2b1-4556-be2d-250589e5dbd6",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549975",
-        "updated_at": "2025-09-07T23:19:46.549975"
+        "created_at": "2025-09-08T15:40:29.718416",
+        "updated_at": "2025-09-08T15:40:29.718417"
       },
       {
-        "id": "1deef623-1973-4d86-91fe-4dfbf4cc3da2",
+        "id": "5875a8ea-4d6b-414c-ad8a-0dc4673892d7",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.549983",
-        "updated_at": "2025-09-07T23:19:46.549983"
+        "created_at": "2025-09-08T15:40:29.718424",
+        "updated_at": "2025-09-08T15:40:29.718424"
       }
     ],
     "results": [],
@@ -1205,94 +1427,115 @@
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250831_091946_14",
-    "name": "検証バッチ_基地局スリープ機能_20250831_091946",
-    "created_at": "2025/08/31 09:19:46",
-    "completed_at": "2025/08/31 09:19:46",
+    "id": "batch_20250901_014029_14",
+    "name": "検証バッチ_基地局スリープ機能_20250901_014029",
+    "created_at": "2025/09/01 01:40:29",
+    "completed_at": "2025/09/01 01:40:29",
     "status": "completed",
     "test_items": [
       {
-        "id": "d886e112-0623-4ec5-b78f-328330236e88",
+        "id": "541f8fbf-dee1-4c8e-bf46-eef8a29562ef",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
           "condition_text": "CMデータの取得成功",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-MMU"
+            "高輪ゲートウェイシティ_Ericsson"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.550069",
-        "updated_at": "2025-09-07T23:19:46.550069"
+        "created_at": "2025-09-08T15:40:29.718507",
+        "updated_at": "2025-09-08T15:40:29.718507"
       },
       {
-        "id": "b8013cab-87ce-4f57-8cee-aa967e401889",
+        "id": "c0c61a68-ab03-424b-a73f-468afe85fd82",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
           "condition_text": "スリープモード移行確認",
-          "expected_count": 1,
           "threshold_values": {},
           "equipment_types": [
-            "Samsung-AUv1"
+            "高輪ゲートウェイシティ_Samsung"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.550077",
-        "updated_at": "2025-09-07T23:19:46.550077"
+        "created_at": "2025-09-08T15:40:29.718515",
+        "updated_at": "2025-09-08T15:40:29.718515"
       },
       {
-        "id": "1fc8818c-5919-41f7-8812-8ac1881252ae",
+        "id": "4a045bb4-843e-468f-8325-29bd5b97f7b0",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
           "condition_text": "アクセス制御性能測定",
-          "expected_count": 5,
           "threshold_values": {},
           "equipment_types": [
-            "Ericsson-RRU"
+            "大岡山ラボ_Nokia"
           ]
         },
-        "created_at": "2025-09-07T23:19:46.550086",
-        "updated_at": "2025-09-07T23:19:46.550087"
+        "created_at": "2025-09-08T15:40:29.718525",
+        "updated_at": "2025-09-08T15:40:29.718525"
       }
     ],
     "results": [
       {
-        "id": "030c6b53-28a0-4840-8a6d-e600e1a851fb",
-        "test_item_id": "d886e112-0623-4ec5-b78f-328330236e88",
-        "equipment_type": "Ericsson-MMU",
+        "id": "98452aa7-c9ba-4ea8-890e-dd89588cbae6",
+        "test_item_id": "541f8fbf-dee1-4c8e-bf46-eef8a29562ef",
+        "equipment_type": "高輪ゲートウェイシティ_Ericsson",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
         "response_data": {},
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T23:19:46.550095"
+        "created_at": "2025-09-08T15:40:29.718534",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "4ebfb0de-f098-4f8f-b58a-270b03960e8c",
-        "test_item_id": "b8013cab-87ce-4f57-8cee-aa967e401889",
-        "equipment_type": "Samsung-AUv1",
+        "id": "ae967b44-684a-4aae-a383-363e85f4e678",
+        "test_item_id": "c0c61a68-ab03-424b-a73f-468afe85fd82",
+        "equipment_type": "高輪ゲートウェイシティ_Samsung",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
         "response_data": {},
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T22:19:46.550106"
+        "created_at": "2025-09-08T14:40:29.718547",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       },
       {
-        "id": "92150aac-35b3-47c3-82ab-de756b6d2167",
-        "test_item_id": "1fc8818c-5919-41f7-8812-8ac1881252ae",
-        "equipment_type": "Ericsson-RRU",
+        "id": "801463dc-dddc-4798-908b-b0f7a8ed557e",
+        "test_item_id": "4a045bb4-843e-468f-8325-29bd5b97f7b0",
+        "equipment_type": "大岡山ラボ_Nokia",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
         "response_data": {},
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T21:19:46.550116"
+        "created_at": "2025-09-08T13:40:29.718558",
+        "review_status": "not_required",
+        "reviewer_name": "",
+        "review_comments": "",
+        "engineer_decision": null,
+        "reviewed_at": null,
+        "decision_reason": "",
+        "validation_feedback": "",
+        "item_feedback": ""
       }
     ],
     "test_count": 3,

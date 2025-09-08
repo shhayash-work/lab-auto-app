@@ -32,7 +32,6 @@ def update_vector_db_with_realistic_data():
 試験ブロック: {item.get('test_block', '')}
 カテゴリ: {item.get('category', '')}
 検証条件: {item.get('condition', {}).get('condition_text', '')}
-期待件数: {item.get('condition', {}).get('expected_count', 0)}
 対象設備: {', '.join(item.get('condition', {}).get('equipment_types', []))}
 バッチ名: {batch_name}
 """

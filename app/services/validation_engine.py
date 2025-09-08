@@ -21,9 +21,10 @@ import time
 
 from app.models.validation import (
     TestItem, ValidationResult, ValidationBatch, ValidationStatus, 
-    TestResult, EquipmentType
+    TestResult, EquipmentType, ReviewStatus
 )
 from app.services.llm_service import get_llm_service
+from app.services.review_service import get_review_service
 from mock_equipment.simplified_equipment_simulator import get_simplified_mock_equipment_manager
 
 logger = logging.getLogger(__name__)
@@ -34,6 +35,7 @@ class ValidationEngine:
     def __init__(self, llm_provider: str = "ollama"):
         self.llm_service = get_llm_service(llm_provider)
         self.mock_equipment = get_simplified_mock_equipment_manager()
+        self.review_service = get_review_service()
         self.max_workers = 3  # 並列実行数
     
     def execute_test_item(self, test_item: TestItem, equipment_type: EquipmentType) -> ValidationResult:
@@ -85,7 +87,12 @@ class ValidationEngine:
                 if issues:
                     error_message = '; '.join(issues)
             
-            return ValidationResult(
+            # レビューステータスを設定
+            review_status = ReviewStatus.NOT_REQUIRED
+            if test_result in [TestResult.FAIL, TestResult.NEEDS_CHECK]:
+                review_status = ReviewStatus.NEEDS_REVIEW
+            
+            validation_result = ValidationResult(
                 id=result_id,
                 test_item_id=test_item.id,
                 equipment_type=equipment_type,
@@ -94,8 +101,11 @@ class ValidationEngine:
                 response_data=equipment_response,
                 execution_time=execution_time,
                 error_message=error_message,
-                confidence=confidence
+                confidence=confidence,
+                review_status=review_status
             )
+            
+            return validation_result
             
         except Exception as e:
             execution_time = time.time() - start_time
@@ -292,7 +302,7 @@ class ValidationEngine:
         equipment_stats = {}
         
         for result in batch.results:
-            eq_type = result.equipment_type.value
+            eq_type = result.equipment_type.value if hasattr(result.equipment_type, 'value') else str(result.equipment_type)
             if eq_type not in equipment_stats:
                 equipment_stats[eq_type] = {
                     "total": 0,
