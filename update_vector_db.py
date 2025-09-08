@@ -56,3 +56,4 @@ def update_vector_db_with_realistic_data():
 
 if __name__ == "__main__":
     update_vector_db_with_realistic_data()
+

@@ -290,7 +290,7 @@ def render_dashboard():
     st.markdown("<p style='color: #666; font-size: 14px; margin-bottom: 16px;'>過去に実行された検証バッチの履歴と実行結果を確認できます</p>", unsafe_allow_html=True)
     
     # タブで分類表示
-    tab1, tab2, tab3 = st.tabs(["最新検証結果", "成功", "失敗"])
+    tab1, tab2, tab3, tab4 = st.tabs(["最新", "成功", "失敗", "実行中"])
     
     with tab1:
         st.write("**最新の10件を表示**")
@@ -303,6 +303,10 @@ def render_dashboard():
     with tab3:
         st.write("**最新の検証が失敗したもの10件**")
         render_recent_batches("failed", 10)
+    
+    with tab4:
+        st.write("**現在実行中の検証バッチ**")
+        render_recent_batches("running", 10)
     
     # グラフ表示（下に移動）
     st.markdown("<div class='custom-header'>検証結果分析</div>", unsafe_allow_html=True)
@@ -419,6 +423,8 @@ def render_recent_batches(filter_type: str, limit: int):
         if filter_type == "success" and status != "成功":
             continue
         elif filter_type == "failed" and status != "失敗":
+            continue
+        elif filter_type == "running" and status != "実行中":
             continue
         
         # 実行時刻を変換
@@ -1043,7 +1049,6 @@ def render_test_items_table():
                             expected_count=st.session_state[f"edit_count_{i}"],
                             equipment_types=[EquipmentType(eq) for eq in st.session_state[f"edit_equipment_{i}"]]
                         ),
-                        scenarios=[s.strip() for s in st.session_state[f"edit_scenarios_{i}"].split('\n') if s.strip()],
                         created_at=item.created_at,
                         updated_at=datetime.now()
                     )

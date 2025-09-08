@@ -1,13 +1,13 @@
 [
   {
-    "id": "batch_20250907_142731_0",
-    "name": "検証バッチ_基地局スリープ機能_20250907_142731",
-    "created_at": "2025/09/07 14:27:31",
+    "id": "batch_20250907_231946_0",
+    "name": "検証バッチ_基地局スリープ機能_20250907_231946",
+    "created_at": "2025/09/07 23:19:46",
     "completed_at": null,
     "status": "running",
     "test_items": [
       {
-        "id": "c3991459-a8e0-4f01-860a-6c7d1c977116",
+        "id": "83cbaeb2-a7d1-4203-b0ba-e0a82d3a0b6f",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -18,11 +18,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.142653",
-        "updated_at": "2025-09-07T14:27:31.142654"
+        "created_at": "2025-09-07T23:19:46.548308",
+        "updated_at": "2025-09-07T23:19:46.548308"
       },
       {
-        "id": "b5d0fce0-9ee0-4cdd-a1ea-94397be1ce6b",
+        "id": "a71f703e-3b1f-44e5-a98e-2e6eea3b5b96",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -33,11 +33,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.142670",
-        "updated_at": "2025-09-07T14:27:31.142670"
+        "created_at": "2025-09-07T23:19:46.548325",
+        "updated_at": "2025-09-07T23:19:46.548325"
       },
       {
-        "id": "55ee2f41-7a9b-4a8d-8554-83d80f376b72",
+        "id": "aa20ada2-3a4b-4bfb-8a99-d3677d1abd04",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -48,8 +48,8 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.142681",
-        "updated_at": "2025-09-07T14:27:31.142681"
+        "created_at": "2025-09-07T23:19:46.548336",
+        "updated_at": "2025-09-07T23:19:46.548336"
       }
     ],
     "results": [],
@@ -57,14 +57,14 @@
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250907_132731_1",
-    "name": "検証バッチ_基地局スリープ機能_20250907_132731",
-    "created_at": "2025/09/07 13:27:31",
-    "completed_at": "2025/09/07 13:27:31",
+    "id": "batch_20250907_221946_1",
+    "name": "検証バッチ_基地局スリープ機能_20250907_221946",
+    "created_at": "2025/09/07 22:19:46",
+    "completed_at": "2025/09/07 22:19:46",
     "status": "completed",
     "test_items": [
       {
-        "id": "c9cb17c7-3c28-4833-ad9c-d4fdaa9ca42c",
+        "id": "0b967a1e-40c0-4218-beba-930ee20e905b",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -75,11 +75,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.142861",
-        "updated_at": "2025-09-07T14:27:31.142862"
+        "created_at": "2025-09-07T23:19:46.548502",
+        "updated_at": "2025-09-07T23:19:46.548502"
       },
       {
-        "id": "9388847f-574f-4787-9362-0be3714c6b6f",
+        "id": "52ca9055-8255-48e1-b37f-87afb87005b0",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -90,11 +90,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.142871",
-        "updated_at": "2025-09-07T14:27:31.142872"
+        "created_at": "2025-09-07T23:19:46.548511",
+        "updated_at": "2025-09-07T23:19:46.548512"
       },
       {
-        "id": "68ac2702-15b1-4198-b1a0-1b086ce9dba2",
+        "id": "681088dc-5e99-49f1-90c2-5581d7eaabf2",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -105,14 +105,14 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.142880",
-        "updated_at": "2025-09-07T14:27:31.142880"
+        "created_at": "2025-09-07T23:19:46.548520",
+        "updated_at": "2025-09-07T23:19:46.548520"
       }
     ],
     "results": [
       {
-        "id": "f5f6e39f-d39f-40d8-a5cd-25c6de07e92b",
-        "test_item_id": "c9cb17c7-3c28-4833-ad9c-d4fdaa9ca42c",
+        "id": "bb1f9fac-6ff6-4d71-9ee7-d9bd05044418",
+        "test_item_id": "0b967a1e-40c0-4218-beba-930ee20e905b",
         "equipment_type": "Ericsson-MMU",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
@@ -120,11 +120,11 @@
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T14:27:31.142890"
+        "created_at": "2025-09-07T23:19:46.548530"
       },
       {
-        "id": "39af8c70-ff20-4659-ba53-6bc18eed1d06",
-        "test_item_id": "9388847f-574f-4787-9362-0be3714c6b6f",
+        "id": "fd830b83-e36e-4086-89d0-29103fae0b5a",
+        "test_item_id": "52ca9055-8255-48e1-b37f-87afb87005b0",
         "equipment_type": "Samsung-AUv1",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
@@ -132,11 +132,11 @@
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T13:27:31.142903"
+        "created_at": "2025-09-07T22:19:46.548542"
       },
       {
-        "id": "736edd9c-2561-40eb-a287-4d204efcc6cf",
-        "test_item_id": "68ac2702-15b1-4198-b1a0-1b086ce9dba2",
+        "id": "f703115f-812a-420a-a969-897042bdd5fd",
+        "test_item_id": "681088dc-5e99-49f1-90c2-5581d7eaabf2",
         "equipment_type": "Ericsson-RRU",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
@@ -144,21 +144,21 @@
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T12:27:31.142915"
+        "created_at": "2025-09-07T21:19:46.548554"
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250906_122731_2",
-    "name": "検証バッチ_基地局スリープ機能_20250906_122731",
-    "created_at": "2025/09/06 12:27:31",
-    "completed_at": "2025/09/06 12:27:31",
+    "id": "batch_20250906_211946_2",
+    "name": "検証バッチ_基地局スリープ機能_20250906_211946",
+    "created_at": "2025/09/06 21:19:46",
+    "completed_at": "2025/09/06 21:19:46",
     "status": "completed",
     "test_items": [
       {
-        "id": "c7e9c7f9-4f0d-4f59-8eb2-f873e280359b",
+        "id": "9da0688f-2075-4aed-a86e-30c1b0ec8845",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -169,11 +169,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.142989",
-        "updated_at": "2025-09-07T14:27:31.142989"
+        "created_at": "2025-09-07T23:19:46.548632",
+        "updated_at": "2025-09-07T23:19:46.548632"
       },
       {
-        "id": "2bc1cddb-2b72-44f4-81c7-7f4e3c336124",
+        "id": "e3e195b6-537c-48dc-b150-9d29f855ca7c",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -184,11 +184,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143000",
-        "updated_at": "2025-09-07T14:27:31.143001"
+        "created_at": "2025-09-07T23:19:46.548641",
+        "updated_at": "2025-09-07T23:19:46.548641"
       },
       {
-        "id": "5fb97a0f-f5af-4b5c-bbe0-6f33fa223fed",
+        "id": "de13e203-24cd-45a0-95c7-533400a2aac3",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -199,14 +199,14 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143008",
-        "updated_at": "2025-09-07T14:27:31.143009"
+        "created_at": "2025-09-07T23:19:46.548649",
+        "updated_at": "2025-09-07T23:19:46.548649"
       }
     ],
     "results": [
       {
-        "id": "336011ec-e101-47ea-ad2d-84682ab0a648",
-        "test_item_id": "c7e9c7f9-4f0d-4f59-8eb2-f873e280359b",
+        "id": "8435d178-f5eb-4355-a07f-87de5270377b",
+        "test_item_id": "9da0688f-2075-4aed-a86e-30c1b0ec8845",
         "equipment_type": "Ericsson-MMU",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
@@ -214,11 +214,11 @@
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T14:27:31.143018"
+        "created_at": "2025-09-07T23:19:46.548658"
       },
       {
-        "id": "146e33cf-01f5-4e16-9992-6d5e03458ceb",
-        "test_item_id": "2bc1cddb-2b72-44f4-81c7-7f4e3c336124",
+        "id": "7fb1db7f-a159-4c98-9c74-cd50861f5478",
+        "test_item_id": "e3e195b6-537c-48dc-b150-9d29f855ca7c",
         "equipment_type": "Samsung-AUv1",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
@@ -226,11 +226,11 @@
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T13:27:31.143029"
+        "created_at": "2025-09-07T22:19:46.548669"
       },
       {
-        "id": "45332f09-649a-4a00-aef2-0b9082a3632d",
-        "test_item_id": "5fb97a0f-f5af-4b5c-bbe0-6f33fa223fed",
+        "id": "ab189a3b-9918-4ee1-b5ff-380146978e40",
+        "test_item_id": "de13e203-24cd-45a0-95c7-533400a2aac3",
         "equipment_type": "Ericsson-RRU",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
@@ -238,21 +238,21 @@
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T12:27:31.143040"
+        "created_at": "2025-09-07T21:19:46.548680"
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250906_112731_3",
-    "name": "検証バッチ_基地局スリープ機能_20250906_112731",
-    "created_at": "2025/09/06 11:27:31",
-    "completed_at": "2025/09/06 11:27:31",
+    "id": "batch_20250906_201946_3",
+    "name": "検証バッチ_基地局スリープ機能_20250906_201946",
+    "created_at": "2025/09/06 20:19:46",
+    "completed_at": "2025/09/06 20:19:46",
     "status": "completed",
     "test_items": [
       {
-        "id": "3ebff29e-3b20-48c3-8cf8-2bd9299ce1de",
+        "id": "3850eb77-f473-4cdf-a66e-c7716b19cb0d",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -263,11 +263,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143106",
-        "updated_at": "2025-09-07T14:27:31.143106"
+        "created_at": "2025-09-07T23:19:46.548747",
+        "updated_at": "2025-09-07T23:19:46.548747"
       },
       {
-        "id": "d39c26c6-88fb-4659-a793-a1d4c3d7dfac",
+        "id": "fbb5544e-8436-486b-a4df-a30b9c791ecc",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -278,11 +278,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143114",
-        "updated_at": "2025-09-07T14:27:31.143115"
+        "created_at": "2025-09-07T23:19:46.548755",
+        "updated_at": "2025-09-07T23:19:46.548756"
       },
       {
-        "id": "95f4c6fa-0721-4d19-849f-83b29c99ec69",
+        "id": "9aeacb1f-b3ed-460f-986e-ee0cfc384fc8",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -293,14 +293,14 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143122",
-        "updated_at": "2025-09-07T14:27:31.143123"
+        "created_at": "2025-09-07T23:19:46.548763",
+        "updated_at": "2025-09-07T23:19:46.548764"
       }
     ],
     "results": [
       {
-        "id": "21378329-6bdf-4191-8181-1835437658c0",
-        "test_item_id": "3ebff29e-3b20-48c3-8cf8-2bd9299ce1de",
+        "id": "bafaab37-7a65-424a-b9bd-5fd8baad4146",
+        "test_item_id": "3850eb77-f473-4cdf-a66e-c7716b19cb0d",
         "equipment_type": "Ericsson-MMU",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
@@ -308,11 +308,11 @@
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T14:27:31.143131"
+        "created_at": "2025-09-07T23:19:46.548772"
       },
       {
-        "id": "edd7f093-6a61-452a-bcaf-abe85d317467",
-        "test_item_id": "d39c26c6-88fb-4659-a793-a1d4c3d7dfac",
+        "id": "048ed7c9-ca86-4b02-8980-c097b8c6e5b2",
+        "test_item_id": "fbb5544e-8436-486b-a4df-a30b9c791ecc",
         "equipment_type": "Samsung-AUv1",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
@@ -320,11 +320,11 @@
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T13:27:31.143143"
+        "created_at": "2025-09-07T22:19:46.548784"
       },
       {
-        "id": "189c7c77-0b45-4706-bff6-4744e49e6ce0",
-        "test_item_id": "95f4c6fa-0721-4d19-849f-83b29c99ec69",
+        "id": "5f2d6cbc-28ab-41df-955b-431ea9e9cb23",
+        "test_item_id": "9aeacb1f-b3ed-460f-986e-ee0cfc384fc8",
         "equipment_type": "Ericsson-RRU",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
@@ -332,21 +332,21 @@
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T12:27:31.143153"
+        "created_at": "2025-09-07T21:19:46.548795"
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250905_102731_4",
-    "name": "検証バッチ_基地局スリープ機能_20250905_102731",
-    "created_at": "2025/09/05 10:27:31",
-    "completed_at": "2025/09/05 10:27:31",
+    "id": "batch_20250905_191946_4",
+    "name": "検証バッチ_基地局スリープ機能_20250905_191946",
+    "created_at": "2025/09/05 19:19:46",
+    "completed_at": "2025/09/05 19:19:46",
     "status": "completed",
     "test_items": [
       {
-        "id": "91137743-c5a7-4578-80b6-2c4967252674",
+        "id": "89fef9f2-bbd6-4192-bd5e-abe00acc35a4",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -357,11 +357,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143219",
-        "updated_at": "2025-09-07T14:27:31.143220"
+        "created_at": "2025-09-07T23:19:46.548860",
+        "updated_at": "2025-09-07T23:19:46.548861"
       },
       {
-        "id": "b25d3768-f5d1-4d09-8c3c-5c9a534ac7d1",
+        "id": "b74ba78e-33d1-4f78-8835-545ed3630595",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -372,11 +372,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143229",
-        "updated_at": "2025-09-07T14:27:31.143229"
+        "created_at": "2025-09-07T23:19:46.548870",
+        "updated_at": "2025-09-07T23:19:46.548871"
       },
       {
-        "id": "2c204ac0-0321-45b9-9289-8ad3f267a258",
+        "id": "e3e982a0-0cbb-4387-87d8-eb85405ef1b4",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -387,14 +387,14 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143237",
-        "updated_at": "2025-09-07T14:27:31.143238"
+        "created_at": "2025-09-07T23:19:46.548879",
+        "updated_at": "2025-09-07T23:19:46.548879"
       }
     ],
     "results": [
       {
-        "id": "2e57cf2f-e139-4900-ad98-170e2eab242b",
-        "test_item_id": "91137743-c5a7-4578-80b6-2c4967252674",
+        "id": "4419aed8-0a96-4aa1-9612-862cafd9ef1a",
+        "test_item_id": "89fef9f2-bbd6-4192-bd5e-abe00acc35a4",
         "equipment_type": "Ericsson-MMU",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
@@ -402,11 +402,11 @@
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T14:27:31.143246"
+        "created_at": "2025-09-07T23:19:46.548888"
       },
       {
-        "id": "c15e0b38-9317-4efc-ba71-7199e5b5fea0",
-        "test_item_id": "b25d3768-f5d1-4d09-8c3c-5c9a534ac7d1",
+        "id": "fffdde39-3c65-419c-83e7-2ac1be3826d1",
+        "test_item_id": "b74ba78e-33d1-4f78-8835-545ed3630595",
         "equipment_type": "Samsung-AUv1",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
@@ -414,11 +414,11 @@
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T13:27:31.143257"
+        "created_at": "2025-09-07T22:19:46.548898"
       },
       {
-        "id": "2bbfd076-5cd9-4716-b944-c9fc950b9d97",
-        "test_item_id": "2c204ac0-0321-45b9-9289-8ad3f267a258",
+        "id": "17625e9d-60bb-479b-8fd4-1d1d0f9e2a16",
+        "test_item_id": "e3e982a0-0cbb-4387-87d8-eb85405ef1b4",
         "equipment_type": "Ericsson-RRU",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
@@ -426,21 +426,21 @@
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T12:27:31.143267"
+        "created_at": "2025-09-07T21:19:46.548909"
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250905_092731_5",
-    "name": "検証バッチ_基地局スリープ機能_20250905_092731",
-    "created_at": "2025/09/05 09:27:31",
-    "completed_at": "2025/09/05 09:27:31",
+    "id": "batch_20250905_181946_5",
+    "name": "検証バッチ_基地局スリープ機能_20250905_181946",
+    "created_at": "2025/09/05 18:19:46",
+    "completed_at": "2025/09/05 18:19:46",
     "status": "completed",
     "test_items": [
       {
-        "id": "2c818c2a-0ec2-454c-8417-dacc7b352aee",
+        "id": "dd15cdb5-e8ee-48b1-9b20-cb5baef1abc5",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -451,11 +451,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143346",
-        "updated_at": "2025-09-07T14:27:31.143347"
+        "created_at": "2025-09-07T23:19:46.548975",
+        "updated_at": "2025-09-07T23:19:46.548975"
       },
       {
-        "id": "42db34c7-5cef-40fc-8cbe-7a129ea5062f",
+        "id": "616affbe-3fc5-4d4c-931b-71da5d0e77c8",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -466,11 +466,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143354",
-        "updated_at": "2025-09-07T14:27:31.143355"
+        "created_at": "2025-09-07T23:19:46.548983",
+        "updated_at": "2025-09-07T23:19:46.548983"
       },
       {
-        "id": "d3409e4b-a419-4d72-ae3d-3b6dda70076c",
+        "id": "b24eb819-6585-4b98-b3d6-bbef317046ce",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -481,14 +481,14 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143362",
-        "updated_at": "2025-09-07T14:27:31.143363"
+        "created_at": "2025-09-07T23:19:46.548991",
+        "updated_at": "2025-09-07T23:19:46.548991"
       }
     ],
     "results": [
       {
-        "id": "1df4b66d-2eeb-4c7c-b8ae-e94514fe934a",
-        "test_item_id": "2c818c2a-0ec2-454c-8417-dacc7b352aee",
+        "id": "10f0def5-b5af-4975-ba51-8fd30ce1e110",
+        "test_item_id": "dd15cdb5-e8ee-48b1-9b20-cb5baef1abc5",
         "equipment_type": "Ericsson-MMU",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
@@ -496,11 +496,11 @@
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T14:27:31.143371"
+        "created_at": "2025-09-07T23:19:46.549002"
       },
       {
-        "id": "2aa225ca-b93c-4f33-926b-ff94270999a1",
-        "test_item_id": "42db34c7-5cef-40fc-8cbe-7a129ea5062f",
+        "id": "9ad88be4-5438-4af8-adff-6b03f3e10b64",
+        "test_item_id": "616affbe-3fc5-4d4c-931b-71da5d0e77c8",
         "equipment_type": "Samsung-AUv1",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
@@ -508,11 +508,11 @@
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T13:27:31.143384"
+        "created_at": "2025-09-07T22:19:46.549012"
       },
       {
-        "id": "c692b119-3fce-49f7-909a-52e04211e13c",
-        "test_item_id": "d3409e4b-a419-4d72-ae3d-3b6dda70076c",
+        "id": "903998af-bfd0-4acb-834b-51ba818e65ad",
+        "test_item_id": "b24eb819-6585-4b98-b3d6-bbef317046ce",
         "equipment_type": "Ericsson-RRU",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
@@ -520,21 +520,21 @@
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T12:27:31.143394"
+        "created_at": "2025-09-07T21:19:46.549023"
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250904_082731_6",
-    "name": "検証バッチ_基地局スリープ機能_20250904_082731",
-    "created_at": "2025/09/04 08:27:31",
-    "completed_at": "2025/09/04 08:27:31",
+    "id": "batch_20250904_171946_6",
+    "name": "検証バッチ_基地局スリープ機能_20250904_171946",
+    "created_at": "2025/09/04 17:19:46",
+    "completed_at": "2025/09/04 17:19:46",
     "status": "failed",
     "test_items": [
       {
-        "id": "e13060c9-1eb9-4704-b9da-4c3c2be8ce87",
+        "id": "151184c2-9ffd-4136-ab04-04bde0ef5dd8",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -545,11 +545,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143456",
-        "updated_at": "2025-09-07T14:27:31.143456"
+        "created_at": "2025-09-07T23:19:46.549084",
+        "updated_at": "2025-09-07T23:19:46.549084"
       },
       {
-        "id": "bb9495f5-76c3-4430-805b-7907d2100e25",
+        "id": "0bd0d7f0-092d-4a46-9a70-9bcd4a6bf136",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -560,11 +560,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143465",
-        "updated_at": "2025-09-07T14:27:31.143465"
+        "created_at": "2025-09-07T23:19:46.549093",
+        "updated_at": "2025-09-07T23:19:46.549093"
       },
       {
-        "id": "952bbf6b-1189-41ad-887a-c5434f353960",
+        "id": "90e0afa9-6cae-42f3-b1f2-580c87fde918",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -575,8 +575,8 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143473",
-        "updated_at": "2025-09-07T14:27:31.143473"
+        "created_at": "2025-09-07T23:19:46.549101",
+        "updated_at": "2025-09-07T23:19:46.549101"
       }
     ],
     "results": [],
@@ -584,14 +584,14 @@
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250904_072731_7",
-    "name": "検証バッチ_基地局スリープ機能_20250904_072731",
-    "created_at": "2025/09/04 07:27:31",
-    "completed_at": "2025/09/04 07:27:31",
+    "id": "batch_20250904_161946_7",
+    "name": "検証バッチ_基地局スリープ機能_20250904_161946",
+    "created_at": "2025/09/04 16:19:46",
+    "completed_at": "2025/09/04 16:19:46",
     "status": "completed",
     "test_items": [
       {
-        "id": "4dbbdfcd-5d85-449e-84a4-7bff688c2a5e",
+        "id": "6cc0d985-c3ec-44ab-920a-49c3974d9c0b",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -602,11 +602,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143557",
-        "updated_at": "2025-09-07T14:27:31.143558"
+        "created_at": "2025-09-07T23:19:46.549186",
+        "updated_at": "2025-09-07T23:19:46.549186"
       },
       {
-        "id": "cd324551-e620-481f-8dec-fb70b173f1ac",
+        "id": "2abe8aa5-0458-4dd6-9676-80d6e11d539b",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -617,11 +617,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143565",
-        "updated_at": "2025-09-07T14:27:31.143566"
+        "created_at": "2025-09-07T23:19:46.549194",
+        "updated_at": "2025-09-07T23:19:46.549194"
       },
       {
-        "id": "051baeb3-8863-4b8a-95ab-05359eeb855c",
+        "id": "5a50f82b-fb82-48ea-9916-8e6540fcd0b6",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -632,14 +632,14 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143574",
-        "updated_at": "2025-09-07T14:27:31.143574"
+        "created_at": "2025-09-07T23:19:46.549202",
+        "updated_at": "2025-09-07T23:19:46.549202"
       }
     ],
     "results": [
       {
-        "id": "0f7d6e33-aa85-4f19-ac7c-d0b32d7b4f80",
-        "test_item_id": "4dbbdfcd-5d85-449e-84a4-7bff688c2a5e",
+        "id": "16d725ed-5797-4724-9036-8dd387858b6e",
+        "test_item_id": "6cc0d985-c3ec-44ab-920a-49c3974d9c0b",
         "equipment_type": "Ericsson-MMU",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
@@ -647,11 +647,11 @@
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T14:27:31.143584"
+        "created_at": "2025-09-07T23:19:46.549212"
       },
       {
-        "id": "217bfce1-3125-4b15-9cfd-25425a7b0cce",
-        "test_item_id": "cd324551-e620-481f-8dec-fb70b173f1ac",
+        "id": "0b4f1e94-1f6a-4363-9970-0fcb0a53a6c2",
+        "test_item_id": "2abe8aa5-0458-4dd6-9676-80d6e11d539b",
         "equipment_type": "Samsung-AUv1",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
@@ -659,11 +659,11 @@
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T13:27:31.143595"
+        "created_at": "2025-09-07T22:19:46.549223"
       },
       {
-        "id": "b2811ffe-be22-4a4a-91ec-b24963291380",
-        "test_item_id": "051baeb3-8863-4b8a-95ab-05359eeb855c",
+        "id": "d7f567c5-b888-4388-961f-33a4f5c04dc0",
+        "test_item_id": "5a50f82b-fb82-48ea-9916-8e6540fcd0b6",
         "equipment_type": "Ericsson-RRU",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
@@ -671,21 +671,21 @@
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T12:27:31.143605"
+        "created_at": "2025-09-07T21:19:46.549234"
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250903_062731_8",
-    "name": "検証バッチ_基地局スリープ機能_20250903_062731",
-    "created_at": "2025/09/03 06:27:31",
-    "completed_at": "2025/09/03 06:27:31",
+    "id": "batch_20250903_151946_8",
+    "name": "検証バッチ_基地局スリープ機能_20250903_151946",
+    "created_at": "2025/09/03 15:19:46",
+    "completed_at": "2025/09/03 15:19:46",
     "status": "completed",
     "test_items": [
       {
-        "id": "2261fb2f-407b-493a-b1f0-98edb43769ca",
+        "id": "f48d7e6f-fe93-4ab8-a9cf-499fd26312f9",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -696,11 +696,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143668",
-        "updated_at": "2025-09-07T14:27:31.143668"
+        "created_at": "2025-09-07T23:19:46.549294",
+        "updated_at": "2025-09-07T23:19:46.549295"
       },
       {
-        "id": "517fd1b4-9110-4cce-a62d-1e4b5c067f73",
+        "id": "8bfa80be-928e-445d-a9eb-44acf3169244",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -711,11 +711,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143676",
-        "updated_at": "2025-09-07T14:27:31.143676"
+        "created_at": "2025-09-07T23:19:46.549303",
+        "updated_at": "2025-09-07T23:19:46.549303"
       },
       {
-        "id": "dea91be6-f842-4121-a962-0db7dee7b20f",
+        "id": "eb3abb00-60c1-4527-8014-f27dfb6ed3e0",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -726,14 +726,14 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143684",
-        "updated_at": "2025-09-07T14:27:31.143684"
+        "created_at": "2025-09-07T23:19:46.549311",
+        "updated_at": "2025-09-07T23:19:46.549311"
       }
     ],
     "results": [
       {
-        "id": "be5cee4c-faff-4b9a-aca5-37ba1a570341",
-        "test_item_id": "2261fb2f-407b-493a-b1f0-98edb43769ca",
+        "id": "a0924a81-b06b-4a92-a9d6-f01ac6df522c",
+        "test_item_id": "f48d7e6f-fe93-4ab8-a9cf-499fd26312f9",
         "equipment_type": "Ericsson-MMU",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
@@ -741,11 +741,11 @@
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T14:27:31.143693"
+        "created_at": "2025-09-07T23:19:46.549319"
       },
       {
-        "id": "854477b1-a530-4141-be9a-83820d335a60",
-        "test_item_id": "517fd1b4-9110-4cce-a62d-1e4b5c067f73",
+        "id": "a891fd94-3475-44c0-a409-9b4d5f1e411e",
+        "test_item_id": "8bfa80be-928e-445d-a9eb-44acf3169244",
         "equipment_type": "Samsung-AUv1",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
@@ -753,11 +753,11 @@
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T13:27:31.143704"
+        "created_at": "2025-09-07T22:19:46.549330"
       },
       {
-        "id": "d919a1a9-d517-416f-a954-1996927877a1",
-        "test_item_id": "dea91be6-f842-4121-a962-0db7dee7b20f",
+        "id": "264085db-90a1-4e60-a895-9e02a11f7f20",
+        "test_item_id": "eb3abb00-60c1-4527-8014-f27dfb6ed3e0",
         "equipment_type": "Ericsson-RRU",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
@@ -765,21 +765,21 @@
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T12:27:31.143715"
+        "created_at": "2025-09-07T21:19:46.549341"
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250903_052731_9",
-    "name": "検証バッチ_基地局スリープ機能_20250903_052731",
-    "created_at": "2025/09/03 05:27:31",
-    "completed_at": "2025/09/03 05:27:31",
+    "id": "batch_20250903_141946_9",
+    "name": "検証バッチ_基地局スリープ機能_20250903_141946",
+    "created_at": "2025/09/03 14:19:46",
+    "completed_at": "2025/09/03 14:19:46",
     "status": "completed",
     "test_items": [
       {
-        "id": "bcc7cad8-14f4-4c3c-a497-26b511e80cb1",
+        "id": "80f5bded-6079-471f-a3a1-797d6cf1ada5",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -790,11 +790,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143780",
-        "updated_at": "2025-09-07T14:27:31.143780"
+        "created_at": "2025-09-07T23:19:46.549406",
+        "updated_at": "2025-09-07T23:19:46.549407"
       },
       {
-        "id": "9d632e13-2e13-4d49-87dc-2f035a369bea",
+        "id": "93396693-4a5b-4c7d-b839-8e1ee5ea79d9",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -805,11 +805,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143788",
-        "updated_at": "2025-09-07T14:27:31.143788"
+        "created_at": "2025-09-07T23:19:46.549414",
+        "updated_at": "2025-09-07T23:19:46.549415"
       },
       {
-        "id": "94fa3e9f-0795-400d-a98e-e338b919f587",
+        "id": "4a22a903-4bd6-4db3-a828-9899f03386bc",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -820,14 +820,14 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143795",
-        "updated_at": "2025-09-07T14:27:31.143796"
+        "created_at": "2025-09-07T23:19:46.549422",
+        "updated_at": "2025-09-07T23:19:46.549423"
       }
     ],
     "results": [
       {
-        "id": "40661f6c-e9bf-409c-9661-521ec1df6a63",
-        "test_item_id": "bcc7cad8-14f4-4c3c-a497-26b511e80cb1",
+        "id": "8464d992-132e-4214-97aa-43c72be0f352",
+        "test_item_id": "80f5bded-6079-471f-a3a1-797d6cf1ada5",
         "equipment_type": "Ericsson-MMU",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
@@ -835,11 +835,11 @@
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T14:27:31.143804"
+        "created_at": "2025-09-07T23:19:46.549431"
       },
       {
-        "id": "0a7e9f92-7895-4b66-a03f-5f93e65642bf",
-        "test_item_id": "9d632e13-2e13-4d49-87dc-2f035a369bea",
+        "id": "4d59e7ac-93a0-444a-b769-cd39d8e74059",
+        "test_item_id": "93396693-4a5b-4c7d-b839-8e1ee5ea79d9",
         "equipment_type": "Samsung-AUv1",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
@@ -847,11 +847,11 @@
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T13:27:31.143815"
+        "created_at": "2025-09-07T22:19:46.549442"
       },
       {
-        "id": "2600a3ca-d1b1-4a3a-8207-b897d20f1b6f",
-        "test_item_id": "94fa3e9f-0795-400d-a98e-e338b919f587",
+        "id": "6b36874a-578b-4c8e-974f-2b2468041e1b",
+        "test_item_id": "4a22a903-4bd6-4db3-a828-9899f03386bc",
         "equipment_type": "Ericsson-RRU",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
@@ -859,21 +859,21 @@
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T12:27:31.143826"
+        "created_at": "2025-09-07T21:19:46.549452"
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250902_042731_10",
-    "name": "検証バッチ_基地局スリープ機能_20250902_042731",
-    "created_at": "2025/09/02 04:27:31",
-    "completed_at": "2025/09/02 04:27:31",
+    "id": "batch_20250902_131946_10",
+    "name": "検証バッチ_基地局スリープ機能_20250902_131946",
+    "created_at": "2025/09/02 13:19:46",
+    "completed_at": "2025/09/02 13:19:46",
     "status": "completed",
     "test_items": [
       {
-        "id": "a1e7f014-ec52-4596-9923-605c470500e9",
+        "id": "06701a74-69ac-49f9-8a14-6af7929f6a14",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -884,11 +884,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143886",
-        "updated_at": "2025-09-07T14:27:31.143887"
+        "created_at": "2025-09-07T23:19:46.549629",
+        "updated_at": "2025-09-07T23:19:46.549629"
       },
       {
-        "id": "5f641bf9-79f7-4712-96b9-d7107ee86f4b",
+        "id": "b78117ee-c5ee-4d56-8e5f-ea81d0fa597b",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -899,11 +899,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143894",
-        "updated_at": "2025-09-07T14:27:31.143895"
+        "created_at": "2025-09-07T23:19:46.549638",
+        "updated_at": "2025-09-07T23:19:46.549638"
       },
       {
-        "id": "72abc1e8-fe17-41c0-8b32-7e832d166b2c",
+        "id": "f8853780-7ace-4054-bb3f-da6a6557bcd2",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -914,14 +914,14 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.143902",
-        "updated_at": "2025-09-07T14:27:31.143903"
+        "created_at": "2025-09-07T23:19:46.549646",
+        "updated_at": "2025-09-07T23:19:46.549646"
       }
     ],
     "results": [
       {
-        "id": "7196ac1b-bde6-454d-9c9a-9a4f2ce928c4",
-        "test_item_id": "a1e7f014-ec52-4596-9923-605c470500e9",
+        "id": "765c65ef-ce8a-4e55-9edb-d8fa22a1b042",
+        "test_item_id": "06701a74-69ac-49f9-8a14-6af7929f6a14",
         "equipment_type": "Ericsson-MMU",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
@@ -929,11 +929,11 @@
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T14:27:31.143911"
+        "created_at": "2025-09-07T23:19:46.549657"
       },
       {
-        "id": "edd56b92-0176-4e05-8c5b-6af15148defe",
-        "test_item_id": "5f641bf9-79f7-4712-96b9-d7107ee86f4b",
+        "id": "1e68834d-efe1-4eae-99d3-d22bbf00d61d",
+        "test_item_id": "b78117ee-c5ee-4d56-8e5f-ea81d0fa597b",
         "equipment_type": "Samsung-AUv1",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
@@ -941,11 +941,11 @@
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T13:27:31.143921"
+        "created_at": "2025-09-07T22:19:46.549668"
       },
       {
-        "id": "8c61c350-7369-4440-9d30-945abd88d7b8",
-        "test_item_id": "72abc1e8-fe17-41c0-8b32-7e832d166b2c",
+        "id": "c832694d-8a41-4940-8062-71a6f154d4c3",
+        "test_item_id": "f8853780-7ace-4054-bb3f-da6a6557bcd2",
         "equipment_type": "Ericsson-RRU",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
@@ -953,21 +953,21 @@
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T12:27:31.143931"
+        "created_at": "2025-09-07T21:19:46.549679"
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250902_032731_11",
-    "name": "検証バッチ_基地局スリープ機能_20250902_032731",
-    "created_at": "2025/09/02 03:27:31",
-    "completed_at": "2025/09/02 03:27:31",
+    "id": "batch_20250902_121946_11",
+    "name": "検証バッチ_基地局スリープ機能_20250902_121946",
+    "created_at": "2025/09/02 12:19:46",
+    "completed_at": "2025/09/02 12:19:46",
     "status": "completed",
     "test_items": [
       {
-        "id": "3dfa6ede-9f81-47f8-adb2-00368742fcc9",
+        "id": "46f23472-27ab-47b4-9267-d6ac98138083",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -978,11 +978,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.144000",
-        "updated_at": "2025-09-07T14:27:31.144001"
+        "created_at": "2025-09-07T23:19:46.549751",
+        "updated_at": "2025-09-07T23:19:46.549751"
       },
       {
-        "id": "2197c166-905c-4d58-9261-003c26df67e0",
+        "id": "a4cdea55-5c46-4fbc-af53-0f8275605590",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -993,11 +993,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.144008",
-        "updated_at": "2025-09-07T14:27:31.144009"
+        "created_at": "2025-09-07T23:19:46.549759",
+        "updated_at": "2025-09-07T23:19:46.549760"
       },
       {
-        "id": "ac8ea079-27ac-469c-89a8-a2fb720c3ebf",
+        "id": "30b49902-f366-4a47-a351-a1296d7e06c9",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -1008,14 +1008,14 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.144017",
-        "updated_at": "2025-09-07T14:27:31.144017"
+        "created_at": "2025-09-07T23:19:46.549767",
+        "updated_at": "2025-09-07T23:19:46.549767"
       }
     ],
     "results": [
       {
-        "id": "b625af39-60c5-4b86-a33f-9e6a9b4a5135",
-        "test_item_id": "3dfa6ede-9f81-47f8-adb2-00368742fcc9",
+        "id": "51d0ceff-b4dc-4cb0-8d0a-ac3930de8ab2",
+        "test_item_id": "46f23472-27ab-47b4-9267-d6ac98138083",
         "equipment_type": "Ericsson-MMU",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
@@ -1023,11 +1023,11 @@
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T14:27:31.144025"
+        "created_at": "2025-09-07T23:19:46.549776"
       },
       {
-        "id": "d73a84df-e1cb-473a-a23d-d8c2eda741d3",
-        "test_item_id": "2197c166-905c-4d58-9261-003c26df67e0",
+        "id": "532336e9-b7de-4659-8dfc-8caacbb1c346",
+        "test_item_id": "a4cdea55-5c46-4fbc-af53-0f8275605590",
         "equipment_type": "Samsung-AUv1",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
@@ -1035,11 +1035,11 @@
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T13:27:31.144036"
+        "created_at": "2025-09-07T22:19:46.549786"
       },
       {
-        "id": "73c651b4-5d9e-4019-aad1-bf31d323ea0d",
-        "test_item_id": "ac8ea079-27ac-469c-89a8-a2fb720c3ebf",
+        "id": "936ec6b6-4e46-4979-8bd7-86d48b5cff1a",
+        "test_item_id": "30b49902-f366-4a47-a351-a1296d7e06c9",
         "equipment_type": "Ericsson-RRU",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
@@ -1047,21 +1047,21 @@
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T12:27:31.144046"
+        "created_at": "2025-09-07T21:19:46.549797"
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250901_022731_12",
-    "name": "検証バッチ_基地局スリープ機能_20250901_022731",
-    "created_at": "2025/09/01 02:27:31",
-    "completed_at": "2025/09/01 02:27:31",
+    "id": "batch_20250901_111946_12",
+    "name": "検証バッチ_基地局スリープ機能_20250901_111946",
+    "created_at": "2025/09/01 11:19:46",
+    "completed_at": "2025/09/01 11:19:46",
     "status": "completed",
     "test_items": [
       {
-        "id": "957f3732-3898-4365-8691-5be7943c359a",
+        "id": "1812ffae-0e7f-4f4c-a704-eceb3f472f1f",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -1072,11 +1072,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.144111",
-        "updated_at": "2025-09-07T14:27:31.144111"
+        "created_at": "2025-09-07T23:19:46.549860",
+        "updated_at": "2025-09-07T23:19:46.549860"
       },
       {
-        "id": "42e80097-0cf9-48c6-8a07-6ce8feaee07d",
+        "id": "296bca47-fc49-4635-96e4-d99dd4ed3fa2",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -1087,11 +1087,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.144119",
-        "updated_at": "2025-09-07T14:27:31.144119"
+        "created_at": "2025-09-07T23:19:46.549868",
+        "updated_at": "2025-09-07T23:19:46.549868"
       },
       {
-        "id": "50370a4f-1549-4df6-8e7a-82370e701bd1",
+        "id": "a50abd2a-266d-48cb-a5b7-a6aa5ecc7c39",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -1102,14 +1102,14 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.144127",
-        "updated_at": "2025-09-07T14:27:31.144127"
+        "created_at": "2025-09-07T23:19:46.549876",
+        "updated_at": "2025-09-07T23:19:46.549876"
       }
     ],
     "results": [
       {
-        "id": "6b69576d-9adb-431d-997a-3ed5a6a93e5a",
-        "test_item_id": "957f3732-3898-4365-8691-5be7943c359a",
+        "id": "d1bedcde-22dc-42fc-a796-b8131f5909ba",
+        "test_item_id": "1812ffae-0e7f-4f4c-a704-eceb3f472f1f",
         "equipment_type": "Ericsson-MMU",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
@@ -1117,11 +1117,11 @@
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T14:27:31.144135"
+        "created_at": "2025-09-07T23:19:46.549885"
       },
       {
-        "id": "92c31337-0273-4fc9-88e7-6c64e97d0471",
-        "test_item_id": "42e80097-0cf9-48c6-8a07-6ce8feaee07d",
+        "id": "c3dc0de3-55b5-4471-b8f9-38da5a4dbd93",
+        "test_item_id": "296bca47-fc49-4635-96e4-d99dd4ed3fa2",
         "equipment_type": "Samsung-AUv1",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
@@ -1129,11 +1129,11 @@
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T13:27:31.144146"
+        "created_at": "2025-09-07T22:19:46.549895"
       },
       {
-        "id": "d73ee266-863c-4d65-afba-ca4483541eec",
-        "test_item_id": "50370a4f-1549-4df6-8e7a-82370e701bd1",
+        "id": "b9a325ee-ba5f-49dd-84e3-db59769ca9a7",
+        "test_item_id": "a50abd2a-266d-48cb-a5b7-a6aa5ecc7c39",
         "equipment_type": "Ericsson-RRU",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
@@ -1141,21 +1141,21 @@
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T12:27:31.144156"
+        "created_at": "2025-09-07T21:19:46.549907"
       }
     ],
     "test_count": 3,
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250901_012731_13",
-    "name": "検証バッチ_基地局スリープ機能_20250901_012731",
-    "created_at": "2025/09/01 01:27:31",
-    "completed_at": "2025/09/01 01:27:31",
+    "id": "batch_20250901_101946_13",
+    "name": "検証バッチ_基地局スリープ機能_20250901_101946",
+    "created_at": "2025/09/01 10:19:46",
+    "completed_at": "2025/09/01 10:19:46",
     "status": "failed",
     "test_items": [
       {
-        "id": "dd7118a7-308a-4dc8-8320-47b75785bc14",
+        "id": "e8722028-025b-4863-a891-899db0ae1c81",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -1166,11 +1166,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.144217",
-        "updated_at": "2025-09-07T14:27:31.144217"
+        "created_at": "2025-09-07T23:19:46.549967",
+        "updated_at": "2025-09-07T23:19:46.549967"
       },
       {
-        "id": "a94faaf1-31c4-4cb8-9eee-d837fe1439f0",
+        "id": "35a9e417-63f3-43ba-b489-25a2b422c8bc",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -1181,11 +1181,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.144225",
-        "updated_at": "2025-09-07T14:27:31.144225"
+        "created_at": "2025-09-07T23:19:46.549975",
+        "updated_at": "2025-09-07T23:19:46.549975"
       },
       {
-        "id": "1841dd78-4082-47b1-b3fd-249ca6e90f13",
+        "id": "1deef623-1973-4d86-91fe-4dfbf4cc3da2",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -1196,8 +1196,8 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.144233",
-        "updated_at": "2025-09-07T14:27:31.144234"
+        "created_at": "2025-09-07T23:19:46.549983",
+        "updated_at": "2025-09-07T23:19:46.549983"
       }
     ],
     "results": [],
@@ -1205,14 +1205,14 @@
     "success_rate": "66.7%"
   },
   {
-    "id": "batch_20250831_002731_14",
-    "name": "検証バッチ_基地局スリープ機能_20250831_002731",
-    "created_at": "2025/08/31 00:27:31",
-    "completed_at": "2025/08/31 00:27:31",
+    "id": "batch_20250831_091946_14",
+    "name": "検証バッチ_基地局スリープ機能_20250831_091946",
+    "created_at": "2025/08/31 09:19:46",
+    "completed_at": "2025/08/31 09:19:46",
     "status": "completed",
     "test_items": [
       {
-        "id": "7b344bc1-4544-43de-82a5-b128f5f9f05d",
+        "id": "d886e112-0623-4ec5-b78f-328330236e88",
         "test_block": "基地局スリープ機能",
         "category": "CMデータの取得",
         "condition": {
@@ -1223,11 +1223,11 @@
             "Ericsson-MMU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.144318",
-        "updated_at": "2025-09-07T14:27:31.144318"
+        "created_at": "2025-09-07T23:19:46.550069",
+        "updated_at": "2025-09-07T23:19:46.550069"
       },
       {
-        "id": "0468085a-75d9-49a8-922b-e76927e44058",
+        "id": "b8013cab-87ce-4f57-8cee-aa967e401889",
         "test_block": "基地局スリープ機能",
         "category": "ESG選定",
         "condition": {
@@ -1238,11 +1238,11 @@
             "Samsung-AUv1"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.144326",
-        "updated_at": "2025-09-07T14:27:31.144326"
+        "created_at": "2025-09-07T23:19:46.550077",
+        "updated_at": "2025-09-07T23:19:46.550077"
       },
       {
-        "id": "3dd7cf84-4773-46ff-91db-dc84b5a23632",
+        "id": "1fc8818c-5919-41f7-8812-8ac1881252ae",
         "test_block": "アクセス制御",
         "category": "ESG作成",
         "condition": {
@@ -1253,14 +1253,14 @@
             "Ericsson-RRU"
           ]
         },
-        "created_at": "2025-09-07T14:27:31.144336",
-        "updated_at": "2025-09-07T14:27:31.144336"
+        "created_at": "2025-09-07T23:19:46.550086",
+        "updated_at": "2025-09-07T23:19:46.550087"
       }
     ],
     "results": [
       {
-        "id": "549221ab-4972-4c09-b5d7-423fb8930983",
-        "test_item_id": "7b344bc1-4544-43de-82a5-b128f5f9f05d",
+        "id": "030c6b53-28a0-4840-8a6d-e600e1a851fb",
+        "test_item_id": "d886e112-0623-4ec5-b78f-328330236e88",
         "equipment_type": "Ericsson-MMU",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: CMデータの取得成功",
@@ -1268,11 +1268,11 @@
         "execution_time": 1.2,
         "error_message": null,
         "confidence": 0.85,
-        "created_at": "2025-09-07T14:27:31.144344"
+        "created_at": "2025-09-07T23:19:46.550095"
       },
       {
-        "id": "eb6812fc-76dd-4473-825e-d34eec128701",
-        "test_item_id": "0468085a-75d9-49a8-922b-e76927e44058",
+        "id": "4ebfb0de-f098-4f8f-b58a-270b03960e8c",
+        "test_item_id": "b8013cab-87ce-4f57-8cee-aa967e401889",
         "equipment_type": "Samsung-AUv1",
         "result": "PASS",
         "details": "AIエージェントによる自動検証完了: スリープモード移行確認",
@@ -1280,11 +1280,11 @@
         "execution_time": 1.5,
         "error_message": null,
         "confidence": 0.9,
-        "created_at": "2025-09-07T13:27:31.144358"
+        "created_at": "2025-09-07T22:19:46.550106"
       },
       {
-        "id": "70ab3997-10c9-45ad-b97e-02bfd247b3d8",
-        "test_item_id": "3dd7cf84-4773-46ff-91db-dc84b5a23632",
+        "id": "92150aac-35b3-47c3-82ab-de756b6d2167",
+        "test_item_id": "1fc8818c-5919-41f7-8812-8ac1881252ae",
         "equipment_type": "Ericsson-RRU",
         "result": "FAIL",
         "details": "AIエージェントによる自動検証完了: アクセス制御性能測定",
@@ -1292,7 +1292,7 @@
         "execution_time": 1.7999999999999998,
         "error_message": null,
         "confidence": 0.95,
-        "created_at": "2025-09-07T12:27:31.144370"
+        "created_at": "2025-09-07T21:19:46.550116"
       }
     ],
     "test_count": 3,

@@ -242,3 +242,4 @@ simplified_mock_equipment_manager = SimplifiedMockEquipmentManager()
 def get_simplified_mock_equipment_manager():
     """簡易化されたモック設備管理インスタンスを取得"""
     return simplified_mock_equipment_manager
+

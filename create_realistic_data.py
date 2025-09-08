@@ -290,3 +290,4 @@ if __name__ == "__main__":
         json.dump(batch_data, f, ensure_ascii=False, indent=2)
     
     print(f"📁 データを保存しました: data/realistic/realistic_batches.json")
+
